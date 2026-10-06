@@ -47,8 +47,8 @@
     .options { display: flex; flex-direction: column; gap: 0.75rem; }
     .option-btn { background: #0f172a; border: 1px solid var(--border); color: var(--text); padding: 1rem; border-radius: 0.5rem; text-align: left; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
     .option-btn:hover { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); }
-    .option-btn.correct { background: rgba(16, 185, 129, 0.15); border-color: var(--accent); color: #34d399; }
-    .option-btn.wrong { background: rgba(239, 68, 68, 0.15); border-color: var(--danger); color: #f87171; }
+    .option-btn.correct { background: rgba(16, 185, 129, 0.15) !important; border-color: var(--accent) !important; color: #34d399 !important; font-weight: 700; }
+    .option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: var(--danger) !important; color: #f87171 !important; }
     .explanation { margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--primary); border-radius: 0 0.5rem 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); display: none; line-height: 1.6; }
     .search-box { width: 100%; padding: 0.8rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; color: var(--text); font-size: 1rem; margin-bottom: 1.5rem; outline: none; }
     .search-box:focus { border-color: var(--primary); }
@@ -132,7 +132,7 @@
   </main>
 
   <script>
-    // DATA STORE - TỔNG HỢP TOÀN BỘ BỘ ĐỀ 120 CÂU TỪ TÀI LIỆU
+    // DATA STORE
     const DB = {
       ch1: {
         title: "Chapter 1 — Memory and Understanding",
@@ -195,8 +195,8 @@
           { q: "5. Gathercole et al. (2004) found that working memory capacity:", a: ["is fixed from birth", "only grows after age 16", "increases steadily between the ages of 5 and 14", "grows in sudden jumps, as Piaget said"], c: 2, why: "Dung lượng bộ nhớ làm việc tăng trưởng liên tục từ 5 đến 14 tuổi." },
           { q: "6. Simons et al. (2016) reviewed 'brain training' and found that gains:", a: ["do not transfer beyond the trained task", "transfer easily to school subjects", "last for a whole lifetime", "only work for adults"], c: 0, why: "Các ứng dụng 'luyện não' không có sự chuyển giao (transfer) sang các nhiệm vụ học tập khác." },
           { q: "7. Executive function does not include:", a: ["planning", "inhibiting harmful actions", "checking our own progress", "storing information for a few seconds"], c: 3, why: "Lưu trữ thông tin ngắn hạn thuộc Working Memory, không thuộc chức năng điều hành (Executive Function)." },
-          { q: "8. The part of the brain most linked to executive function is the:", a: ["hippocampus", "cerebellum", "visual cortex", "prefrontal cortex"], c: 3, why: "Vỏ não tiền trán (Prefrontal Cortex) quản lý chức năng điều hành." },
-          { q: "9. Blakemore and Choudhury (2006) showed that the prefrontal cortex keeps developing until:", a: ["at least our early twenties", "the age of 8", "the age of 11", "the first year of life"], c: 0, why: "Vỏ nền tiền trán tiếp tục phát triển cho đến đầu những năm 20 tuổi." },
+          { q: "8. The part of the brain most linked to executive function is the:", a: ["hippocampus", "cerebellum", "visual cortex", "prefrontal cortex"], c: 3, why: "Vỏ brain tiền trán (Prefrontal Cortex) quản lý chức năng điều hành." },
+          { q: "9. Blakemore and Choudhury (2006) showed that the prefrontal cortex keeps developing until:", a: ["at least our early twenties", "the age of 8", "the age of 11", "the first year of life"], c: 0, why: "Vỏ não tiền trán tiếp tục phát triển cho đến đầu những năm 20 tuổi." },
           { q: "10. Steinberg (2007) found that adolescent decisions are strongly influenced by:", a: ["the weather", "the presence of peers", "their height", "the size of the school"], c: 1, why: "Quyết định của thanh thiếu niên bị ảnh hưởng mạnh mẽ bởi sự có mặt của bạn bè (peer presence)." },
           { q: "11. Children exposed to constant traffic noise show:", a: ["better concentration", "no measurable difference", "poorer reading comprehension", "larger working memory"], c: 2, why: "Tiếng ồn giao thông liên tục làm giảm khả năng đọc hiểu của trẻ." },
           { q: "12. Ching (2017) found that maths anxiety harmed most:", a: ["the youngest children only", "boys more than girls", "nobody — anxiety always helps", "learners with better executive abilities"], c: 3, why: "Lo âu toán học gây hại nhất cho những học sinh có chức năng điều hành tốt vì nó chiếm dụng dung lượng Working Memory của họ." },
@@ -208,7 +208,7 @@
           { q: "Cognition means only our memory for facts.", a: false, why: "Sai. Nhận thức bao gồm cả chú ý, lý luận, suy nghĩ." },
           { q: "We are conscious of all our own cognitive processes.", a: false, why: "Sai. Nhiều quá trình nhận thức diễn ra tự động vô thức." },
           { q: "Attention is unlimited if a student tries hard enough.", a: false, why: "Sai. Chú ý là tài nguyên bị giới hạn." },
-          { q: "Information must be noticed before it can be processed.", a: false, why: "Đúng. Thông tin cần được chú ý trước khi xử lý." },
+          { q: "Information must be noticed before it can be processed.", a: true, why: "Đúng. Thông tin cần được chú ý trước khi xử lý." },
           { q: "Working memory is an active system, not only a passive store.", a: true, why: "Đúng. Bộ nhớ làm việc chủ động xử lý thông tin." },
           { q: "A child of six has the same working memory capacity as a child of fourteen.", a: false, why: "Sai. Trẻ 14 tuổi có dung lượng bộ nhớ làm việc lớn hơn nhiều." },
           { q: "‘Brain training’ software reliably improves school performance.", a: false, why: "Sai. Phần mềm luyện não không giúp cải thiện kết quả học tập ở trường." },
@@ -219,7 +219,7 @@
         scenarios: [
           { title: "Tình huống 1: GV vừa đọc từng chữ trên slide vừa bắt HS chép vào vở", solution: "Khái niệm: Quá tải Bộ nhớ làm việc (Split-attention / Dual-task).\nGiải pháp: GV nên cung cấp bản tóm tắt/slide và giảng giải bằng lời thay vì bắt học sinh vừa đọc vừa chép cùng lúc." },
           { title: "Tình huống 2: HS luôn viết 'I have been in Hanoi since two years' dù sửa 5 lần", solution: "Khái niệm: Lỗi hóa thạch / Thiếu chú ý chủ động.\nGiải pháp: Nhận xét chung không hiệu quả. GV cần cho học sinh thực hành sửa lỗi chủ động trong ngữ cảnh cụ thể." },
-          { title: "Tình huống 3: Bắt trẻ 7 tuổi lập kế hoạch, viết và tự sửa bài văn 3 đoạn trong 1 tiết", solution: "Khái niệm: Giới hạn Chức năng điều hành ở trẻ nhỏ.\nGiải pháp: Trẻ 7 tuổi chưa đủ khả năng điều hành complex. GV nên chia nhỏ nhiệm vụ thành từng bước trong nhiều buổi." },
+          { title: "Tình huống 3: Bắt trẻ 7 tuổi lập kế hoạch, viết và tự sửa bài văn 3 đoạn trong 1 tiết", solution: "Khái niệm: Giới hạn Chức năng điều hành ở trẻ nhỏ.\nGiải pháp: Trẻ 7 tuổi chưa đủ khả năng điều hành phức tạp. GV nên chia nhỏ nhiệm vụ thành từng bước trong nhiều buổi." },
           { title: "Tình huống 4: HS bảo 'hiểu hết rồi' nhưng làm bài kiểm tra chỉ được 4/10", solution: "Khái niệm: Ảo tưởng hiểu biết (Illusion of understanding).\nGiải pháp: GV không nên tin vào tự báo cáo của HS mà phải dùng Quiz ngắn, Exit ticket để kiểm tra thực tế." },
           { title: "Tình huống 5: Đồng nghiệp thêm vô số hoạt hình, màu sắc vào trang bài tập", solution: "Khái niệm: Tải nhận thức ngoại lai (Extraneous cognitive load).\nGiải pháp: Khuyên đồng nghiệp bỏ bớt chi tiết thừa vì chúng gây xao nhãng và làm quá tải bộ nhớ làm việc của HS." }
         ]
@@ -257,7 +257,7 @@
         ],
         scenarios: [
           { title: "Tình huống 1: HS nói 'Em không phải là người học ngôn ngữ'", solution: "Khái niệm: Academic self-concept thấp / Fixed Mindset.\nGiải pháp: HS đã hình thành niềm tin tiêu cực từ thất bại cũ. GV cần chia nhỏ nhiệm vụ, khen ngợi chiến lược và nỗ lực để xây dựng lại niềm tin." },
-          { title: "Tình huống 2: Thu chỉ ôn lại ngữ pháp đã biết rõ, tránh phần câu hỏi chia thì khó", solution: "Khái niệm: Performance-avoidance goal orientation (Định hướng né tránh).\nGiải pháp: Thu sợ mắc lỗi làm mất hình ảnh. GV nên chuyển hướng tiêu chí sang mục tiêu làm chủ (Mastery goal) và tiến bộ cá nhân." },
+          { title: "Tình huống 2: Thu chỉ ôn lại ngữ pháp đã biết rõ, tránh phần chia thì khó", solution: "Khái niệm: Performance-avoidance goal orientation (Định hướng né tránh).\nGiải pháp: Thu sợ mắc lỗi làm mất hình ảnh. GV nên chuyển hướng tiêu chí sang mục tiêu làm chủ (Mastery goal) và tiến bộ cá nhân." },
           { title: "Tình huống 3: Trường trao giải 'Top of the Class' mỗi tháng", solution: "Khái niệm: Performance Goal Orientation & So sánh xã hội tiêu cực.\nGiải pháp: Giải thưởng này gây áp lực và làm nản lòng phần lớn HS. Nên thay bằng giải nhận diện sự tiến bộ cá nhân." },
           { title: "Tình huống 4: GV khen HS hoàn thành đầu tiên: 'Em thông minh quá!'", solution: "Khái niệm: Khen ngợi con người (Person praise) -> Kích hoạt Fixed mindset.\nGiải pháp: Lời khen này khiến HS sợ thất bại sau này. GV nên khen quá trình (Process praise): 'Em đã làm việc rất chăm chỉ và dùng chiến lược tốt!'" },
           { title: "Tình huống 5: HS giỏi bất ngờ bị điểm kém 1 bài thi và bỏ cuộc luôn", solution: "Khái niệm: Tư duy cố định (Fixed mindset) / Tâm lý bất lực.\nGiải pháp: HS nghĩ điểm kém nghĩa là mình hết thông minh. GV cần định hướng lại: Thất bại là cơ hội học hỏi và điều chỉnh phương pháp." }
@@ -311,7 +311,9 @@
       currentChapter: null
     };
 
-    // INIT
+    // STORE CURRENT ACTIVE QUESTIONS TO PREVENT STRING ESCAPING ISSUES IN ONCLICK
+    let activeQuestions = {};
+
     document.addEventListener('DOMContentLoaded', () => {
       updateUI();
     });
@@ -349,13 +351,17 @@
       // Section A: MCQ
       html += `<h3 style="color: #818cf8; margin: 1.5rem 0 1rem;">Section A — Multiple Choice</h3>`;
       data.mcq.forEach((q, idx) => {
-        html += renderMCQCard(q, `mcq-${chKey}-${idx}`);
+        const qId = `mcq-${chKey}-${idx}`;
+        activeQuestions[qId] = q;
+        html += renderMCQCard(q, qId);
       });
 
       // Section B: True/False
       html += `<h3 style="color: #34d399; margin: 2rem 0 1rem;">Section B — True or False</h3>`;
       data.tf.forEach((q, idx) => {
-        html += renderTFCard(q, `tf-${chKey}-${idx}`);
+        const qId = `tf-${chKey}-${idx}`;
+        activeQuestions[qId] = q;
+        html += renderTFCard(q, qId);
       });
 
       // Section C: Scenarios
@@ -363,17 +369,19 @@
       data.scenarios.forEach((s) => {
         html += `
           <div class="scenario-box">
-            <div class="scenario-title">${s.title}</div>
-            <div style="white-space: pre-line; color: var(--text-muted);">${s.solution}</div>
+            <div class="scenario-title">${escapeHTML(s.title)}</div>
+            <div style="white-space: pre-line; color: var(--text-muted);">${escapeHTML(s.solution)}</div>
           </div>
         `;
       });
 
-      // Section D: Fill in blanks (if exists)
+      // Section D: Fill in blanks
       if(data.fill) {
         html += `<h3 style="color: #f472b6; margin: 2rem 0 1rem;">Section D — Fill in the Blanks</h3>`;
         data.fill.forEach((f, idx) => {
-          html += renderFillCard(f, `fill-${chKey}-${idx}`);
+          const qId = `fill-${chKey}-${idx}`;
+          activeQuestions[qId] = f;
+          html += renderFillCard(f, qId);
         });
       }
 
@@ -384,13 +392,13 @@
     function renderMCQCard(q, id) {
       return `
         <div class="q-card" id="card-${id}">
-          <div class="q-title">${q.q}</div>
+          <div class="q-title">${escapeHTML(q.q)}</div>
           <div class="options">
             ${q.a.map((opt, i) => `
-              <button class="option-btn" onclick="checkMCQ('${id}',${i}, ${q.c}, '${escapeHtml(q.q)}', '${escapeHtml(q.why)}')">${opt}</button>
+              <button class="option-btn" onclick="checkMCQ('${id}', ${i})">${escapeHTML(opt)}</button>
             `).join('')}
           </div>
-          <div class="explanation" id="exp-${id}">${q.why}</div>
+          <div class="explanation" id="exp-${id}">${escapeHTML(q.why)}</div>
         </div>
       `;
     }
@@ -398,12 +406,12 @@
     function renderTFCard(q, id) {
       return `
         <div class="q-card" id="card-${id}">
-          <div class="q-title">${q.q}</div>
+          <div class="q-title">${escapeHTML(q.q)}</div>
           <div class="options" style="flex-direction: row;">
-            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', true, ${q.a}, '${escapeHtml(q.q)}', '${escapeHtml(q.why)}')">TRUE</button>
-            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', false, ${q.a}, '${escapeHtml(q.q)}', '${escapeHtml(q.why)}')">FALSE</button>
+            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', true)">TRUE</button>
+            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', false)">FALSE</button>
           </div>
-          <div class="explanation" id="exp-${id}">${q.why}</div>
+          <div class="explanation" id="exp-${id}">${escapeHTML(q.why)}</div>
         </div>
       `;
     }
@@ -411,56 +419,59 @@
     function renderFillCard(f, id) {
       return `
         <div class="q-card" id="card-${id}">
-          <div class="q-title">${f.q}</div>
+          <div class="q-title">${escapeHTML(f.q)}</div>
           <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
             <input type="text" id="in-${id}" class="search-box" style="margin:0;" placeholder="Nhập từ cần điền...">
-            <button class="btn" onclick="checkFill('${id}', '${f.a}')">Trả lời</button>
+            <button class="btn" onclick="checkFill('${id}')">Trả lời</button>
           </div>
-          <div class="explanation" id="exp-${id}">Đáp án đúng: <strong>${f.a}</strong></div>
+          <div class="explanation" id="exp-${id}">Đáp án đúng: <strong>${escapeHTML(f.a)}</strong></div>
         </div>
       `;
     }
 
-    function checkMCQ(id, selected, correct, qText, why) {
+    function checkMCQ(id, selected) {
+      const q = activeQuestions[id];
       const card = document.getElementById(`card-${id}`);
       const btns = card.querySelectorAll('.option-btn');
       btns.forEach(b => b.disabled = true);
 
-      if(selected === correct) {
+      if(selected === q.c) {
         btns[selected].classList.add('correct');
         state.xp += 10;
       } else {
         btns[selected].classList.add('wrong');
-        btns[correct].classList.add('correct');
-        addMistake(qText, why);
+        btns[q.c].classList.add('correct');
+        addMistake(q.q, q.why);
       }
       card.querySelector('.explanation').style.display = 'block';
       saveState();
     }
 
-    function checkTF(id, selected, correct, qText, why) {
+    function checkTF(id, selected) {
+      const q = activeQuestions[id];
       const card = document.getElementById(`card-${id}`);
       const btns = card.querySelectorAll('.option-btn');
       btns.forEach(b => b.disabled = true);
 
-      if(selected === correct) {
+      if(selected === q.a) {
         btns[selected ? 0 : 1].classList.add('correct');
         state.xp += 10;
       } else {
         btns[selected ? 0 : 1].classList.add('wrong');
-        btns[correct ? 0 : 1].classList.add('correct');
-        addMistake(qText, why);
+        btns[q.a ? 0 : 1].classList.add('correct');
+        addMistake(q.q, q.why);
       }
       card.querySelector('.explanation').style.display = 'block';
       saveState();
     }
 
-    function checkFill(id, correct) {
+    function checkFill(id) {
+      const q = activeQuestions[id];
       const input = document.getElementById(`in-${id}`);
       const val = input.value.trim().toLowerCase();
       const exp = document.getElementById(`exp-${id}`);
       
-      if(val === correct.toLowerCase()) {
+      if(val === q.a.toLowerCase()) {
         input.style.borderColor = 'var(--accent)';
         state.xp += 15;
       } else {
@@ -484,8 +495,8 @@
       }
       container.innerHTML = state.mistakes.map((m, i) => `
         <div class="q-card">
-          <div class="q-title">${m.q}</div>
-          <div style="color: #34d399; font-size: 0.9rem;">💡 Giải thích: ${m.why}</div>
+          <div class="q-title">${escapeHTML(m.q)}</div>
+          <div style="color: #34d399; font-size: 0.9rem;">💡 Giải thích: ${escapeHTML(m.why)}</div>
           <button class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="removeMistake(${i})">Đã hiểu / Xóa câu này</button>
         </div>
       `).join('');
@@ -502,11 +513,14 @@
       Object.keys(DB).forEach(ch => {
         allMCQ = allMCQ.concat(DB[ch].mcq);
       });
-      // Shuffle
       allMCQ.sort(() => Math.random() - 0.5);
       const selected = allMCQ.slice(0, 20);
 
-      document.getElementById('mock-container').innerHTML = selected.map((q, idx) => renderMCQCard(q, `mock-${idx}`)).join('');
+      document.getElementById('mock-container').innerHTML = selected.map((q, idx) => {
+        const qId = `mock-${idx}`;
+        activeQuestions[qId] = q;
+        return renderMCQCard(q, qId);
+      }).join('');
     }
 
     function handleSearch() {
@@ -535,12 +549,21 @@
       if(matches.length === 0) {
         resContainer.innerHTML = `<p style="color: var(--text-muted);">Không tìm thấy câu hỏi hoặc khái niệm phù hợp.</p>`;
       } else {
-        resContainer.innerHTML = matches.map((q, idx) => renderMCQCard(q, `search-${idx}`)).join('');
+        resContainer.innerHTML = matches.map((q, idx) => {
+          const qId = `search-${idx}`;
+          activeQuestions[qId] = q;
+          return renderMCQCard(q, qId);
+        }).join('');
       }
     }
 
-    function escapeHtml(str) {
-      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    function escapeHTML(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
   </script>
 </body>
