@@ -419,7 +419,19 @@ const defaultState={
  completedChapters:[], passedChapters:[], mistakes:[], results:{},
  achievements:[], sectionProgress:{}, mockPassed:false
 };
-let state=JSON.parse(localStorage.getItem("epsyState")||"null")||structuredClone(defaultState);
+let state;
+try {
+  state = JSON.parse(localStorage.getItem("epsyState") || "null") || {};
+} catch(e) { state = {}; }
+state = Object.assign({}, defaultState, state);
+state.activityDates = Array.isArray(state.activityDates) ? state.activityDates : [];
+state.completedChapters = Array.isArray(state.completedChapters) ? state.completedChapters : [];
+state.passedChapters = Array.isArray(state.passedChapters) ? state.passedChapters : [];
+state.mistakes = Array.isArray(state.mistakes) ? state.mistakes : [];
+state.achievements = Array.isArray(state.achievements) ? state.achievements : [];
+state.results = state.results && typeof state.results === "object" ? state.results : {};
+state.sectionProgress = state.sectionProgress && typeof state.sectionProgress === "object" ? state.sectionProgress : {};
+state.mockPassed = !!state.mockPassed;
 let currentChapter=1, currentMode="", currentQuestions=[], quizIndex=0, quizAnswers=[], quizStartedAt=0, lastResult=null, retryMode=false;
 let soundEnabled=localStorage.getItem("epsySound")!=="0";
 
@@ -499,10 +511,16 @@ const achievementDefs=[
 
 function go(page){
  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
- const el=document.getElementById("page-"+page); if(el)el.classList.add("active");
+ const el=document.getElementById("page-"+page);
+ if(!el)return;
+ el.classList.add("active");
  document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
- window.scrollTo({top:0,behavior:"smooth"});
  renderAll();
+ if(page==="chapter")renderChapterDetail();
+ if(page==="learn")renderLearn();
+ if(page==="quiz")renderQuiz();
+ if(page==="result")renderResult();
+ try{window.scrollTo(0,0)}catch(e){}
 }
 
 function renderAll(){
@@ -830,7 +848,10 @@ document.getElementById("searchInput").addEventListener("input",e=>{
 });
 document.addEventListener("click",e=>{if(!e.target.closest(".search"))document.getElementById("searchResults").style.display="none"});
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
-function boot(){updateSoundButton();renderAll();renderChapterDetail();renderLearn();renderQuiz();renderResult()}
+function boot(){
+ try{updateSoundButton();renderAll();renderChapterDetail();renderLearn();renderQuiz();renderResult();}
+ catch(e){console.error("App boot error:",e);}
+}
 boot();
 </script>
 </body>
