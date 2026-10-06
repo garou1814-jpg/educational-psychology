@@ -818,7 +818,7 @@ function continueLearning(){
 function searchItems(term){
  term=term.toLowerCase().trim();if(!term)return[];
  const arr=[];
- for(let c=1;c<=4;c++)(concepts[c]||[]).forEach(x=>{if((x[0]+" "+x[1]).toLowerCase().includes(term))arr.push({kind:"Concept",ch:c,title:x[0],desc:x[1],action:()=>{currentChapter=c;go("learn")}}));
+ for(let c=1;c<=4;c++)(concepts[c]||[]).forEach(x=>{if((x[0]+" "+x[1]).toLowerCase().includes(term))arr.push({kind:"Concept",ch:c,title:x[0],desc:x[1],action:()=>{currentChapter=c;go("learn")}})});
  questions.forEach(q=>{if(q.q.toLowerCase().includes(term))arr.push({kind:"Question",ch:q.ch,title:q.q,desc:`Section ${q.sec}`,action:()=>{currentChapter=q.ch;currentQuestions=[q];currentMode="practice";quizIndex=0;quizAnswers=[null];go("quiz")}})});
  return arr.slice(0,12);
 }
