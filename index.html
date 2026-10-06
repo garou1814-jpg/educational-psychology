@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Educational Psychology - Midterm Revision App</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #0f172a;
@@ -19,552 +21,3486 @@
       --warning: #f59e0b;
       --border: #334155;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
-    header { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.25rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
-    nav { display: flex; gap: 0.5rem; }
-    .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .nav-btn:hover, .nav-btn.active { color: var(--text); background: var(--card-hover); }
-    .xp-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.4rem 0.8rem; border-radius: 9999px; font-weight: 700; font-size: 0.875rem; display: flex; align-items: center; gap: 0.4rem; }
-    main { flex: 1; max-width: 1000px; width: 100%; margin: 2rem auto; padding: 0 1.5rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
-    .card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2); }
-    .card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .card p { color: var(--text-muted); font-size: 0.875rem; }
-    .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.75rem; text-transform: uppercase; }
-    .badge-ch1 { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
-    .badge-ch2 { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-    .badge-ch3 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-    .badge-ch4 { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
-    .btn { background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
-    .btn:hover { background: var(--primary-hover); }
-    .btn-secondary { background: var(--card-hover); color: var(--text); }
-    .btn-secondary:hover { background: #475569; }
-    .q-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; }
-    .q-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; line-height: 1.5; }
-    .options { display: flex; flex-direction: column; gap: 0.75rem; }
-    .option-btn { background: #0f172a; border: 1px solid var(--border); color: var(--text); padding: 1rem; border-radius: 0.5rem; text-align: left; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
-    .option-btn:hover { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); }
-    .option-btn.correct { background: rgba(16, 185, 129, 0.15) !important; border-color: var(--accent) !important; color: #34d399 !important; font-weight: 700; }
-    .option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: var(--danger) !important; color: #f87171 !important; }
-    .explanation { margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--primary); border-radius: 0 0.5rem 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); display: none; line-height: 1.6; }
-    .search-box { width: 100%; padding: 0.8rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; color: var(--text); font-size: 1rem; margin-bottom: 1.5rem; outline: none; }
-    .search-box:focus { border-color: var(--primary); }
-    .scenario-box { background: #0f172a; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6; }
-    .scenario-title { font-weight: 700; color: #818cf8; margin-bottom: 0.5rem; }
-    .hidden { display: none !important; }
-    @media (max-width: 640px) { header { padding: 1rem; flex-direction: column; gap: 1rem; } nav { width: 100%; overflow-x: auto; } }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      color: var(--text);
+      background: var(--card-hover);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .sound-btn {
+      background: var(--card-hover);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .sound-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .xp-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .badge-ch1 {
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+    }
+
+    .badge-ch2 {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .badge-ch3 {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .badge-ch4 {
+      background: rgba(236, 72, 153, 0.2);
+      color: #f472b6;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #475569;
+    }
+
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: 0.25s;
+    }
+
+    .q-card.result-card-correct {
+      border-color: rgba(16, 185, 129, 0.5);
+    }
+
+    .q-card.result-card-wrong {
+      border-color: rgba(239, 68, 68, 0.55);
+    }
+
+    .q-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option-btn {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: left;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: var(--accent) !important;
+      color: #34d399 !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.15) !important;
+      border-color: var(--danger) !important;
+      color: #f87171 !important;
+    }
+
+    .explanation {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 0.5rem 0.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: none;
+      line-height: 1.6;
+    }
+
+    .answer-review {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .answer-review.wrong-review {
+      display: block;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .answer-review.correct-review {
+      display: block;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--primary);
+    }
+
+    .scenario-box {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .scenario-title {
+      font-weight: 700;
+      color: #818cf8;
+      margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .result-summary {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0.5rem 0;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #0f172a;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #a855f7);
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .xp-popup {
+      position: fixed;
+      right: 25px;
+      top: 90px;
+      z-index: 100;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      animation: xpPop 1.2s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes xpPop {
+      0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.8);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      70% {
+        opacity: 1;
+        transform: translateY(-15px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-55px) scale(0.9);
+      }
+    }
+
+    .mistake-item {
+      border-left: 4px solid var(--danger);
+    }
+
+    .retry-banner {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .q-card {
+        padding: 1.25rem;
+      }
+    }
   </style>
 </head>
+
 <body>
 
+  <!-- =========================
+       AUDIO
+  ========================== -->
+
+  <audio id="rightSound" src="right.mp3" preload="auto"></audio>
+  <audio id="wrongSound" src="wrong.mp3" preload="auto"></audio>
+  <audio id="xpSound" src="xp.mp3" preload="auto"></audio>
+
+
   <header>
-    <div class="logo" onclick="go('home')">EduPsych Revision ⚡</div>
+
+    <div class="logo" onclick="go('home')">
+      EduPsych Revision ⚡
+    </div>
+
     <nav>
-      <button class="nav-btn active" id="nav-home" onclick="go('home')">Dashboard</button>
-      <button class="nav-btn" id="nav-mistakes" onclick="go('mistakes')">Mistakes (<span id="mistake-count">0</span>)</button>
-      <button class="nav-btn" id="nav-mock" onclick="go('mock')">Midterm Mock</button>
+      <button class="nav-btn active" id="nav-home" onclick="go('home')">
+        Dashboard
+      </button>
+
+      <button class="nav-btn" id="nav-mistakes" onclick="go('mistakes')">
+        Mistakes (<span id="mistake-count">0</span>)
+      </button>
+
+      <button class="nav-btn" id="nav-mock" onclick="go('mock')">
+        Midterm Mock
+      </button>
     </nav>
-    <div class="xp-badge">⭐ <span id="xp-val">0</span> XP</div>
+
+    <div class="header-right">
+
+      <button class="sound-btn" id="sound-button" onclick="toggleSound()">
+        🔊 Sound
+      </button>
+
+      <div class="xp-badge">
+        ⭐ <span id="xp-val">0</span> XP
+      </div>
+
+    </div>
+
   </header>
 
+
   <main>
-    <!-- DASHBOARD VIEW -->
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
     <section id="view-home">
-      <input type="text" class="search-box" id="search-input" placeholder="🔍 Tìm kiếm câu hỏi, từ khóa (VD: schema, Yerkes-Dodson, Baumeister...)..." oninput="handleSearch()">
-      
+
+      <input
+        type="text"
+        class="search-box"
+        id="search-input"
+        placeholder="🔍 Tìm kiếm câu hỏi, từ khóa..."
+        oninput="handleSearch()"
+      >
+
       <div id="search-results" class="hidden"></div>
 
       <div id="main-content">
-        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Ôn tập theo Chương</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Chọn chương để làm trắc nghiệm, câu đúng/sai và bài tập tình huống sư phạm.</p>
-        
+
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">
+          Ôn tập theo Chương
+        </h2>
+
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Chọn chương để làm trắc nghiệm, câu đúng/sai và bài tập tình huống sư phạm.
+        </p>
+
         <div class="grid">
+
           <div class="card" onclick="startChapter('ch1')">
             <span class="badge badge-ch1">Chapter 1</span>
             <h3>Memory & Understanding</h3>
-            <p>15 MCQ, 10 T/F, 5 Tình huống, 10 Điền từ</p>
+            <p>
+              15 MCQ, 10 T/F, 5 Tình huống, 10 Điền từ
+            </p>
           </div>
+
           <div class="card" onclick="startChapter('ch2')">
             <span class="badge badge-ch2">Chapter 2</span>
             <h3>Cognition & Attention</h3>
-            <p>15 MCQ, 10 T/F, 5 Tình huống</p>
+            <p>
+              15 MCQ, 10 T/F, 5 Tình huống
+            </p>
           </div>
+
           <div class="card" onclick="startChapter('ch3')">
             <span class="badge badge-ch3">Chapter 3</span>
             <h3>Self-theories & Mindset</h3>
-            <p>15 MCQ, 10 T/F, 5 Tình huống</p>
+            <p>
+              15 MCQ, 10 T/F, 5 Tình huống
+            </p>
           </div>
+
           <div class="card" onclick="startChapter('ch4')">
             <span class="badge badge-ch4">Chapter 4</span>
             <h3>Creativity & Problem Solving</h3>
-            <p>15 MCQ, 10 T/F, 5 Tình huống</p>
+            <p>
+              15 MCQ, 10 T/F, 5 Tình huống
+            </p>
           </div>
+
         </div>
+
+        <!-- XP PROGRESS -->
+
+        <div class="q-card" style="margin-top: 2rem;">
+
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:800;">Your XP</div>
+              <div style="color:var(--text-muted);font-size:0.85rem;">
+                Càng học nhiều, càng lên level 🚀
+              </div>
+            </div>
+
+            <div style="font-weight:800;color:#fbbf24;">
+              ⭐ <span id="home-xp">0</span> XP
+            </div>
+          </div>
+
+          <div class="progress-track">
+            <div
+              id="xp-progress"
+              class="progress-fill"
+              style="width:0%"
+            ></div>
+          </div>
+
+          <div
+            id="level-text"
+            style="margin-top:0.7rem;color:var(--text-muted);font-size:0.85rem;"
+          >
+            Level 1
+          </div>
+
+        </div>
+
       </div>
+
     </section>
 
-    <!-- QUIZ VIEW -->
+
+    <!-- =========================
+         QUIZ
+    ========================== -->
+
     <section id="view-quiz" class="hidden">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <button class="btn btn-secondary" onclick="go('home')">← Quay lại Dashboard</button>
-        <span id="quiz-title" style="font-weight: 700; color: var(--text-muted);"></span>
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:1.5rem;
+          gap:1rem;
+        "
+      >
+
+        <button class="btn btn-secondary" onclick="go('home')">
+          ← Quay lại Dashboard
+        </button>
+
+        <span
+          id="quiz-title"
+          style="font-weight:700;color:var(--text-muted);text-align:right;"
+        ></span>
+
       </div>
+
       <div id="quiz-container"></div>
+
     </section>
 
-    <!-- MISTAKES VIEW -->
+
+    <!-- =========================
+         MISTAKES
+    ========================== -->
+
     <section id="view-mistakes" class="hidden">
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Danh sách câu làm sai</h2>
-      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Luyện tập lại các câu hỏi bạn đã chọn sai để khắc sâu kiến thức.</p>
+
+      <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:0.5rem;">
+        Danh sách câu làm sai
+      </h2>
+
+      <p style="color:var(--text-muted);margin-bottom:1.5rem;">
+        Luyện tập lại các câu hỏi bạn đã chọn sai để khắc sâu kiến thức.
+      </p>
+
       <div id="mistakes-container"></div>
+
     </section>
 
-    <!-- MOCK TEST VIEW -->
+
+    <!-- =========================
+         MOCK
+    ========================== -->
+
     <section id="view-mock" class="hidden">
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Đề thi thử Tổng hợp (Midterm Mock Test)</h2>
-      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Trộn ngẫu nhiên 20 câu trắc nghiệm từ tất cả 4 chương.</p>
-      <button class="btn" style="margin-bottom: 1.5rem;" onclick="generateMockTest()">🔄 Bắt đầu Đề thi mới</button>
+
+      <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:0.5rem;">
+        Đề thi thử Tổng hợp
+      </h2>
+
+      <p style="color:var(--text-muted);margin-bottom:1.5rem;">
+        Trộn ngẫu nhiên 20 câu trắc nghiệm từ tất cả 4 chương.
+      </p>
+
+      <button
+        class="btn"
+        style="margin-bottom:1.5rem;"
+        onclick="generateMockTest()"
+      >
+        🔄 Bắt đầu Đề thi mới
+      </button>
+
       <div id="mock-container"></div>
+
     </section>
+
   </main>
 
+
   <script>
-    // DATA STORE
+
+    /* =====================================================
+       QUESTION DATABASE
+    ===================================================== */
+
     const DB = {
+
       ch1: {
+
         title: "Chapter 1 — Memory and Understanding",
+
         mcq: [
-          { q: "1. In psychology, 'memory' means:", a: ["any lasting change in how we think, feel or act", "only learning facts by heart", "the ability to copy information quickly", "a short feeling we have after a lesson"], c: 0, why: "Theo tâm lý học giáo dục, ký ức là bất kỳ sự thay đổi lâu dài nào trong cách chúng ta suy nghĩ, cảm nhận hoặc hành động." },
-          { q: "2. Knowledge that you know and can explain in words is:", a: ["non-declarative memory", "working memory", "declarative memory", "sensory memory"], c: 2, why: "Declarative memory (trí nhớ khai báo) là những kiến thức ta có thể diễn đạt bằng lời." },
-          { q: "3. Riding a bicycle is an example of:", a: ["declarative memory", "non-declarative memory", "factual memory", "short-term memory"], c: 1, why: "Đi xe đạp là kỹ năng vận động, thuộc Trí nhớ phi khai báo (non-declarative / procedural memory)." },
-          { q: "4. Which one is not one of the three steps of memory?", a: ["encoding", "storage", "retrieval", "revision"], c: 3, why: "3 giai đoạn của trí nhớ bao gồm: Mã hóa (Encoding), Lưu trữ (Storage), và Truy xuất (Retrieval)." },
-          { q: "5. The chapter says the brain is not like:", a: ["a group of connected systems", "something that changes physically", "a video recorder", "something that needs sleep"], c: 2, why: "Bộ não không hoạt động như một máy ghi hình (video recorder); ký ức được tái tạo chứ không phải phát lại nguyên bản." },
-          { q: "6. Loftus (2005) showed that our memories:", a: ["can be distorted, and some never happened at all", "never change over time", "are always stronger than other people’s", "are stored like files on a computer"], c: 0, why: "Nghiên cứu của Loftus chứng minh ký ức có thể bị bóp méo hoặc sai lệch hoàn toàn." },
-          { q: "7. Schacter (2001) found that child witnesses of a crime:", a: ["remember more accurately than adults", "are easily influenced by leading questions", "cannot remember anything at all", "have a larger long-term memory"], c: 1, why: "Trẻ em rất dễ bị ảnh hưởng bởi các câu hỏi gợi ý (leading questions)." },
-          { q: "8. Kornell et al. (2011) found that simple repetition gives learners:", a: ["much more long-term memory", "better attention in every lesson", "a bigger working memory", "more confidence, but not more long-term learning"], c: 3, why: "Lặp lại thuần túy chỉ mang lại ảo tưởng tự tin chứ không tạo ra việc học lâu dài." },
-          { q: "9. 'Counterintuitive' means:", a: ["true, but different from what people expect", "easy to understand", "wrong and unscientific", "impossible to measure"], c: 0, why: "Counterintuitive = Phản trực giác (đúng thực tế nhưng ngược với kỳ vọng thông thường)." },
-          { q: "10. Soderstrom and Bjork (2015) warn that short-term gains are:", a: ["the best measure of real learning", "impossible for a teacher to see", "an unreliable guide to long-term learning", "only found in young children"], c: 2, why: "Thể hiện tốt trong ngắn hạn không phản ánh chính xác việc ghi nhớ dài hạn." },
-          { q: "11. A schema is:", a: ["a type of exam question", "a group of connected ideas about one topic in the mind", "a store that holds information for a few seconds", "a method of teaching grammar"], c: 1, why: "Schema (Sơ đồ tư duy/lưới tri thức) là tập hợp các ý tưởng liên kết với nhau về một chủ đề." },
-          { q: "12. Bartlett read Native American folk tales to his students. Later they:", a: ["remembered every detail correctly", "refused to retell the stories", "remembered them better after one week", "changed the stories to be more like their own culture"], c: 3, why: "Thí nghiệm Bartlett: Người nghe tự điều chỉnh câu chuyện theo văn hóa của chính họ." },
-          { q: "13. Which activity is deep processing?", a: ["copying a new word ten times", "counting the letters in a word", "writing a true sentence about your own life with the word", "underlining a whole page of notes"], c: 2, why: "Xử lý sâu (Deep processing) liên quan đến việc gán ý nghĩa và liên hệ bản thân." },
-          { q: "14. In Hyde and Jenkins (1973), the group that remembered the words better was asked to:", a: ["say how much they liked each word", "try hard to learn the words for a test", "copy each word twice", "count the letters in each word"], c: 0, why: "Đánh giá mức độ yêu thích từ (nghĩa của từ) giúp nhớ tốt hơn là cố gắng học thuộc lòng." },
-          { q: "15. The Yerkes-Dodson law says performance is best when arousal is:", a: ["very low", "medium", "very high", "zero"], c: 1, why: "Định luật Yerkes-Dodson: Hiệu suất đạt đỉnh ở mức độ kích thích/căng thẳng vừa phải (medium)." }
+
+          {
+            q:"1. In psychology, 'memory' means:",
+            a:[
+              "any lasting change in how we think, feel or act",
+              "only learning facts by heart",
+              "the ability to copy information quickly",
+              "a short feeling we have after a lesson"
+            ],
+            c:0,
+            why:"Theo tâm lý học giáo dục, ký ức là bất kỳ sự thay đổi lâu dài nào trong cách chúng ta suy nghĩ, cảm nhận hoặc hành động."
+          },
+
+          {
+            q:"2. Knowledge that you know and can explain in words is:",
+            a:[
+              "non-declarative memory",
+              "working memory",
+              "declarative memory",
+              "sensory memory"
+            ],
+            c:2,
+            why:"Declarative memory (trí nhớ khai báo) là những kiến thức ta có thể diễn đạt bằng lời."
+          },
+
+          {
+            q:"3. Riding a bicycle is an example of:",
+            a:[
+              "declarative memory",
+              "non-declarative memory",
+              "factual memory",
+              "short-term memory"
+            ],
+            c:1,
+            why:"Đi xe đạp là kỹ năng vận động, thuộc Trí nhớ phi khai báo (non-declarative / procedural memory)."
+          },
+
+          {
+            q:"4. Which one is not one of the three steps of memory?",
+            a:["encoding","storage","retrieval","revision"],
+            c:3,
+            why:"3 giai đoạn của trí nhớ bao gồm: Mã hóa (Encoding), Lưu trữ (Storage), và Truy xuất (Retrieval)."
+          },
+
+          {
+            q:"5. The chapter says the brain is not like:",
+            a:[
+              "a group of connected systems",
+              "something that changes physically",
+              "a video recorder",
+              "something that needs sleep"
+            ],
+            c:2,
+            why:"Bộ não không hoạt động như một máy ghi hình (video recorder); ký ức được tái tạo chứ không phải phát lại nguyên bản."
+          },
+
+          {
+            q:"6. Loftus (2005) showed that our memories:",
+            a:[
+              "can be distorted, and some never happened at all",
+              "never change over time",
+              "are always stronger than other people’s",
+              "are stored like files on a computer"
+            ],
+            c:0,
+            why:"Nghiên cứu của Loftus chứng minh ký ức có thể bị bóp méo hoặc sai lệch hoàn toàn."
+          },
+
+          {
+            q:"7. Schacter (2001) found that child witnesses of a crime:",
+            a:[
+              "remember more accurately than adults",
+              "are easily influenced by leading questions",
+              "cannot remember anything at all",
+              "have a larger long-term memory"
+            ],
+            c:1,
+            why:"Trẻ em rất dễ bị ảnh hưởng bởi các câu hỏi gợi ý (leading questions)."
+          },
+
+          {
+            q:"8. Kornell et al. (2011) found that simple repetition gives learners:",
+            a:[
+              "much more long-term memory",
+              "better attention in every lesson",
+              "a bigger working memory",
+              "more confidence, but not more long-term learning"
+            ],
+            c:3,
+            why:"Lặp lại thuần túy chỉ mang lại ảo tưởng tự tin chứ không tạo ra việc học lâu dài."
+          },
+
+          {
+            q:"9. 'Counterintuitive' means:",
+            a:[
+              "true, but different from what people expect",
+              "easy to understand",
+              "wrong and unscientific",
+              "impossible to measure"
+            ],
+            c:0,
+            why:"Counterintuitive = Phản trực giác (đúng thực tế nhưng ngược với kỳ vọng thông thường)."
+          },
+
+          {
+            q:"10. Soderstrom and Bjork (2015) warn that short-term gains are:",
+            a:[
+              "the best measure of real learning",
+              "impossible for a teacher to see",
+              "an unreliable guide to long-term learning",
+              "only found in young children"
+            ],
+            c:2,
+            why:"Thể hiện tốt trong ngắn hạn không phản ánh chính xác việc ghi nhớ dài hạn."
+          },
+
+          {
+            q:"11. A schema is:",
+            a:[
+              "a type of exam question",
+              "a group of connected ideas about one topic in the mind",
+              "a store that holds information for a few seconds",
+              "a method of teaching grammar"
+            ],
+            c:1,
+            why:"Schema (Sơ đồ tư duy/lưới tri thức) là tập hợp các ý tưởng liên kết với nhau về một chủ đề."
+          },
+
+          {
+            q:"12. Bartlett read Native American folk tales to his students. Later they:",
+            a:[
+              "remembered every detail correctly",
+              "refused to retell the stories",
+              "remembered them better after one week",
+              "changed the stories to be more like their own culture"
+            ],
+            c:3,
+            why:"Thí nghiệm Bartlett: Người nghe tự điều chỉnh câu chuyện theo văn hóa của chính họ."
+          },
+
+          {
+            q:"13. Which activity is deep processing?",
+            a:[
+              "copying a new word ten times",
+              "counting the letters in a word",
+              "writing a true sentence about your own life with the word",
+              "underlining a whole page of notes"
+            ],
+            c:2,
+            why:"Xử lý sâu (Deep processing) liên quan đến việc gán ý nghĩa và liên hệ bản thân."
+          },
+
+          {
+            q:"14. In Hyde and Jenkins (1973), the group that remembered the words better was asked to:",
+            a:[
+              "say how much they liked each word",
+              "try hard to learn the words for a test",
+              "copy each word twice",
+              "count the letters in each word"
+            ],
+            c:0,
+            why:"Đánh giá mức độ yêu thích từ (nghĩa của từ) giúp nhớ tốt hơn là cố gắng học thuộc lòng."
+          },
+
+          {
+            q:"15. The Yerkes-Dodson law says performance is best when arousal is:",
+            a:["very low","medium","very high","zero"],
+            c:1,
+            why:"Định luật Yerkes-Dodson: Hiệu suất đạt đỉnh ở mức độ kích thích/căng thẳng vừa phải (medium)."
+          }
+
         ],
-        tf: [
-          { q: "In psychology, 'memory' means only learning facts by heart.", a: false, why: "Sai. Trí nhớ bao gồm cả kỹ năng (non-declarative), thái độ và thói quen." },
-          { q: "Declarative memory is knowledge you know and can explain in words.", a: true, why: "Đúng. Đây là định nghĩa của trí nhớ khai báo." },
-          { q: "Playing a musical instrument uses mainly non-declarative memory.", a: true, why: "Đúng. Chơi nhạc cụ phụ thuộc vào trí nhớ thao tác/kỹ năng." },
-          { q: "Our memories are stored exactly as the events happened.", a: false, why: "Sai. Ký ức được tái tạo và có thể bị biến đổi." },
-          { q: "Children remember events more accurately than adults do.", a: false, why: "Sai. Trẻ em dễ bị thao túng bởi câu hỏi gợi ý hơn người lớn." },
-          { q: "A lesson that feels easy always produces strong long-term learning.", a: false, why: "Sai. Cảm giác dễ dàng ngắn hạn không đảm bảo ghi nhớ dài hạn." },
-          { q: "New information is easier to learn when it links to a schema we already have.", a: true, why: "Đúng. Liên kết với Schema có sẵn giúp mã hóa thông tin tốt hơn." },
-          { q: "Bartlett’s participants added details that were not in the original story.", a: true, why: "Đúng. Họ hợp lý hóa câu chuyện theo văn hóa bản địa." },
-          { q: "Deep processing means thinking about the meaning of the information.", a: true, why: "Đúng. Xử lý sâu là tập trung vào ý nghĩa thay vì hình thức." },
-          { q: "Trying hard to learn always produces better memory than thinking about meaning.", a: false, why: "Sai. Ý định cố nhớ không quan trọng bằng cách thức xử lý ý nghĩa (Deep processing)." }
+
+        tf:[
+
+          {
+            q:"In psychology, 'memory' means only learning facts by heart.",
+            a:false,
+            why:"Sai. Trí nhớ bao gồm cả kỹ năng (non-declarative), thái độ và thói quen."
+          },
+
+          {
+            q:"Declarative memory is knowledge you know and can explain in words.",
+            a:true,
+            why:"Đúng. Đây là định nghĩa của trí nhớ khai báo."
+          },
+
+          {
+            q:"Playing a musical instrument uses mainly non-declarative memory.",
+            a:true,
+            why:"Đúng. Chơi nhạc cụ phụ thuộc vào trí nhớ thao tác/kỹ năng."
+          },
+
+          {
+            q:"Our memories are stored exactly as the events happened.",
+            a:false,
+            why:"Sai. Ký ức được tái tạo và có thể bị biến đổi."
+          },
+
+          {
+            q:"Children remember events more accurately than adults do.",
+            a:false,
+            why:"Sai. Trẻ em dễ bị thao túng bởi câu hỏi gợi ý hơn người lớn."
+          },
+
+          {
+            q:"A lesson that feels easy always produces strong long-term learning.",
+            a:false,
+            why:"Sai. Cảm giác dễ dàng ngắn hạn không đảm bảo ghi nhớ dài hạn."
+          },
+
+          {
+            q:"New information is easier to learn when it links to a schema we already have.",
+            a:true,
+            why:"Đúng. Liên kết với Schema có sẵn giúp mã hóa thông tin tốt hơn."
+          },
+
+          {
+            q:"Bartlett’s participants added details that were not in the original story.",
+            a:true,
+            why:"Đúng. Họ hợp lý hóa câu chuyện theo văn hóa bản địa."
+          },
+
+          {
+            q:"Deep processing means thinking about the meaning of the information.",
+            a:true,
+            why:"Đúng. Xử lý sâu là tập trung vào ý nghĩa thay vì hình thức."
+          },
+
+          {
+            q:"Trying hard to learn always produces better memory than thinking about meaning.",
+            a:false,
+            why:"Sai. Ý định cố nhớ không quan trọng bằng cách thức xử lý ý nghĩa (Deep processing)."
+          }
+
         ],
-        scenarios: [
-          { title: "Tình huống 1: Thầy Hùng giảng Passive Voice 40 phút với 35 slide", solution: "Nguyên lý: Quá tải chú ý / Giới hạn Working Memory.\nGiải pháp: Thầy Hùng nên chia nhỏ bài giảng (10-15 phút), giảm bớt slide và chèn các bài tập truy xuất (retrieval practice) giữa giờ." },
-          { title: "Tình huống 2: Lan đọc lại vở 5 lần trước đêm thi nhưng điểm vẫn thấp", solution: "Nguyên lý: Ảo tưởng năng lực (Illusion of competence) & Đọc lại thụ động.\nGiải pháp: Lan nên thay việc đọc lại bằng việc tự kiểm tra (Retrieval Practice) như dùng flashcard hoặc làm bài tập." },
-          { title: "Tình huống 3: Dạy Present Perfect ở tuần 2 và không bao giờ gợi lại", solution: "Nguyên lý: Spacing Effect & Thiếu củng cố (Consolidation).\nGiải pháp: Giáo viên cần áp dụng bài tập cách quãng (Spaced practice), định kỳ đưa bài tập Thì hiện tại hoàn thành vào các tuần sau." },
-          { title: "Tình huống 4: Minh chỉ học ở đúng 1 góc bàn, vào phòng thi thì quên sạch", solution: "Nguyên lý: Trí nhớ phụ thuộc ngữ cảnh (Context-dependent memory).\nGiải pháp: Minh nên đa dạng hóa môi trường và không gian học tập để không bị phụ thuộc vào tín hiệu môi trường." },
-          { title: "Tình huống 5: Làm 20 câu Present Perfect liên tục đạt 19/20, tuần sau làm lẫn lộn với Past Simple", solution: "Nguyên lý: Luyện tập tập trung (Blocking) vs. Luyện tập đan xen (Interleaving).\nGiải pháp: Giáo viên nên xáo trộn các dạng bài tập thì Quá khứ đơn và Hiện tại hoàn thành để học sinh phân biệt ngữ cảnh sử dụng." }
+
+        scenarios:[
+
+          {
+            title:"Tình huống 1: Thầy Hùng giảng Passive Voice 40 phút với 35 slide",
+            solution:"Nguyên lý: Quá tải chú ý / Giới hạn Working Memory.\nGiải pháp: Thầy Hùng nên chia nhỏ bài giảng (10-15 phút), giảm bớt slide và chèn các bài tập truy xuất (retrieval practice) giữa giờ."
+          },
+
+          {
+            title:"Tình huống 2: Lan đọc lại vở 5 lần trước đêm thi nhưng điểm vẫn thấp",
+            solution:"Nguyên lý: Ảo tưởng năng lực (Illusion of competence) & Đọc lại thụ động.\nGiải pháp: Lan nên thay việc đọc lại bằng việc tự kiểm tra (Retrieval Practice) như dùng flashcard hoặc làm bài tập."
+          },
+
+          {
+            title:"Tình huống 3: Dạy Present Perfect ở tuần 2 và không bao giờ gợi lại",
+            solution:"Nguyên lý: Spacing Effect & Thiếu củng cố (Consolidation).\nGiải pháp: Giáo viên cần áp dụng bài tập cách quãng (Spaced practice), định kỳ đưa bài tập Thì hiện tại hoàn thành vào các tuần sau."
+          },
+
+          {
+            title:"Tình huống 4: Minh chỉ học ở đúng 1 góc bàn, vào phòng thi thì quên sạch",
+            solution:"Nguyên lý: Trí nhớ phụ thuộc ngữ cảnh (Context-dependent memory).\nGiải pháp: Minh nên đa dạng hóa môi trường và không gian học tập để không bị phụ thuộc vào tín hiệu môi trường."
+          },
+
+          {
+            title:"Tình huống 5: Làm 20 câu Present Perfect liên tục đạt 19/20, tuần sau làm lẫn lộn với Past Simple",
+            solution:"Nguyên lý: Luyện tập tập trung (Blocking) vs. Luyện tập đan xen (Interleaving).\nGiải pháp: Giáo viên nên xáo trộn các dạng bài tập thì Quá khứ đơn và Hiện tại hoàn thành để học sinh phân biệt ngữ cảnh sử dụng."
+          }
+
         ],
-        fill: [
-          { q: "1. Sleep helps the brain __________ new memories.", a: "consolidate" },
-          { q: "2. Testing yourself instead of re-reading is called __________.", a: "retrieval practice" },
-          { q: "3. A group of connected ideas in your mind is a __________.", a: "schema" },
-          { q: "4. Studying on Monday and again on Friday uses the __________.", a: "spacing effect" },
-          { q: "5. Mixing present perfect and past simple exercises together is __________.", a: "interleaving" },
-          { q: "6. A task that feels harder but improves learning is a __________.", a: "desirable difficulty" },
-          { q: "7. Knowledge you can explain in words is __________ memory.", a: "declarative" },
-          { q: "8. A skill you can perform but cannot explain is __________ memory.", a: "non-declarative" },
-          { q: "9. Putting new information into memory is called __________.", a: "encoding" },
-          { q: "10. Thinking about the meaning of a new word is __________.", a: "deep processing" }
+
+        fill:[
+
+          {q:"1. Sleep helps the brain __________ new memories.",a:"consolidate"},
+          {q:"2. Testing yourself instead of re-reading is called __________.",a:"retrieval practice"},
+          {q:"3. A group of connected ideas in your mind is a __________.",a:"schema"},
+          {q:"4. Studying on Monday and again on Friday uses the __________.",a:"spacing effect"},
+          {q:"5. Mixing present perfect and past simple exercises together is __________.",a:"interleaving"},
+          {q:"6. A task that feels harder but improves learning is a __________.",a:"desirable difficulty"},
+          {q:"7. Knowledge you can explain in words is __________ memory.",a:"declarative"},
+          {q:"8. A skill you can perform but cannot explain is __________ memory.",a:"non-declarative"},
+          {q:"9. Putting new information into memory is called __________.",a:"encoding"},
+          {q:"10. Thinking about the meaning of a new word is __________.",a:"deep processing"}
+
         ]
+
       },
+
+
       ch2: {
-        title: "Chapter 2 — Cognition",
-        mcq: [
-          { q: "1. In psychology, 'cognition' means:", a: ["thinking and reasoning — what is going on in the mind now", "memory for facts only", "a feeling that lasts a long time", "the ability to sit still and listen"], c: 0, why: "Cognition (Nhận thức) là quá trình suy nghĩ, lý luận đang diễn ra trong trí óc." },
-          { q: "2. Which pair are the two closely linked processes at the heart of cognition?", a: ["sleep and diet", "reward and punishment", "attention and thinking", "reading and writing"], c: 2, why: "Attention (Chú ý) và Thinking (Tư duy) là 2 cốt lõi của nhận thức." },
-          { q: "3. Attention is best described as:", a: ["unlimited if the student tries hard", "a limited resource that must be divided", "the same thing as intelligence", "fixed from birth"], c: 1, why: "Chú ý là một nguồn tài nguyên có giới hạn." },
-          { q: "4. The old term 'short-term memory' is less useful than 'working memory' because it suggests the learner:", a: ["is forgetting on purpose", "has a large capacity", "can study for hours", "only holds information passively"], c: 3, why: "Thuật ngữ cũ 'short-term memory' hàm ý người học chỉ tiếp nhận thông tin thụ động." },
-          { q: "5. Gathercole et al. (2004) found that working memory capacity:", a: ["is fixed from birth", "only grows after age 16", "increases steadily between the ages of 5 and 14", "grows in sudden jumps, as Piaget said"], c: 2, why: "Dung lượng bộ nhớ làm việc tăng trưởng liên tục từ 5 đến 14 tuổi." },
-          { q: "6. Simons et al. (2016) reviewed 'brain training' and found that gains:", a: ["do not transfer beyond the trained task", "transfer easily to school subjects", "last for a whole lifetime", "only work for adults"], c: 0, why: "Các ứng dụng 'luyện não' không có sự chuyển giao (transfer) sang các nhiệm vụ học tập khác." },
-          { q: "7. Executive function does not include:", a: ["planning", "inhibiting harmful actions", "checking our own progress", "storing information for a few seconds"], c: 3, why: "Lưu trữ thông tin ngắn hạn thuộc Working Memory, không thuộc chức năng điều hành (Executive Function)." },
-          { q: "8. The part of the brain most linked to executive function is the:", a: ["hippocampus", "cerebellum", "visual cortex", "prefrontal cortex"], c: 3, why: "Vỏ brain tiền trán (Prefrontal Cortex) quản lý chức năng điều hành." },
-          { q: "9. Blakemore and Choudhury (2006) showed that the prefrontal cortex keeps developing until:", a: ["at least our early twenties", "the age of 8", "the age of 11", "the first year of life"], c: 0, why: "Vỏ não tiền trán tiếp tục phát triển cho đến đầu những năm 20 tuổi." },
-          { q: "10. Steinberg (2007) found that adolescent decisions are strongly influenced by:", a: ["the weather", "the presence of peers", "their height", "the size of the school"], c: 1, why: "Quyết định của thanh thiếu niên bị ảnh hưởng mạnh mẽ bởi sự có mặt của bạn bè (peer presence)." },
-          { q: "11. Children exposed to constant traffic noise show:", a: ["better concentration", "no measurable difference", "poorer reading comprehension", "larger working memory"], c: 2, why: "Tiếng ồn giao thông liên tục làm giảm khả năng đọc hiểu của trẻ." },
-          { q: "12. Ching (2017) found that maths anxiety harmed most:", a: ["the youngest children only", "boys more than girls", "nobody — anxiety always helps", "learners with better executive abilities"], c: 3, why: "Lo âu toán học gây hại nhất cho những học sinh có chức năng điều hành tốt vì nó chiếm dụng dung lượng Working Memory của họ." },
-          { q: "13. A distraction is different from mind-wandering because a distraction:", a: ["comes from outside the learner", "comes from inside the learner", "only happens in the morning", "cannot be controlled at all"], c: 0, why: "Distraction (xao nhãng) đến từ bên ngoài; Mind-wandering (tâm trí lang thang) đến từ bên trong." },
-          { q: "14. Risko et al. (2012) found that university students mind-wandered about:", a: ["5 per cent of the time", "15 per cent of the time", "40 per cent of the time", "90 per cent of the time"], c: 2, why: "Sinh viên để tâm trí lang thang khoảng 40% thời gian trong giờ học." },
-          { q: "15. Ravizza et al. (2014) found that non-academic internet use during class:", a: ["helped the high achievers only", "made no difference to results", "helped learners relax and focus", "was negatively related to test performance for all learners"], c: 3, why: "Dùng internet ngoài mục đích học tập trong giờ gây ảnh hưởng tiêu cực đến tất cả học sinh." }
+
+        title:"Chapter 2 — Cognition",
+
+        mcq:[
+
+          {
+            q:"1. In psychology, 'cognition' means:",
+            a:[
+              "thinking and reasoning — what is going on in the mind now",
+              "memory for facts only",
+              "a feeling that lasts a long time",
+              "the ability to sit still and listen"
+            ],
+            c:0,
+            why:"Cognition (Nhận thức) là quá trình suy nghĩ, lý luận đang diễn ra trong trí óc."
+          },
+
+          {
+            q:"2. Which pair are the two closely linked processes at the heart of cognition?",
+            a:["sleep and diet","reward and punishment","attention and thinking","reading and writing"],
+            c:2,
+            why:"Attention (Chú ý) và Thinking (Tư duy) là 2 cốt lõi của nhận thức."
+          },
+
+          {
+            q:"3. Attention is best described as:",
+            a:[
+              "unlimited if the student tries hard",
+              "a limited resource that must be divided",
+              "the same thing as intelligence",
+              "fixed from birth"
+            ],
+            c:1,
+            why:"Chú ý là một nguồn tài nguyên có giới hạn."
+          },
+
+          {
+            q:"4. The old term 'short-term memory' is less useful than 'working memory' because it suggests the learner:",
+            a:[
+              "is forgetting on purpose",
+              "has a large capacity",
+              "can study for hours",
+              "only holds information passively"
+            ],
+            c:3,
+            why:"Thuật ngữ cũ 'short-term memory' hàm ý người học chỉ tiếp nhận thông tin thụ động."
+          },
+
+          {
+            q:"5. Gathercole et al. (2004) found that working memory capacity:",
+            a:[
+              "is fixed from birth",
+              "only grows after age 16",
+              "increases steadily between the ages of 5 and 14",
+              "grows in sudden jumps, as Piaget said"
+            ],
+            c:2,
+            why:"Dung lượng bộ nhớ làm việc tăng trưởng liên tục từ 5 đến 14 tuổi."
+          },
+
+          {
+            q:"6. Simons et al. (2016) reviewed 'brain training' and found that gains:",
+            a:[
+              "do not transfer beyond the trained task",
+              "transfer easily to school subjects",
+              "last for a whole lifetime",
+              "only work for adults"
+            ],
+            c:0,
+            why:"Các ứng dụng 'luyện não' không có sự chuyển giao (transfer) sang các nhiệm vụ học tập khác."
+          },
+
+          {
+            q:"7. Executive function does not include:",
+            a:[
+              "planning",
+              "inhibiting harmful actions",
+              "checking our own progress",
+              "storing information for a few seconds"
+            ],
+            c:3,
+            why:"Lưu trữ thông tin ngắn hạn thuộc Working Memory, không thuộc chức năng điều hành (Executive Function)."
+          },
+
+          {
+            q:"8. The part of the brain most linked to executive function is the:",
+            a:["hippocampus","cerebellum","visual cortex","prefrontal cortex"],
+            c:3,
+            why:"Vỏ não tiền trán (Prefrontal Cortex) quản lý chức năng điều hành."
+          },
+
+          {
+            q:"9. Blakemore and Choudhury (2006) showed that the prefrontal cortex keeps developing until:",
+            a:["at least our early twenties","the age of 8","the age of 11","the first year of life"],
+            c:0,
+            why:"Vỏ não tiền trán tiếp tục phát triển cho đến đầu những năm 20 tuổi."
+          },
+
+          {
+            q:"10. Steinberg (2007) found that adolescent decisions are strongly influenced by:",
+            a:["the weather","the presence of peers","their height","the size of the school"],
+            c:1,
+            why:"Quyết định của thanh thiếu niên bị ảnh hưởng mạnh mẽ bởi sự có mặt của bạn bè (peer presence)."
+          },
+
+          {
+            q:"11. Children exposed to constant traffic noise show:",
+            a:[
+              "better concentration",
+              "no measurable difference",
+              "poorer reading comprehension",
+              "larger working memory"
+            ],
+            c:2,
+            why:"Tiếng ồn giao thông liên tục làm giảm khả năng đọc hiểu của trẻ."
+          },
+
+          {
+            q:"12. Ching (2017) found that maths anxiety harmed most:",
+            a:[
+              "the youngest children only",
+              "boys more than girls",
+              "nobody — anxiety always helps",
+              "learners with better executive abilities"
+            ],
+            c:3,
+            why:"Lo âu toán học gây hại nhất cho những học sinh có chức năng điều hành tốt vì nó chiếm dụng dung lượng Working Memory của họ."
+          },
+
+          {
+            q:"13. A distraction is different from mind-wandering because a distraction:",
+            a:[
+              "comes from outside the learner",
+              "comes from inside the learner",
+              "only happens in the morning",
+              "cannot be controlled at all"
+            ],
+            c:0,
+            why:"Distraction (xao nhãng) đến từ bên ngoài; Mind-wandering (tâm trí lang thang) đến từ bên trong."
+          },
+
+          {
+            q:"14. Risko et al. (2012) found that university students mind-wandered about:",
+            a:["5 per cent of the time","15 per cent of the time","40 per cent of the time","90 per cent of the time"],
+            c:2,
+            why:"Sinh viên để tâm trí lang thang khoảng 40% thời gian trong giờ học."
+          },
+
+          {
+            q:"15. Ravizza et al. (2014) found that non-academic internet use during class:",
+            a:[
+              "helped the high achievers only",
+              "made no difference to results",
+              "helped learners relax and focus",
+              "was negatively related to test performance for all learners"
+            ],
+            c:3,
+            why:"Dùng internet ngoài mục đích học tập trong giờ gây ảnh hưởng tiêu cực đến tất cả học sinh."
+          }
+
         ],
-        tf: [
-          { q: "Cognition means only our memory for facts.", a: false, why: "Sai. Nhận thức bao gồm cả chú ý, lý luận, suy nghĩ." },
-          { q: "We are conscious of all our own cognitive processes.", a: false, why: "Sai. Nhiều quá trình nhận thức diễn ra tự động vô thức." },
-          { q: "Attention is unlimited if a student tries hard enough.", a: false, why: "Sai. Chú ý là tài nguyên bị giới hạn." },
-          { q: "Information must be noticed before it can be processed.", a: true, why: "Đúng. Thông tin cần được chú ý trước khi xử lý." },
-          { q: "Working memory is an active system, not only a passive store.", a: true, why: "Đúng. Bộ nhớ làm việc chủ động xử lý thông tin." },
-          { q: "A child of six has the same working memory capacity as a child of fourteen.", a: false, why: "Sai. Trẻ 14 tuổi có dung lượng bộ nhớ làm việc lớn hơn nhiều." },
-          { q: "‘Brain training’ software reliably improves school performance.", a: false, why: "Sai. Phần mềm luyện não không giúp cải thiện kết quả học tập ở trường." },
-          { q: "Executive function depends on attention, but it is not the same thing.", a: true, why: "Đúng. Chức năng điều hành rộng hơn chú ý." },
-          { q: "The prefrontal cortex is fully developed by the age of eleven.", a: false, why: "Sai. Nó phát triển đến tận tuổi 20+." },
-          { q: "Risky group decisions in adolescence are normal, not a sign of bad character.", a: true, why: "Đúng. Do sự chưa hoàn thiện của vỏ não tiền trán." }
+
+        tf:[
+
+          {q:"Cognition means only our memory for facts.",a:false,why:"Sai. Nhận thức bao gồm cả chú ý, lý luận, suy nghĩ."},
+          {q:"We are conscious of all our own cognitive processes.",a:false,why:"Sai. Nhiều quá trình nhận thức diễn ra tự động vô thức."},
+          {q:"Attention is unlimited if a student tries hard enough.",a:false,why:"Sai. Chú ý là tài nguyên bị giới hạn."},
+          {q:"Information must be noticed before it can be processed.",a:true,why:"Đúng. Thông tin cần được chú ý trước khi xử lý."},
+          {q:"Working memory is an active system, not only a passive store.",a:true,why:"Đúng. Bộ nhớ làm việc chủ động xử lý thông tin."},
+          {q:"A child of six has the same working memory capacity as a child of fourteen.",a:false,why:"Sai. Trẻ 14 tuổi có dung lượng bộ nhớ làm việc lớn hơn nhiều."},
+          {q:"‘Brain training’ software reliably improves school performance.",a:false,why:"Sai. Phần mềm luyện não không giúp cải thiện kết quả học tập ở trường."},
+          {q:"Executive function depends on attention, but it is not the same thing.",a:true,why:"Đúng. Chức năng điều hành rộng hơn chú ý."},
+          {q:"The prefrontal cortex is fully developed by the age of eleven.",a:false,why:"Sai. Nó phát triển đến tận tuổi 20+."},
+          {q:"Risky group decisions in adolescence are normal, not a sign of bad character.",a:true,why:"Đúng. Do sự chưa hoàn thiện của vỏ não tiền trán."}
+
         ],
-        scenarios: [
-          { title: "Tình huống 1: GV vừa đọc từng chữ trên slide vừa bắt HS chép vào vở", solution: "Khái niệm: Quá tải Bộ nhớ làm việc (Split-attention / Dual-task).\nGiải pháp: GV nên cung cấp bản tóm tắt/slide và giảng giải bằng lời thay vì bắt học sinh vừa đọc vừa chép cùng lúc." },
-          { title: "Tình huống 2: HS luôn viết 'I have been in Hanoi since two years' dù sửa 5 lần", solution: "Khái niệm: Lỗi hóa thạch / Thiếu chú ý chủ động.\nGiải pháp: Nhận xét chung không hiệu quả. GV cần cho học sinh thực hành sửa lỗi chủ động trong ngữ cảnh cụ thể." },
-          { title: "Tình huống 3: Bắt trẻ 7 tuổi lập kế hoạch, viết và tự sửa bài văn 3 đoạn trong 1 tiết", solution: "Khái niệm: Giới hạn Chức năng điều hành ở trẻ nhỏ.\nGiải pháp: Trẻ 7 tuổi chưa đủ khả năng điều hành phức tạp. GV nên chia nhỏ nhiệm vụ thành từng bước trong nhiều buổi." },
-          { title: "Tình huống 4: HS bảo 'hiểu hết rồi' nhưng làm bài kiểm tra chỉ được 4/10", solution: "Khái niệm: Ảo tưởng hiểu biết (Illusion of understanding).\nGiải pháp: GV không nên tin vào tự báo cáo của HS mà phải dùng Quiz ngắn, Exit ticket để kiểm tra thực tế." },
-          { title: "Tình huống 5: Đồng nghiệp thêm vô số hoạt hình, màu sắc vào trang bài tập", solution: "Khái niệm: Tải nhận thức ngoại lai (Extraneous cognitive load).\nGiải pháp: Khuyên đồng nghiệp bỏ bớt chi tiết thừa vì chúng gây xao nhãng và làm quá tải bộ nhớ làm việc của HS." }
+
+        scenarios:[
+
+          {
+            title:"Tình huống 1: GV vừa đọc từng chữ trên slide vừa bắt HS chép vào vở",
+            solution:"Khái niệm: Quá tải Bộ nhớ làm việc (Split-attention / Dual-task).\nGiải pháp: GV nên cung cấp bản tóm tắt/slide và giảng giải bằng lời thay vì bắt học sinh vừa đọc vừa chép cùng lúc."
+          },
+
+          {
+            title:"Tình huống 2: HS luôn viết 'I have been in Hanoi since two years' dù sửa 5 lần",
+            solution:"Khái niệm: Lỗi hóa thạch / Thiếu chú ý chủ động.\nGiải pháp: Nhận xét chung không hiệu quả. GV cần cho học sinh thực hành sửa lỗi chủ động trong ngữ cảnh cụ thể."
+          },
+
+          {
+            title:"Tình huống 3: Bắt trẻ 7 tuổi lập kế hoạch, viết và tự sửa bài văn 3 đoạn trong 1 tiết",
+            solution:"Khái niệm: Giới hạn Chức năng điều hành ở trẻ nhỏ.\nGiải pháp: Trẻ 7 tuổi chưa đủ khả năng điều hành phức tạp. GV nên chia nhỏ nhiệm vụ thành từng bước trong nhiều buổi."
+          },
+
+          {
+            title:"Tình huống 4: HS bảo 'hiểu hết rồi' nhưng làm bài kiểm tra chỉ được 4/10",
+            solution:"Khái niệm: Ảo tưởng hiểu biết (Illusion of understanding).\nGiải pháp: GV không nên tin vào tự báo cáo của HS mà phải dùng Quiz ngắn, Exit ticket để kiểm tra thực tế."
+          },
+
+          {
+            title:"Tình huống 5: Đồng nghiệp thêm vô số hoạt hình, màu sắc vào trang bài tập",
+            solution:"Khái niệm: Tải nhận thức ngoại lai (Extraneous cognitive load).\nGiải pháp: Khuyên đồng nghiệp bỏ bớt chi tiết thừa vì chúng gây xao nhãng và làm quá tải bộ nhớ làm việc của HS."
+          }
+
         ]
+
       },
+
+
       ch3: {
-        title: "Chapter 3 — Self-theories",
-        mcq: [
-          { q: "1. Self-theories are:", a: ["a method of marking student work", "theories written by famous psychologists", "people’s beliefs about themselves", "tests of general intelligence"], c: 2, why: "Self-theories là niềm tin của con người về chính bản thân mình." },
-          { q: "2. Dweck (2000) calls self-theories:", a: ["learning styles", "personality types", "cognitive maps", "meaning systems"], c: 3, why: "Dweck gọi self-theories là 'hệ thống ý nghĩa' (meaning systems)." },
-          { q: "3. Self-esteem is best described as:", a: ["your belief about one school subject", "a global feeling of how much you value yourself", "your confidence about one particular task", "your memory for personal events"], c: 1, why: "Self-esteem (Tự trọng) là cảm nhận tổng thể về giá trị bản thân." },
-          { q: "4. William James wrote that self-esteem equals:", a: ["effort divided by ability", "ability multiplied by practice", "intelligence plus motivation", "success divided by pretensions"], c: 3, why: "Công thức William James: Self-esteem = Success / Pretensions (Thành công / Kỳ vọng)." },
-          { q: "5. Which is not one of Coopersmith’s four dimensions of self-esteem?", a: ["significance", "competence", "intelligence", "virtue"], c: 2, why: "4 chiều của Coopersmith bao gồm: Significance, Competence, Power, và Virtue (không có Intelligence)." },
-          { q: "6. In Coopersmith’s model, 'power' means:", a: ["control over your own life", "control over other people", "physical strength", "high marks in exams"], c: 0, why: "'Power' ở đây là khả năng kiểm soát cuộc sống của chính mình." },
-          { q: "7. Harter (1999) described five domains. Which one is not among them?", a: ["scholastic competence", "athletic competence", "physical appearance", "musical talent"], c: 3, why: "5 lĩnh vực của Harter không bao gồm tài năng âm nhạc (musical talent)." },
-          { q: "8. Baumeister found that the most aggressive people tend to have:", a: ["very low self-esteem", "average self-esteem", "no measurable self-esteem", "high self-esteem"], c: 3, why: "Baumeister phát hiện người hung hăng nhất thường có tự trọng cao nhưng dễ bị tổn thương (defensive high self-esteem)." },
-          { q: "9. Baumeister et al. (2003) linked high self-esteem in children to:", a: ["more risky behaviour", "fewer friendships", "lower happiness", "poorer physical health"], c: 0, why: "Tự trọng cao ở trẻ em liên quan đến hành vi mạo hiểm nhiều hơn." },
-          { q: "10. The relationship between self-esteem and academic results is:", a: ["very strong and clearly causal", "modest, and self-esteem seems to follow success", "negative in every study", "impossible to measure"], c: 1, why: "Mối quan hệ khiêm tốn, và tự trọng thường là kết quả đi sau thành công chứ không phải nguyên nhân." },
-          { q: "11. Programmes designed to raise pupils’ self-esteem have:", a: ["raised exam results sharply", "only worked with boys", "not improved results, and have sometimes backfired", "been banned in most countries"], c: 2, why: "Các chương trình tăng tự trọng nhân tạo không cải thiện điểm thi, thậm chí phản tác dụng." },
-          { q: "12. Academic self-concept is:", a: ["a global feeling of self-worth", "your belief about your ability in a school subject", "your confidence on one particular question", "the same thing as intelligence"], c: 1, why: "Academic self-concept là niềm tin về năng lực trong một môn học cụ thể." },
-          { q: "13. Tiedemann (2000) found that academic self-concept first appears between the ages of:", a: ["3 and 5", "7 and 9", "10 and 12", "13 and 15"], c: 1, why: "Khái niệm bản thân học thuật xuất hiện từ 7-9 tuổi." },
-          { q: "14. From about age 10 or 11, children judge their own ability mainly by:", a: ["asking their parents", "reading their school reports", "counting their own mistakes", "comparing themselves with classmates"], c: 3, why: "Từ 10-11 tuổi, trẻ đánh giá bản thân bằng cách so sánh với bạn bè (social comparison)." },
-          { q: "15. Marsh’s reciprocal effects model says that:", a: ["self-concept causes achievement only", "achievement causes self-concept only", "each one affects the other over time", "neither affects the other"], c: 2, why: "Mô hình tác động qua lại của Marsh: Khái niệm bản thân và Thành tích tác động lẫn nhau theo thời gian." }
+
+        title:"Chapter 3 — Self-theories",
+
+        mcq:[
+
+          {
+            q:"1. Self-theories are:",
+            a:[
+              "a method of marking student work",
+              "theories written by famous psychologists",
+              "people’s beliefs about themselves",
+              "tests of general intelligence"
+            ],
+            c:2,
+            why:"Self-theories là niềm tin của con người về chính bản thân mình."
+          },
+
+          {
+            q:"2. Dweck (2000) calls self-theories:",
+            a:["learning styles","personality types","cognitive maps","meaning systems"],
+            c:3,
+            why:"Dweck gọi self-theories là 'hệ thống ý nghĩa' (meaning systems)."
+          },
+
+          {
+            q:"3. Self-esteem is best described as:",
+            a:[
+              "your belief about one school subject",
+              "a global feeling of how much you value yourself",
+              "your confidence about one particular task",
+              "your memory for personal events"
+            ],
+            c:1,
+            why:"Self-esteem (Tự trọng) là cảm nhận tổng thể về giá trị bản thân."
+          },
+
+          {
+            q:"4. William James wrote that self-esteem equals:",
+            a:[
+              "effort divided by ability",
+              "ability multiplied by practice",
+              "intelligence plus motivation",
+              "success divided by pretensions"
+            ],
+            c:3,
+            why:"Công thức William James: Self-esteem = Success / Pretensions (Thành công / Kỳ vọng)."
+          },
+
+          {
+            q:"5. Which is not one of Coopersmith’s four dimensions of self-esteem?",
+            a:["significance","competence","intelligence","virtue"],
+            c:2,
+            why:"4 chiều của Coopersmith bao gồm: Significance, Competence, Power, và Virtue (không có Intelligence)."
+          },
+
+          {
+            q:"6. In Coopersmith’s model, 'power' means:",
+            a:[
+              "control over your own life",
+              "control over other people",
+              "physical strength",
+              "high marks in exams"
+            ],
+            c:0,
+            why:"'Power' ở đây là khả năng kiểm soát cuộc sống của chính mình."
+          },
+
+          {
+            q:"7. Harter (1999) described five domains. Which one is not among them?",
+            a:["scholastic competence","athletic competence","physical appearance","musical talent"],
+            c:3,
+            why:"5 lĩnh vực của Harter không bao gồm tài năng âm nhạc (musical talent)."
+          },
+
+          {
+            q:"8. Baumeister found that the most aggressive people tend to have:",
+            a:["very low self-esteem","average self-esteem","no measurable self-esteem","high self-esteem"],
+            c:3,
+            why:"Baumeister phát hiện người hung hăng nhất thường có tự trọng cao nhưng dễ bị tổn thương (defensive high self-esteem)."
+          },
+
+          {
+            q:"9. Baumeister et al. (2003) linked high self-esteem in children to:",
+            a:["more risky behaviour","fewer friendships","lower happiness","poorer physical health"],
+            c:0,
+            why:"Tự trọng cao ở trẻ em liên quan đến hành vi mạo hiểm nhiều hơn."
+          },
+
+          {
+            q:"10. The relationship between self-esteem and academic results is:",
+            a:[
+              "very strong and clearly causal",
+              "modest, and self-esteem seems to follow success",
+              "negative in every study",
+              "impossible to measure"
+            ],
+            c:1,
+            why:"Mối quan hệ khiêm tốn, và tự trọng thường là kết quả đi sau thành công chứ không phải nguyên nhân."
+          },
+
+          {
+            q:"11. Programmes designed to raise pupils’ self-esteem have:",
+            a:[
+              "raised exam results sharply",
+              "only worked with boys",
+              "not improved results, and have sometimes backfired",
+              "been banned in most countries"
+            ],
+            c:2,
+            why:"Các chương trình tăng tự trọng nhân tạo không cải thiện điểm thi, thậm chí phản tác dụng."
+          },
+
+          {
+            q:"12. Academic self-concept is:",
+            a:[
+              "a global feeling of self-worth",
+              "your belief about your ability in a school subject",
+              "your confidence on one particular question",
+              "the same thing as intelligence"
+            ],
+            c:1,
+            why:"Academic self-concept là niềm tin về năng lực trong một môn học cụ thể."
+          },
+
+          {
+            q:"13. Tiedemann (2000) found that academic self-concept first appears between the ages of:",
+            a:["3 and 5","7 and 9","10 and 12","13 and 15"],
+            c:1,
+            why:"Khái niệm bản thân học thuật xuất hiện từ 7-9 tuổi."
+          },
+
+          {
+            q:"14. From about age 10 or 11, children judge their own ability mainly by:",
+            a:[
+              "asking their parents",
+              "reading their school reports",
+              "counting their own mistakes",
+              "comparing themselves with classmates"
+            ],
+            c:3,
+            why:"Từ 10-11 tuổi, trẻ đánh giá bản thân bằng cách so sánh với bạn bè (social comparison)."
+          },
+
+          {
+            q:"15. Marsh’s reciprocal effects model says that:",
+            a:[
+              "self-concept causes achievement only",
+              "achievement causes self-concept only",
+              "each one affects the other over time",
+              "neither affects the other"
+            ],
+            c:2,
+            why:"Mô hình tác động qua lại của Marsh: Khái niệm bản thân và Thành tích tác động lẫn nhau theo thời gian."
+          }
+
         ],
-        tf: [
-          { q: "Self-esteem is a belief about one particular school subject.", a: false, why: "Sai. Tự trọng là đánh giá toàn cục, Academic self-concept mới là theo môn." },
-          { q: "According to William James, lower expectations can raise self-esteem.", a: true, why: "Đúng. Giảm kỳ vọng (pretensions) giúp tăng chỉ số tự trọng." },
-          { q: "Coopersmith found that clearer rules from parents went with higher self-esteem.", a: true, why: "Đúng. Quy tắc rõ ràng giúp trẻ cảm thấy an toàn và tăng tự trọng." },
-          { q: "Aggressive people usually have very low self-esteem.", a: false, why: "Sai. Người hung hăng thường có tự trọng cao nhưng ảo tưởng." },
-          { q: "High self-esteem in children is linked to more experimentation and risk-taking.", a: true, why: "Đúng. Tự trọng cao làm tăng hành vi thử nghiệm rủi ro." },
-          { q: "Raising self-esteem is an effective way to raise exam results.", a: false, why: "Sai. Nâng tự trọng không làm tăng điểm thi." },
-          { q: "Good school results can raise a student’s self-esteem.", a: true, why: "Đúng. Thành tích tốt giúp cải thiện tự trọng." },
-          { q: "Academic self-concept predicts future outcomes better than global self-esteem.", a: true, why: "Đúng. Khái niệm bản thân học thuật dự đoán kết quả học tập chính xác hơn." },
-          { q: "Very young children usually rate their own ability very accurately.", a: false, why: "Sai. Trẻ nhỏ thường đánh giá quá cao năng lực bản thân." },
-          { q: "As children get older, their self-concepts of ability become less positive.", a: true, why: "Đúng. Khi lớn lên, do so sánh xã hội nên nhận thức bản thân thực tế/bớt lạc quan hơn." }
+
+        tf:[
+
+          {q:"Self-esteem is a belief about one particular school subject.",a:false,why:"Sai. Tự trọng là đánh giá toàn cục, Academic self-concept mới là theo môn."},
+          {q:"According to William James, lower expectations can raise self-esteem.",a:true,why:"Đúng. Giảm kỳ vọng (pretensions) giúp tăng chỉ số tự trọng."},
+          {q:"Coopersmith found that clearer rules from parents went with higher self-esteem.",a:true,why:"Đúng. Quy tắc rõ ràng giúp trẻ cảm thấy an toàn và tăng tự trọng."},
+          {q:"Aggressive people usually have very low self-esteem.",a:false,why:"Sai. Người hung hăng thường có tự trọng cao nhưng ảo tưởng."},
+          {q:"High self-esteem in children is linked to more experimentation and risk-taking.",a:true,why:"Đúng. Tự trọng cao làm tăng hành vi thử nghiệm rủi ro."},
+          {q:"Raising self-esteem is an effective way to raise exam results.",a:false,why:"Sai. Nâng tự trọng không làm tăng điểm thi."},
+          {q:"Good school results can raise a student’s self-esteem.",a:true,why:"Đúng. Thành tích tốt giúp cải thiện tự trọng."},
+          {q:"Academic self-concept predicts future outcomes better than global self-esteem.",a:true,why:"Đúng. Khái niệm bản thân học thuật dự đoán kết quả học tập chính xác hơn."},
+          {q:"Very young children usually rate their own ability very accurately.",a:false,why:"Sai. Trẻ nhỏ thường đánh giá quá cao năng lực bản thân."},
+          {q:"As children get older, their self-concepts of ability become less positive.",a:true,why:"Đúng. Khi lớn lên, do so sánh xã hội nên nhận thức bản thân thực tế/bớt lạc quan hơn."}
+
         ],
-        scenarios: [
-          { title: "Tình huống 1: HS nói 'Em không phải là người học ngôn ngữ'", solution: "Khái niệm: Academic self-concept thấp / Fixed Mindset.\nGiải pháp: HS đã hình thành niềm tin tiêu cực từ thất bại cũ. GV cần chia nhỏ nhiệm vụ, khen ngợi chiến lược và nỗ lực để xây dựng lại niềm tin." },
-          { title: "Tình huống 2: Thu chỉ ôn lại ngữ pháp đã biết rõ, tránh phần chia thì khó", solution: "Khái niệm: Performance-avoidance goal orientation (Định hướng né tránh).\nGiải pháp: Thu sợ mắc lỗi làm mất hình ảnh. GV nên chuyển hướng tiêu chí sang mục tiêu làm chủ (Mastery goal) và tiến bộ cá nhân." },
-          { title: "Tình huống 3: Trường trao giải 'Top of the Class' mỗi tháng", solution: "Khái niệm: Performance Goal Orientation & So sánh xã hội tiêu cực.\nGiải pháp: Giải thưởng này gây áp lực và làm nản lòng phần lớn HS. Nên thay bằng giải nhận diện sự tiến bộ cá nhân." },
-          { title: "Tình huống 4: GV khen HS hoàn thành đầu tiên: 'Em thông minh quá!'", solution: "Khái niệm: Khen ngợi con người (Person praise) -> Kích hoạt Fixed mindset.\nGiải pháp: Lời khen này khiến HS sợ thất bại sau này. GV nên khen quá trình (Process praise): 'Em đã làm việc rất chăm chỉ và dùng chiến lược tốt!'" },
-          { title: "Tình huống 5: HS giỏi bất ngờ bị điểm kém 1 bài thi và bỏ cuộc luôn", solution: "Khái niệm: Tư duy cố định (Fixed mindset) / Tâm lý bất lực.\nGiải pháp: HS nghĩ điểm kém nghĩa là mình hết thông minh. GV cần định hướng lại: Thất bại là cơ hội học hỏi và điều chỉnh phương pháp." }
+
+        scenarios:[
+
+          {
+            title:"Tình huống 1: HS nói 'Em không phải là người học ngôn ngữ'",
+            solution:"Khái niệm: Academic self-concept thấp / Fixed Mindset.\nGiải pháp: HS đã hình thành niềm tin tiêu cực từ thất bại cũ. GV cần chia nhỏ nhiệm vụ, khen ngợi chiến lược và nỗ lực để xây dựng lại niềm tin."
+          },
+
+          {
+            title:"Tình huống 2: Thu chỉ ôn lại ngữ pháp đã biết rõ, tránh phần chia thì khó",
+            solution:"Khái niệm: Performance-avoidance goal orientation (Định hướng né tránh).\nGiải pháp: Thu sợ mắc lỗi làm mất hình ảnh. GV nên chuyển hướng tiêu chí sang mục tiêu làm chủ (Mastery goal) và tiến bộ cá nhân."
+          },
+
+          {
+            title:"Tình huống 3: Trường trao giải 'Top of the Class' mỗi tháng",
+            solution:"Khái niệm: Performance Goal Orientation & So sánh xã hội tiêu cực.\nGiải pháp: Giải thưởng này gây áp lực và làm nản lòng phần lớn HS. Nên thay bằng giải nhận diện sự tiến bộ cá nhân."
+          },
+
+          {
+            title:"Tình huống 4: GV khen HS hoàn thành đầu tiên: 'Em thông minh quá!'",
+            solution:"Khái niệm: Khen ngợi con người (Person praise) -> Kích hoạt Fixed mindset.\nGiải pháp: Lời khen này khiến HS sợ thất bại sau này. GV nên khen quá trình (Process praise): 'Em đã làm việc rất chăm chỉ và dùng chiến lược tốt!'"
+          },
+
+          {
+            title:"Tình huống 5: HS giỏi bất ngờ bị điểm kém 1 bài thi và bỏ cuộc luôn",
+            solution:"Khái niệm: Tư duy cố định (Fixed mindset) / Tâm lý bất lực.\nGiải pháp: HS nghĩ điểm kém nghĩa là mình hết thông minh. GV cần định hướng lại: Thất bại là cơ hội học hỏi và điều chỉnh phương pháp."
+          }
+
         ]
+
       },
+
+
       ch4: {
-        title: "Chapter 4 — Creativity",
-        mcq: [
-          { q: "1. Creativity is best described as the ability to create something that is:", a: ["completely new, from nothing", "new and also useful", "difficult for other people to understand", "beautiful but not practical"], c: 1, why: "Sáng tạo là tạo ra cái mới VÀ có ích (new and useful)." },
-          { q: "2. 'Big C' creativity means creative work that:", a: ["happens in every ordinary lesson", "is done by children only", "takes a long time to finish", "changes a whole field and is recognised by experts"], c: 3, why: "Big C là sáng tạo vĩ đại, thay đổi cả một lĩnh vực." },
-          { q: "3. 'Small c' creativity means:", a: ["creativity in everyday life and school work", "creativity that nobody notices", "work of global importance", "creativity in the arts only"], c: 0, why: "Small c là sáng tạo đời thường, trong lớp học." },
-          { q: "4. Jauk et al. (2013) found that the link between a very high IQ and creative success is:", a: ["extremely strong", "weak beyond an above-average level", "negative", "the same in every field"], c: 1, why: "Thuyết ngưỡng: Vượt qua mức IQ trên trung bình, IQ cao hơn không đồng nghĩa sáng tạo hơn." },
-          { q: "5. Csikszentmihalyi (1996) found that highly creative people shared all of these except:", a: ["deep expertise built over years", "hard, sustained work", "a similar early career", "insatiable curiosity"], c: 2, why: "Những người sáng tạo không nhất thiết có khởi đầu sự nghiệp giống nhau." },
-          { q: "6. According to the chapter, creating usually means:", a: ["rearranging existing parts into something new and useful", "making something out of nothing", "copying an expert exactly", "working completely alone"], c: 0, why: "Sáng tạo là tái sắp xếp các tri thức/bộ phận sẵn có thành cái mới." },
-          { q: "7. Cropley and Cropley (2010) argue that creativity is:", a: ["a purely individual act", "impossible to teach", "at least in part a group process", "only possible after the age of 18"], c: 2, why: "Sáng tạo ít nhiều mang tính chất nhóm/xã hội." },
-          { q: "8. Gick and Holyoak (1983) found that solving a problem by analogy is easier if learners have studied:", a: ["no previous examples", "only the theory", "one previous example", "two or more previous examples"], c: 3, why: "Học sinh dễ giải quyết bằng ẩn dụ hơn nếu được nghiên cứu từ 2 ví dụ trở lên." },
-          { q: "9. According to Principle 1, creativity cannot happen without:", a: ["factual and conceptual understanding", "a quiet room", "a natural gift", "a long holiday"], c: 0, why: "Nguyên lý 1: Sáng tạo không thể xảy ra nếu thiếu kiến thức nền tảng (factual & conceptual)." },
-          { q: "10. Association means:", a: ["working in a group", "repeating something many times", "joining a professional organisation", "the mental linking of two ideas or things"], c: 3, why: "Liên tưởng (Association) là việc kết nối 2 ý tưởng trong tâm trí." },
-          { q: "11. Wilson (2016) found that objects with the most potential for creative uses were also:", a: ["the most expensive", "the hardest to describe", "recalled the best", "forgotten the fastest"], c: 2, why: "Vật thể có nhiều công dụng sáng tạo lại là những thứ được nhớ lại tốt nhất." },
-          { q: "12. The moments straight after REM sleep are described by researchers as:", a: ["a period of total rest", "a hyper-associative state", "a time of low creativity", "a memory blackout"], c: 1, why: "Sau giấc ngủ REM là trạng thái siêu liên tưởng (hyper-associative state)." },
-          { q: "13. Divergent thinking means producing:", a: ["one correct answer", "the answer the teacher expects", "an answer as quickly as possible", "many possible answers to one problem"], c: 3, why: "Tư duy phân kỳ (Divergent thinking) là đưa ra nhiều câu trả lời cho một vấn đề." },
-          { q: "14. Which task tests convergent thinking?", a: ["'How many uses can you find for a brick?'", "a logic puzzle with one correct solution", "'Invent a new ending for this story.'", "'Think of an idea nobody else will have.'"], c: 1, why: "Tư duy hội tụ (Convergent thinking) tìm kiếm 1 đáp án đúng duy nhất (VD: câu đố logic)." },
-          { q: "15. In divergent-thinking tests, 'fluency' means:", a: ["how many ideas you produce", "how unusual your ideas are", "how well you speak", "how fully you develop one idea"], c: 0, why: "Fluency (Sự trôi chảy) là số lượng ý tưởng tạo ra." }
+
+        title:"Chapter 4 — Creativity",
+
+        mcq:[
+
+          {
+            q:"1. Creativity is best described as the ability to create something that is:",
+            a:[
+              "completely new, from nothing",
+              "new and also useful",
+              "difficult for other people to understand",
+              "beautiful but not practical"
+            ],
+            c:1,
+            why:"Sáng tạo là tạo ra cái mới VÀ có ích (new and useful)."
+          },
+
+          {
+            q:"2. 'Big C' creativity means creative work that:",
+            a:[
+              "happens in every ordinary lesson",
+              "is done by children only",
+              "takes a long time to finish",
+              "changes a whole field and is recognised by experts"
+            ],
+            c:3,
+            why:"Big C là sáng tạo vĩ đại, thay đổi cả một lĩnh vực."
+          },
+
+          {
+            q:"3. 'Small c' creativity means:",
+            a:[
+              "creativity in everyday life and school work",
+              "creativity that nobody notices",
+              "work of global importance",
+              "creativity in the arts only"
+            ],
+            c:0,
+            why:"Small c là sáng tạo đời thường, trong lớp học."
+          },
+
+          {
+            q:"4. Jauk et al. (2013) found that the link between a very high IQ and creative success is:",
+            a:[
+              "extremely strong",
+              "weak beyond an above-average level",
+              "negative",
+              "the same in every field"
+            ],
+            c:1,
+            why:"Thuyết ngưỡng: Vượt qua mức IQ trên trung bình, IQ cao hơn không đồng nghĩa sáng tạo hơn."
+          },
+
+          {
+            q:"5. Csikszentmihalyi (1996) found that highly creative people shared all of these except:",
+            a:[
+              "deep expertise built over years",
+              "hard, sustained work",
+              "a similar early career",
+              "insatiable curiosity"
+            ],
+            c:2,
+            why:"Những người sáng tạo không nhất thiết có khởi đầu sự nghiệp giống nhau."
+          },
+
+          {
+            q:"6. According to the chapter, creating usually means:",
+            a:[
+              "rearranging existing parts into something new and useful",
+              "making something out of nothing",
+              "copying an expert exactly",
+              "working completely alone"
+            ],
+            c:0,
+            why:"Sáng tạo là tái sắp xếp các tri thức/bộ phận sẵn có thành cái mới."
+          },
+
+          {
+            q:"7. Cropley and Cropley (2010) argue that creativity is:",
+            a:[
+              "a purely individual act",
+              "impossible to teach",
+              "at least in part a group process",
+              "only possible after the age of 18"
+            ],
+            c:2,
+            why:"Sáng tạo ít nhiều mang tính chất nhóm/xã hội."
+          },
+
+          {
+            q:"8. Gick and Holyoak (1983) found that solving a problem by analogy is easier if learners have studied:",
+            a:[
+              "no previous examples",
+              "only the theory",
+              "one previous example",
+              "two or more previous examples"
+            ],
+            c:3,
+            why:"Học sinh dễ giải quyết bằng ẩn dụ hơn nếu được nghiên cứu từ 2 ví dụ trở lên."
+          },
+
+          {
+            q:"9. According to Principle 1, creativity cannot happen without:",
+            a:[
+              "factual and conceptual understanding",
+              "a quiet room",
+              "a natural gift",
+              "a long holiday"
+            ],
+            c:0,
+            why:"Nguyên lý 1: Sáng tạo không thể xảy ra nếu thiếu kiến thức nền tảng (factual & conceptual)."
+          },
+
+          {
+            q:"10. Association means:",
+            a:[
+              "working in a group",
+              "repeating something many times",
+              "joining a professional organisation",
+              "the mental linking of two ideas or things"
+            ],
+            c:3,
+            why:"Liên tưởng (Association) là việc kết nối 2 ý tưởng trong tâm trí."
+          },
+
+          {
+            q:"11. Wilson (2016) found that objects with the most potential for creative uses were also:",
+            a:[
+              "the most expensive",
+              "the hardest to describe",
+              "recalled the best",
+              "forgotten the fastest"
+            ],
+            c:2,
+            why:"Vật thể có nhiều công dụng sáng tạo lại là những thứ được nhớ lại tốt nhất."
+          },
+
+          {
+            q:"12. The moments straight after REM sleep are described by researchers as:",
+            a:[
+              "a period of total rest",
+              "a hyper-associative state",
+              "a time of low creativity",
+              "a memory blackout"
+            ],
+            c:1,
+            why:"Sau giấc ngủ REM là trạng thái siêu liên tưởng (hyper-associative state)."
+          },
+
+          {
+            q:"13. Divergent thinking means producing:",
+            a:[
+              "one correct answer",
+              "the answer the teacher expects",
+              "an answer as quickly as possible",
+              "many possible answers to one problem"
+            ],
+            c:3,
+            why:"Tư duy phân kỳ (Divergent thinking) là đưa ra nhiều câu trả lời cho một vấn đề."
+          },
+
+          {
+            q:"14. Which task tests convergent thinking?",
+            a:[
+              "'How many uses can you find for a brick?'",
+              "a logic puzzle with one correct solution",
+              "'Invent a new ending for this story.'",
+              "'Think of an idea nobody else will have.'"
+            ],
+            c:1,
+            why:"Tư duy hội tụ (Convergent thinking) tìm kiếm 1 đáp án đúng duy nhất (VD: câu đố logic)."
+          },
+
+          {
+            q:"15. In divergent-thinking tests, 'fluency' means:",
+            a:[
+              "how many ideas you produce",
+              "how unusual your ideas are",
+              "how well you speak",
+              "how fully you develop one idea"
+            ],
+            c:0,
+            why:"Fluency (Sự trôi chảy) là số lượng ý tưởng tạo ra."
+          }
+
         ],
-        tf: [
-          { q: "Only people with a very high IQ can do creative work.", a: false, why: "Sai. Chỉ cần IQ trên trung bình là đủ." },
-          { q: "Creativity usually means making something out of nothing.", a: false, why: "Sai. Sáng tạo là kết hợp lại kiến thức cũ." },
-          { q: "A new idea must also be useful before we call it creative.", a: true, why: "Đúng. Định nghĩa sáng tạo: Mới + Có ích." },
-          { q: "Teachers should aim for 'big C' creativity in every lesson.", a: false, why: "Sai. Lớp học chỉ hướng tới 'Small c'." },
-          { q: "Creative work is always a private, individual act.", a: false, why: "Sai. Sáng tạo có thể mang tính tập thể." },
-          { q: "Great creative achievements usually rest on years of expertise.", a: true, why: "Đúng. Thành tựu lớn dựa trên nhiều năm tích lũy chuyên môn." },
-          { q: "Rote learning can never help creative work in any way.", a: false, why: "Sai. Kiến thức nền vững chắc giúp ích cho sáng tạo." },
-          { q: "Creative tasks help consolidate knowledge, because they need active retrieval.", a: true, why: "Đúng. Tác vụ sáng tạo đòi hỏi truy xuất kiến thức chủ động." },
-          { q: "It is easier to draw an analogy when two situations are similar.", a: true, why: "Đúng. Sự tương đồng giúp dễ liên tưởng ẩn dụ." },
-          { q: "A short break can help a learner solve a problem they were stuck on.", a: true, why: "Đúng. Hiệu ứng ấp ủ (Incubation effect) khi nghỉ ngơi giúp tìm ra giải pháp." }
+
+        tf:[
+
+          {
+            q:"Only people with a very high IQ can do creative work.",
+            a:false,
+            why:"Sai. Chỉ cần IQ trên trung bình là đủ."
+          },
+
+          {
+            q:"Creativity usually means making something out of nothing.",
+            a:false,
+            why:"Sai. Sáng tạo là kết hợp lại kiến thức cũ."
+          },
+
+          {
+            q:"A new idea must also be useful before we call it creative.",
+            a:true,
+            why:"Đúng. Định nghĩa sáng tạo: Mới + Có ích."
+          },
+
+          {
+            q:"Teachers should aim for 'big C' creativity in every lesson.",
+            a:false,
+            why:"Sai. Lớp học chỉ hướng tới 'Small c'."
+          },
+
+          {
+            q:"Creative work is always a private, individual act.",
+            a:false,
+            why:"Sai. Sáng tạo có thể mang tính tập thể."
+          },
+
+          {
+            q:"Great creative achievements usually rest on years of expertise.",
+            a:true,
+            why:"Đúng. Thành tựu lớn dựa trên nhiều năm tích lũy chuyên môn."
+          },
+
+          {
+            q:"Rote learning can never help creative work in any way.",
+            a:false,
+            why:"Sai. Kiến thức nền vững chắc giúp ích cho sáng tạo."
+          },
+
+          {
+            q:"Creative tasks help consolidate knowledge, because they need active retrieval.",
+            a:true,
+            why:"Đúng. Tác vụ sáng tạo đòi hỏi truy xuất kiến thức chủ động."
+          },
+
+          {
+            q:"It is easier to draw an analogy when two situations are similar.",
+            a:true,
+            why:"Đúng. Sự tương đồng giúp dễ liên tưởng ẩn dụ."
+          },
+
+          {
+            q:"A short break can help a learner solve a problem they were stuck on.",
+            a:true,
+            why:"Đúng. Hiệu ứng ấp ủ (Incubation effect) khi nghỉ ngơi giúp tìm ra giải pháp."
+          }
+
         ],
-        scenarios: [
-          { title: "Tình huống 1: 'Dạy quy tắc ngữ pháp sẽ giết chết sự sáng tạo khi viết'", solution: "Nguyên lý 1: Chuyên môn là nền tảng của sáng tạo.\nGiải pháp: Giải thích rằng ngữ pháp cung cấp công cụ và chất liệu để học sinh sáng tạo câu văn đa dạng hơn." },
-          { title: "Tình huống 2: Chuẩn bị cho bài viết truyện ngắn Tiếng Anh tháng tới", solution: "Nguyên lý: Chuẩn bị tri thức domain.\nGiải pháp: Dành phần lớn thời gian ban đầu để xây dựng từ vựng, đọc bài mẫu và tích lũy ý tưởng trước khi bắt tay viết." },
-          { title: "Tình huống 3: Giao dự án sáng tạo thứ 2 và thu bài vào thứ 6 cùng tuần", solution: "Nguyên lý: Hiệu ứng ấp ủ (Incubation effect).\nGiải pháp: Thời gian quá gấp không có thời gian cho não bộ ấp ủ. Nên kéo dài thời gian và cho khoảng nghỉ giữa giai đoạn động não và hoàn thiện." },
-          { title: "Tình huống 4: GV cho dàn ý quá chi tiết từng đoạn, kết quả bài đúng nhưng nhàm chán", solution: "Nguyên lý: Cấu trúc quá cứng nhắc hạn chế tư duy phân kỳ.\nGiải pháp: Thay vì bắt buộc theo khung cứng, GV chỉ nên đưa ra tiêu chí đánh giá (rubric) mở." },
-          { title: "Tình huống 5: Lớp động não chỉ ra được 3 ý tưởng rồi dừng lại", solution: "Nguyên lý: Động não nhóm dễ bị nghẽn (Deuja et al., 2014).\nGiải pháp: Cho học sinh viết ý tưởng cá nhân trước (Brainwriting) rồi mới chia sẻ và tổng hợp lại." }
+
+        scenarios:[
+
+          {
+            title:"Tình huống 1: 'Dạy quy tắc ngữ pháp sẽ giết chết sự sáng tạo khi viết'",
+            solution:"Nguyên lý 1: Chuyên môn là nền tảng của sáng tạo.\nGiải pháp: Giải thích rằng ngữ pháp cung cấp công cụ và chất liệu để học sinh sáng tạo câu văn đa dạng hơn."
+          },
+
+          {
+            title:"Tình huống 2: Chuẩn bị cho bài viết truyện ngắn Tiếng Anh tháng tới",
+            solution:"Nguyên lý: Chuẩn bị tri thức domain.\nGiải pháp: Dành phần lớn thời gian ban đầu để xây dựng từ vựng, đọc bài mẫu và tích lũy ý tưởng trước khi bắt tay viết."
+          },
+
+          {
+            title:"Tình huống 3: Giao dự án sáng tạo thứ 2 và thu bài vào thứ 6 cùng tuần",
+            solution:"Nguyên lý: Hiệu ứng ấp ủ (Incubation effect).\nGiải pháp: Thời gian quá gấp không có thời gian cho não bộ ấp ủ. Nên kéo dài thời gian và cho khoảng nghỉ giữa giai đoạn động não và hoàn thiện."
+          },
+
+          {
+            title:"Tình huống 4: GV cho dàn ý quá chi tiết từng đoạn, kết quả bài đúng nhưng nhàm chán",
+            solution:"Nguyên lý: Cấu trúc quá cứng nhắc hạn chế tư duy phân kỳ.\nGiải pháp: Thay vì bắt buộc theo khung cứng, GV chỉ nên đưa ra tiêu chí đánh giá (rubric) mở."
+          },
+
+          {
+            title:"Tình huống 5: Lớp động não chỉ ra được 3 ý tưởng rồi dừng lại",
+            solution:"Nguyên lý: Động não nhóm dễ bị nghẽn (Deuja et al., 2014).\nGiải pháp: Cho học sinh viết ý tưởng cá nhân trước (Brainwriting) rồi mới chia sẻ và tổng hợp lại."
+          }
+
         ]
+
       }
+
     };
 
-    // APP STATE
+
+    /* =====================================================
+       APP STATE
+    ===================================================== */
+
     let state = {
+
       xp: parseInt(localStorage.getItem('ep_xp') || '0'),
-      mistakes: JSON.parse(localStorage.getItem('ep_mistakes') || '[]'),
-      currentChapter: null
+
+      mistakes:
+        JSON.parse(localStorage.getItem('ep_mistakes') || '[]'),
+
+      answered:
+        JSON.parse(localStorage.getItem('ep_answered') || '{}'),
+
+      soundEnabled:
+        localStorage.getItem('ep_sound') !== 'false',
+
+      currentChapter:null,
+
+      currentMode:'chapter',
+
+      mockQuestions:[],
+
+      retryQuestions:[]
+
     };
 
-    // STORE CURRENT ACTIVE QUESTIONS TO PREVENT STRING ESCAPING ISSUES IN ONCLICK
+
     let activeQuestions = {};
 
+
+    /* =====================================================
+       INIT
+    ===================================================== */
+
     document.addEventListener('DOMContentLoaded', () => {
+
       updateUI();
+      updateSoundButton();
+
     });
 
+
+    /* =====================================================
+       SAVE
+    ===================================================== */
+
     function saveState() {
-      localStorage.setItem('ep_xp', state.xp);
-      localStorage.setItem('ep_mistakes', JSON.stringify(state.mistakes));
+
+      localStorage.setItem(
+        'ep_xp',
+        state.xp
+      );
+
+      localStorage.setItem(
+        'ep_mistakes',
+        JSON.stringify(state.mistakes)
+      );
+
+      localStorage.setItem(
+        'ep_answered',
+        JSON.stringify(state.answered)
+      );
+
+      localStorage.setItem(
+        'ep_sound',
+        state.soundEnabled
+      );
+
       updateUI();
+
     }
+
+
+    /* =====================================================
+       UI
+    ===================================================== */
 
     function updateUI() {
-      document.getElementById('xp-val').innerText = state.xp;
-      document.getElementById('mistake-count').innerText = state.mistakes.length;
+
+      document.getElementById('xp-val').innerText =
+        state.xp;
+
+      document.getElementById('home-xp').innerText =
+        state.xp;
+
+      document.getElementById('mistake-count').innerText =
+        state.mistakes.length;
+
+
+      const level =
+        Math.floor(state.xp / 100) + 1;
+
+      const levelXP =
+        state.xp % 100;
+
+      document.getElementById('level-text').innerText =
+        `Level ${level} — ${levelXP}/100 XP`;
+
+      document.getElementById('xp-progress').style.width =
+        `${levelXP}%`;
+
     }
+
+
+    /* =====================================================
+       SOUND
+    ===================================================== */
+
+    function playSound(type) {
+
+      if (!state.soundEnabled) return;
+
+      let id = '';
+
+      if(type === 'right') {
+        id = 'rightSound';
+      }
+
+      if(type === 'wrong') {
+        id = 'wrongSound';
+      }
+
+      if(type === 'xp') {
+        id = 'xpSound';
+      }
+
+      const audio =
+        document.getElementById(id);
+
+      if(!audio) return;
+
+      try {
+
+        audio.pause();
+        audio.currentTime = 0;
+
+        const promise = audio.play();
+
+        if(promise) {
+          promise.catch(() => {});
+        }
+
+      } catch(e) {
+
+        console.log('Audio error:', e);
+
+      }
+
+    }
+
+
+    function toggleSound() {
+
+      state.soundEnabled =
+        !state.soundEnabled;
+
+      localStorage.setItem(
+        'ep_sound',
+        state.soundEnabled
+      );
+
+      updateSoundButton();
+
+    }
+
+
+    function updateSoundButton() {
+
+      const btn =
+        document.getElementById('sound-button');
+
+      if(!btn) return;
+
+      if(state.soundEnabled) {
+
+        btn.innerText =
+          '🔊 Sound';
+
+      } else {
+
+        btn.innerText =
+          '🔇 Sound Off';
+
+      }
+
+    }
+
+
+    /* =====================================================
+       XP
+    ===================================================== */
+
+    function addXP(amount) {
+
+      if(amount <= 0) return;
+
+      state.xp += amount;
+
+      playSound('xp');
+
+      showXPPopup(amount);
+
+      saveState();
+
+    }
+
+
+    function showXPPopup(amount) {
+
+      const popup =
+        document.createElement('div');
+
+      popup.className =
+        'xp-popup';
+
+      popup.innerText =
+        `+${amount} XP ✨`;
+
+      document.body.appendChild(popup);
+
+      setTimeout(() => {
+
+        popup.remove();
+
+      }, 1200);
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
 
     function go(view) {
-      ['home', 'quiz', 'mistakes', 'mock'].forEach(v => {
-        document.getElementById(`view-${v}`).classList.add('hidden');
-        const navBtn = document.getElementById(`nav-${v}`);
-        if(navBtn) navBtn.classList.remove('active');
-      });
-      document.getElementById(`view-${view}`).classList.remove('hidden');
-      if(document.getElementById(`nav-${view}`)) document.getElementById(`nav-${view}`).classList.add('active');
 
-      if(view === 'mistakes') renderMistakes();
+      [
+        'home',
+        'quiz',
+        'mistakes',
+        'mock'
+      ].forEach(v => {
+
+        const el =
+          document.getElementById(`view-${v}`);
+
+        if(el) {
+          el.classList.add('hidden');
+        }
+
+        const navBtn =
+          document.getElementById(`nav-${v}`);
+
+        if(navBtn) {
+          navBtn.classList.remove('active');
+        }
+
+      });
+
+
+      const target =
+        document.getElementById(`view-${view}`);
+
+      if(target) {
+        target.classList.remove('hidden');
+      }
+
+
+      const navBtn =
+        document.getElementById(`nav-${view}`);
+
+      if(navBtn) {
+        navBtn.classList.add('active');
+      }
+
+
+      if(view === 'mistakes') {
+
+        renderMistakes();
+
+      }
+
     }
+
+
+    /* =====================================================
+       START CHAPTER
+    ===================================================== */
 
     function startChapter(chKey) {
-      state.currentChapter = chKey;
-      const data = DB[chKey];
-      document.getElementById('quiz-title').innerText = data.title;
-      
+
+      state.currentChapter =
+        chKey;
+
+      state.currentMode =
+        'chapter';
+
+      activeQuestions = {};
+
+      const data =
+        DB[chKey];
+
+      document.getElementById('quiz-title').innerText =
+        data.title;
+
+
       let html = '';
 
-      // Section A: MCQ
-      html += `<h3 style="color: #818cf8; margin: 1.5rem 0 1rem;">Section A — Multiple Choice</h3>`;
+
+      /* MCQ */
+
+      html += `
+        <h3 style="color:#818cf8;margin:1.5rem 0 1rem;">
+          Section A — Multiple Choice
+        </h3>
+      `;
+
+
       data.mcq.forEach((q, idx) => {
-        const qId = `mcq-${chKey}-${idx}`;
-        activeQuestions[qId] = q;
-        html += renderMCQCard(q, qId);
+
+        const qId =
+          `mcq-${chKey}-${idx}`;
+
+        activeQuestions[qId] =
+          q;
+
+        activeQuestions[qId].type =
+          'mcq';
+
+        html +=
+          renderMCQCard(q, qId);
+
       });
 
-      // Section B: True/False
-      html += `<h3 style="color: #34d399; margin: 2rem 0 1rem;">Section B — True or False</h3>`;
+
+      /* TRUE FALSE */
+
+      html += `
+        <h3 style="color:#34d399;margin:2rem 0 1rem;">
+          Section B — True or False
+        </h3>
+      `;
+
+
       data.tf.forEach((q, idx) => {
-        const qId = `tf-${chKey}-${idx}`;
-        activeQuestions[qId] = q;
-        html += renderTFCard(q, qId);
+
+        const qId =
+          `tf-${chKey}-${idx}`;
+
+        activeQuestions[qId] =
+          q;
+
+        activeQuestions[qId].type =
+          'tf';
+
+        html +=
+          renderTFCard(q, qId);
+
       });
 
-      // Section C: Scenarios
-      html += `<h3 style="color: #fbbf24; margin: 2rem 0 1rem;">Section C — Classroom Scenarios</h3>`;
-      data.scenarios.forEach((s) => {
+
+      /* SCENARIOS */
+
+      html += `
+        <h3 style="color:#fbbf24;margin:2rem 0 1rem;">
+          Section C — Classroom Scenarios
+        </h3>
+      `;
+
+
+      data.scenarios.forEach(s => {
+
         html += `
           <div class="scenario-box">
-            <div class="scenario-title">${escapeHTML(s.title)}</div>
-            <div style="white-space: pre-line; color: var(--text-muted);">${escapeHTML(s.solution)}</div>
+
+            <div class="scenario-title">
+              ${escapeHTML(s.title)}
+            </div>
+
+            <div style="white-space:pre-line;color:var(--text-muted);">
+              ${escapeHTML(s.solution)}
+            </div>
+
           </div>
         `;
+
       });
 
-      // Section D: Fill in blanks
+
+      /* FILL */
+
       if(data.fill) {
-        html += `<h3 style="color: #f472b6; margin: 2rem 0 1rem;">Section D — Fill in the Blanks</h3>`;
+
+        html += `
+          <h3 style="color:#f472b6;margin:2rem 0 1rem;">
+            Section D — Fill in the Blanks
+          </h3>
+        `;
+
+
         data.fill.forEach((f, idx) => {
-          const qId = `fill-${chKey}-${idx}`;
-          activeQuestions[qId] = f;
-          html += renderFillCard(f, qId);
+
+          const qId =
+            `fill-${chKey}-${idx}`;
+
+          activeQuestions[qId] =
+            f;
+
+          activeQuestions[qId].type =
+            'fill';
+
+          html +=
+            renderFillCard(f, qId);
+
         });
+
       }
 
-      document.getElementById('quiz-container').innerHTML = html;
+
+      document.getElementById(
+        'quiz-container'
+      ).innerHTML = html;
+
+
       go('quiz');
+
     }
+
+
+    /* =====================================================
+       MCQ CARD
+    ===================================================== */
 
     function renderMCQCard(q, id) {
+
       return `
+
         <div class="q-card" id="card-${id}">
-          <div class="q-title">${escapeHTML(q.q)}</div>
-          <div class="options">
-            ${q.a.map((opt, i) => `
-              <button class="option-btn" onclick="checkMCQ('${id}', ${i})">${escapeHTML(opt)}</button>
-            `).join('')}
+
+          <div class="q-title">
+            ${escapeHTML(q.q)}
           </div>
-          <div class="explanation" id="exp-${id}">${escapeHTML(q.why)}</div>
+
+          <div class="options">
+
+            ${q.a.map((opt, i) => `
+
+              <button
+                class="option-btn"
+                onclick="checkMCQ('${id}', ${i})"
+              >
+                ${escapeHTML(opt)}
+              </button>
+
+            `).join('')}
+
+          </div>
+
+          <div
+            class="explanation"
+            id="exp-${id}"
+          >
+            ${escapeHTML(q.why)}
+          </div>
+
         </div>
+
       `;
+
     }
+
+
+    /* =====================================================
+       TRUE FALSE CARD
+    ===================================================== */
 
     function renderTFCard(q, id) {
+
       return `
-        <div class="q-card" id="card-${id}">
-          <div class="q-title">${escapeHTML(q.q)}</div>
-          <div class="options" style="flex-direction: row;">
-            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', true)">TRUE</button>
-            <button class="option-btn" style="flex:1; text-align:center;" onclick="checkTF('${id}', false)">FALSE</button>
+
+        <div
+          class="q-card"
+          id="card-${id}"
+        >
+
+          <div class="q-title">
+            ${escapeHTML(q.q)}
           </div>
-          <div class="explanation" id="exp-${id}">${escapeHTML(q.why)}</div>
+
+          <div
+            class="options"
+            style="flex-direction:row;"
+          >
+
+            <button
+              class="option-btn"
+              style="flex:1;text-align:center;"
+              onclick="checkTF('${id}', true)"
+            >
+              TRUE
+            </button>
+
+            <button
+              class="option-btn"
+              style="flex:1;text-align:center;"
+              onclick="checkTF('${id}', false)"
+            >
+              FALSE
+            </button>
+
+          </div>
+
+          <div
+            class="explanation"
+            id="exp-${id}"
+          >
+            ${escapeHTML(q.why)}
+          </div>
+
         </div>
+
       `;
+
     }
+
+
+    /* =====================================================
+       FILL CARD
+    ===================================================== */
 
     function renderFillCard(f, id) {
+
       return `
-        <div class="q-card" id="card-${id}">
-          <div class="q-title">${escapeHTML(f.q)}</div>
-          <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
-            <input type="text" id="in-${id}" class="search-box" style="margin:0;" placeholder="Nhập từ cần điền...">
-            <button class="btn" onclick="checkFill('${id}')">Trả lời</button>
+
+        <div
+          class="q-card"
+          id="card-${id}"
+        >
+
+          <div class="q-title">
+            ${escapeHTML(f.q)}
           </div>
-          <div class="explanation" id="exp-${id}">Đáp án đúng: <strong>${escapeHTML(f.a)}</strong></div>
+
+          <div
+            style="
+              display:flex;
+              gap:0.5rem;
+              margin-top:0.5rem;
+            "
+          >
+
+            <input
+              type="text"
+              id="in-${id}"
+              class="search-box"
+              style="margin:0;"
+              placeholder="Nhập từ cần điền..."
+            >
+
+            <button
+              class="btn"
+              onclick="checkFill('${id}')"
+            >
+              Trả lời
+            </button>
+
+          </div>
+
+          <div
+            class="explanation"
+            id="exp-${id}"
+          >
+            Đáp án đúng:
+            <strong>
+              ${escapeHTML(f.a)}
+            </strong>
+          </div>
+
         </div>
+
       `;
+
     }
+
+
+    /* =====================================================
+       MCQ CHECK
+    ===================================================== */
 
     function checkMCQ(id, selected) {
-      const q = activeQuestions[id];
-      const card = document.getElementById(`card-${id}`);
-      const btns = card.querySelectorAll('.option-btn');
-      btns.forEach(b => b.disabled = true);
 
-      if(selected === q.c) {
-        btns[selected].classList.add('correct');
-        state.xp += 10;
+      const q =
+        activeQuestions[id];
+
+      if(!q) return;
+
+
+      const card =
+        document.getElementById(
+          `card-${id}`
+        );
+
+      if(!card) return;
+
+
+      const btns =
+        card.querySelectorAll(
+          '.option-btn'
+        );
+
+
+      /* Prevent double answer */
+
+      if(
+        btns.length &&
+        btns[0].disabled
+      ) return;
+
+
+      btns.forEach(b => {
+        b.disabled = true;
+      });
+
+
+      const correct =
+        selected === q.c;
+
+
+      if(correct) {
+
+        btns[selected]
+          .classList
+          .add('correct');
+
+        playSound('right');
+
+        handleCorrectAnswer(
+          id,
+          q,
+          10
+        );
+
       } else {
-        btns[selected].classList.add('wrong');
-        btns[q.c].classList.add('correct');
-        addMistake(q.q, q.why);
+
+        btns[selected]
+          .classList
+          .add('wrong');
+
+        btns[q.c]
+          .classList
+          .add('correct');
+
+        playSound('wrong');
+
+        handleWrongAnswer(
+          id,
+          q,
+          q.a[q.c],
+          q.a[selected]
+        );
+
       }
-      card.querySelector('.explanation').style.display = 'block';
+
+
+      card.querySelector(
+        '.explanation'
+      ).style.display = 'block';
+
+
       saveState();
+
     }
+
+
+    /* =====================================================
+       TRUE FALSE CHECK
+    ===================================================== */
 
     function checkTF(id, selected) {
-      const q = activeQuestions[id];
-      const card = document.getElementById(`card-${id}`);
-      const btns = card.querySelectorAll('.option-btn');
-      btns.forEach(b => b.disabled = true);
 
-      if(selected === q.a) {
-        btns[selected ? 0 : 1].classList.add('correct');
-        state.xp += 10;
+      const q =
+        activeQuestions[id];
+
+      if(!q) return;
+
+
+      const card =
+        document.getElementById(
+          `card-${id}`
+        );
+
+      if(!card) return;
+
+
+      const btns =
+        card.querySelectorAll(
+          '.option-btn'
+        );
+
+
+      if(
+        btns.length &&
+        btns[0].disabled
+      ) return;
+
+
+      btns.forEach(b => {
+        b.disabled = true;
+      });
+
+
+      const correct =
+        selected === q.a;
+
+
+      const selectedIndex =
+        selected ? 0 : 1;
+
+      const correctIndex =
+        q.a ? 0 : 1;
+
+
+      if(correct) {
+
+        btns[selectedIndex]
+          .classList
+          .add('correct');
+
+        playSound('right');
+
+        handleCorrectAnswer(
+          id,
+          q,
+          10
+        );
+
       } else {
-        btns[selected ? 0 : 1].classList.add('wrong');
-        btns[q.a ? 0 : 1].classList.add('correct');
-        addMistake(q.q, q.why);
+
+        btns[selectedIndex]
+          .classList
+          .add('wrong');
+
+        btns[correctIndex]
+          .classList
+          .add('correct');
+
+        playSound('wrong');
+
+        handleWrongAnswer(
+          id,
+          q,
+          q.a ? 'TRUE' : 'FALSE',
+          selected ? 'TRUE' : 'FALSE'
+        );
+
       }
-      card.querySelector('.explanation').style.display = 'block';
+
+
+      card.querySelector(
+        '.explanation'
+      ).style.display = 'block';
+
+
       saveState();
+
     }
+
+
+    /* =====================================================
+       FILL CHECK
+    ===================================================== */
 
     function checkFill(id) {
-      const q = activeQuestions[id];
-      const input = document.getElementById(`in-${id}`);
-      const val = input.value.trim().toLowerCase();
-      const exp = document.getElementById(`exp-${id}`);
-      
-      if(val === q.a.toLowerCase()) {
-        input.style.borderColor = 'var(--accent)';
-        state.xp += 15;
+
+      const q =
+        activeQuestions[id];
+
+      if(!q) return;
+
+
+      const input =
+        document.getElementById(
+          `in-${id}`
+        );
+
+      const exp =
+        document.getElementById(
+          `exp-${id}`
+        );
+
+
+      const val =
+        input.value
+          .trim()
+          .toLowerCase();
+
+
+      const correctAnswer =
+        q.a
+          .trim()
+          .toLowerCase();
+
+
+      const correct =
+        val === correctAnswer;
+
+
+      if(correct) {
+
+        input.style.borderColor =
+          'var(--accent)';
+
+        input.disabled = true;
+
+        playSound('right');
+
+        handleCorrectAnswer(
+          id,
+          q,
+          15
+        );
+
       } else {
-        input.style.borderColor = 'var(--danger)';
+
+        input.style.borderColor =
+          'var(--danger)';
+
+        playSound('wrong');
+
+        handleWrongAnswer(
+          id,
+          q,
+          q.a,
+          val || '(chưa nhập)'
+        );
+
       }
-      exp.style.display = 'block';
+
+
+      exp.style.display =
+        'block';
+
+
       saveState();
+
     }
 
-    function addMistake(q, why) {
-      if(!state.mistakes.some(m => m.q === q)) {
-        state.mistakes.push({ q, why });
+
+    /* =====================================================
+       ANSWER HANDLERS
+    ===================================================== */
+
+    function handleCorrectAnswer(
+      id,
+      q,
+      xp
+    ) {
+
+      const alreadyAnswered =
+        state.answered[id] === true;
+
+
+      /*
+        Nếu đây là lần đầu làm đúng:
+        cộng XP.
+      */
+
+      if(!alreadyAnswered) {
+
+        state.answered[id] =
+          true;
+
+        addXP(xp);
+
       }
+
+
+      /*
+        Nếu câu này từng nằm trong Mistakes,
+        trả lời đúng sẽ xóa nó.
+      */
+
+      removeMistakeByQuestion(
+        q.q
+      );
+
     }
+
+
+    function handleWrongAnswer(
+      id,
+      q,
+      correctAnswer,
+      userAnswer
+    ) {
+
+      /*
+        Lưu lại câu sai.
+      */
+
+      const existing =
+        state.mistakes.find(
+          m => m.q === q.q
+        );
+
+
+      if(existing) {
+
+        existing.why =
+          q.why || '';
+
+        existing.answer =
+          correctAnswer;
+
+        existing.lastAnswer =
+          userAnswer;
+
+        existing.type =
+          q.type || 'mcq';
+
+      } else {
+
+        state.mistakes.push({
+
+          q:q.q,
+
+          why:q.why || '',
+
+          answer:correctAnswer,
+
+          lastAnswer:userAnswer,
+
+          type:q.type || 'mcq'
+
+        });
+
+      }
+
+    }
+
+
+    /* =====================================================
+       MISTAKES
+    ===================================================== */
+
+    function removeMistakeByQuestion(qText) {
+
+      state.mistakes =
+        state.mistakes.filter(
+          m => m.q !== qText
+        );
+
+    }
+
 
     function renderMistakes() {
-      const container = document.getElementById('mistakes-container');
+
+      const container =
+        document.getElementById(
+          'mistakes-container'
+        );
+
+
       if(state.mistakes.length === 0) {
-        container.innerHTML = `<p style="color: var(--text-muted);">Tuyệt vời! Bạn chưa có câu hỏi nào bị làm sai.</p>`;
+
+        container.innerHTML = `
+
+          <div class="success-banner">
+
+            <strong>🎉 Tuyệt vời!</strong>
+
+            <div style="margin-top:0.4rem;color:var(--text-muted);">
+              Bạn chưa có câu hỏi nào bị làm sai.
+            </div>
+
+          </div>
+
+        `;
+
         return;
+
       }
-      container.innerHTML = state.mistakes.map((m, i) => `
-        <div class="q-card">
-          <div class="q-title">${escapeHTML(m.q)}</div>
-          <div style="color: #34d399; font-size: 0.9rem;">💡 Giải thích: ${escapeHTML(m.why)}</div>
-          <button class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="removeMistake(${i})">Đã hiểu / Xóa câu này</button>
+
+
+      container.innerHTML = `
+
+        <div class="retry-banner">
+
+          <strong>
+            🧠 ${state.mistakes.length} câu cần ôn lại
+          </strong>
+
+          <div style="margin-top:0.4rem;color:var(--text-muted);">
+            Đừng lo. Sai là dữ liệu để não học tốt hơn.
+          </div>
+
+          <button
+            class="btn"
+            style="margin-top:1rem;"
+            onclick="startRetry()"
+          >
+            🔁 Retry Mistakes
+          </button>
+
         </div>
-      `).join('');
+
+
+        ${state.mistakes.map((m,i) => `
+
+          <div class="q-card mistake-item">
+
+            <div class="q-title">
+              ${escapeHTML(m.q)}
+            </div>
+
+            ${
+              m.lastAnswer
+              ?
+              `
+                <div style="color:#f87171;margin-bottom:0.5rem;">
+                  ❌ Lần trước bạn trả lời:
+                  <strong>
+                    ${escapeHTML(m.lastAnswer)}
+                  </strong>
+                </div>
+              `
+              :
+              ''
+            }
+
+            <div style="color:#34d399;margin-bottom:0.5rem;">
+              ✅ Đáp án đúng:
+              <strong>
+                ${escapeHTML(m.answer || 'Xem explanation')}
+              </strong>
+            </div>
+
+            <div
+              style="
+                color:#94a3b8;
+                font-size:0.9rem;
+                line-height:1.6;
+              "
+            >
+              💡 ${escapeHTML(m.why || '')}
+            </div>
+
+            <button
+              class="btn btn-secondary"
+              style="
+                margin-top:1rem;
+                font-size:0.8rem;
+                padding:0.4rem 0.8rem;
+              "
+              onclick="removeMistake(${i})"
+            >
+              Đã hiểu / Xóa câu này
+            </button>
+
+          </div>
+
+        `).join('')}
+
+      `;
+
     }
+
 
     function removeMistake(index) {
-      state.mistakes.splice(index, 1);
+
+      state.mistakes.splice(
+        index,
+        1
+      );
+
       saveState();
+
       renderMistakes();
+
     }
+
+
+    /* =====================================================
+       RETRY MISTAKES
+    ===================================================== */
+
+    function startRetry() {
+
+      if(state.mistakes.length === 0) {
+
+        alert(
+          'Bạn không có câu sai nào để Retry 🎉'
+        );
+
+        return;
+
+      }
+
+
+      state.currentMode =
+        'retry';
+
+
+      activeQuestions = {};
+
+
+      const questions = [];
+
+
+      state.mistakes.forEach(
+        (mistake, index) => {
+
+          let found = null;
+
+
+          Object.keys(DB).forEach(
+            ch => {
+
+              const data =
+                DB[ch];
+
+              data.mcq.forEach(q => {
+
+                if(q.q === mistake.q) {
+
+                  found = {
+                    ...q,
+                    type:'mcq'
+                  };
+
+                }
+
+              });
+
+
+              data.tf.forEach(q => {
+
+                if(q.q === mistake.q) {
+
+                  found = {
+                    ...q,
+                    type:'tf'
+                  };
+
+                }
+
+              });
+
+
+              if(data.fill) {
+
+                data.fill.forEach(q => {
+
+                  if(q.q === mistake.q) {
+
+                    found = {
+                      ...q,
+                      type:'fill'
+                    };
+
+                  }
+
+                });
+
+              }
+
+            }
+          );
+
+
+          if(found) {
+
+            const id =
+              `retry-${index}`;
+
+            activeQuestions[id] =
+              found;
+
+            questions.push({
+              id,
+              q:found
+            });
+
+          }
+
+        }
+      );
+
+
+      document.getElementById(
+        'quiz-title'
+      ).innerText =
+        '🔁 Retry — Mistakes';
+
+
+      let html = `
+
+        <div class="retry-banner">
+
+          <strong>
+            🔁 Retry các câu bạn từng làm sai
+          </strong>
+
+          <div style="color:var(--text-muted);margin-top:0.4rem;">
+            Lần này nếu làm đúng, câu sẽ tự động biến mất khỏi Mistakes.
+          </div>
+
+        </div>
+
+      `;
+
+
+      questions.forEach(item => {
+
+        if(item.q.type === 'tf') {
+
+          html +=
+            renderTFCard(
+              item.q,
+              item.id
+            );
+
+        } else if(item.q.type === 'fill') {
+
+          html +=
+            renderFillCard(
+              item.q,
+              item.id
+            );
+
+        } else {
+
+          html +=
+            renderMCQCard(
+              item.q,
+              item.id
+            );
+
+        }
+
+      });
+
+
+      document.getElementById(
+        'quiz-container'
+      ).innerHTML =
+        html;
+
+
+      go('quiz');
+
+    }
+
+
+    /* =====================================================
+       MOCK TEST
+    ===================================================== */
+
+    let mockSubmitted =
+      false;
+
 
     function generateMockTest() {
-      let allMCQ = [];
-      Object.keys(DB).forEach(ch => {
-        allMCQ = allMCQ.concat(DB[ch].mcq);
-      });
-      allMCQ.sort(() => Math.random() - 0.5);
-      const selected = allMCQ.slice(0, 20);
 
-      document.getElementById('mock-container').innerHTML = selected.map((q, idx) => {
-        const qId = `mock-${idx}`;
-        activeQuestions[qId] = q;
-        return renderMCQCard(q, qId);
-      }).join('');
+      let allMCQ = [];
+
+
+      Object.keys(DB).forEach(
+        ch => {
+
+          allMCQ =
+            allMCQ.concat(
+              DB[ch].mcq.map(q => ({
+                ...q,
+                type:'mcq'
+              }))
+            );
+
+        }
+      );
+
+
+      allMCQ.sort(
+        () => Math.random() - 0.5
+      );
+
+
+      const selected =
+        allMCQ.slice(0,20);
+
+
+      state.mockQuestions =
+        selected;
+
+
+      mockSubmitted =
+        false;
+
+
+      activeQuestions = {};
+
+
+      let html = `
+
+        <div class="retry-banner">
+
+          <strong>
+            📝 20 câu — Midterm Mock
+          </strong>
+
+          <div style="color:var(--text-muted);margin-top:0.4rem;">
+            Hãy hoàn thành toàn bộ trước khi xem kết quả.
+          </div>
+
+        </div>
+
+      `;
+
+
+      selected.forEach(
+        (q,index) => {
+
+          const qId =
+            `mock-${index}`;
+
+          activeQuestions[qId] =
+            q;
+
+          html +=
+            renderMockCard(
+              q,
+              qId
+            );
+
+        }
+      );
+
+
+      html += `
+
+        <button
+          class="btn"
+          style="
+            width:100%;
+            margin:1rem 0 2rem;
+          "
+          onclick="submitMock()"
+        >
+          📝 Submit Mock Test
+        </button>
+
+      `;
+
+
+      document.getElementById(
+        'mock-container'
+      ).innerHTML =
+        html;
+
+
+      go('mock');
+
     }
+
+
+    function renderMockCard(q,id) {
+
+      return `
+
+        <div
+          class="q-card"
+          id="card-${id}"
+        >
+
+          <div
+            style="
+              color:#818cf8;
+              font-size:0.8rem;
+              font-weight:700;
+              margin-bottom:0.5rem;
+            "
+          >
+            MOCK QUESTION
+          </div>
+
+          <div class="q-title">
+            ${escapeHTML(q.q)}
+          </div>
+
+          <div class="options">
+
+            ${q.a.map((opt,i) => `
+
+              <button
+                class="option-btn"
+                data-mock-answer="${i}"
+                onclick="selectMockAnswer('${id}',${i})"
+              >
+                ${escapeHTML(opt)}
+              </button>
+
+            `).join('')}
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    function selectMockAnswer(
+      id,
+      selected
+    ) {
+
+      if(mockSubmitted) return;
+
+
+      const card =
+        document.getElementById(
+          `card-${id}`
+        );
+
+
+      card.dataset.answer =
+        selected;
+
+
+      const buttons =
+        card.querySelectorAll(
+          '.option-btn'
+        );
+
+
+      buttons.forEach(
+        b =>
+          b.style.borderColor =
+            'var(--border)'
+      );
+
+
+      buttons[selected].style.borderColor =
+        'var(--primary)';
+
+    }
+
+
+    function submitMock() {
+
+      if(mockSubmitted) return;
+
+
+      if(state.mockQuestions.length === 0) {
+
+        alert(
+          'Hãy bắt đầu một đề thi trước.'
+        );
+
+        return;
+
+      }
+
+
+      let score = 0;
+
+
+      state.mockQuestions.forEach(
+        (q,index) => {
+
+          const id =
+            `mock-${index}`;
+
+
+          const card =
+            document.getElementById(
+              `card-${id}`
+            );
+
+
+          if(!card) return;
+
+
+          const selected =
+            card.dataset.answer;
+
+
+          const buttons =
+            card.querySelectorAll(
+              '.option-btn'
+            );
+
+
+          buttons.forEach(
+            b =>
+              b.disabled = true
+          );
+
+
+          if(
+            selected !== undefined &&
+            Number(selected) === q.c
+          ) {
+
+            score++;
+
+            buttons[q.c]
+              .classList
+              .add('correct');
+
+          } else {
+
+            if(selected !== undefined) {
+
+              buttons[
+                Number(selected)
+              ]
+              .classList
+              .add('wrong');
+
+            }
+
+
+            buttons[q.c]
+              .classList
+              .add('correct');
+
+
+            handleWrongAnswer(
+              id,
+              q,
+              q.a[q.c],
+              selected !== undefined
+                ? q.a[Number(selected)]
+                : '(chưa chọn)'
+            );
+
+          }
+
+
+          let exp =
+            document.createElement(
+              'div'
+            );
+
+          exp.className =
+            'explanation';
+
+          exp.style.display =
+            'block';
+
+          exp.innerHTML =
+            escapeHTML(q.why);
+
+          card.appendChild(exp);
+
+        }
+      );
+
+
+      mockSubmitted =
+        true;
+
+
+      const percent =
+        Math.round(
+          score /
+          state.mockQuestions.length *
+          100
+        );
+
+
+      if(percent >= 70) {
+
+        playSound('right');
+
+        addXP(50);
+
+      } else {
+
+        playSound('wrong');
+
+      }
+
+
+      const result =
+        document.createElement(
+          'div'
+        );
+
+
+      result.className =
+        'result-summary';
+
+
+      result.innerHTML = `
+
+        <div style="font-size:2rem;">
+          ${percent >= 70 ? '🎉' : '📚'}
+        </div>
+
+        <div class="result-score">
+          ${score}/${state.mockQuestions.length}
+        </div>
+
+        <div style="color:var(--text-muted);">
+          ${percent}%
+        </div>
+
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            style="width:${percent}%"
+          ></div>
+        </div>
+
+        <div style="margin-top:1rem;font-weight:700;">
+          ${
+            percent >= 70
+            ? '🎉 Đạt! Bạn đã vượt qua Mock Test.'
+            : '💪 Chưa đạt. Hãy ôn lại Mistakes rồi thử lại.'
+          }
+        </div>
+
+      `;
+
+
+      document
+        .getElementById('mock-container')
+        .prepend(result);
+
+
+      saveState();
+
+    }
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
 
     function handleSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
-      const resContainer = document.getElementById('search-results');
-      const mainContent = document.getElementById('main-content');
+
+      const query =
+        document.getElementById(
+          'search-input'
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+      const resContainer =
+        document.getElementById(
+          'search-results'
+        );
+
+
+      const mainContent =
+        document.getElementById(
+          'main-content'
+        );
+
 
       if(!query) {
-        resContainer.classList.add('hidden');
-        mainContent.classList.remove('hidden');
+
+        resContainer
+          .classList
+          .add('hidden');
+
+        mainContent
+          .classList
+          .remove('hidden');
+
         return;
+
       }
+
 
       let matches = [];
-      Object.keys(DB).forEach(ch => {
-        DB[ch].mcq.forEach(q => {
-          if(q.q.toLowerCase().includes(query) || q.why.toLowerCase().includes(query)) {
-            matches.push(q);
-          }
-        });
-      });
 
-      mainContent.classList.add('hidden');
-      resContainer.classList.remove('hidden');
+
+      Object.keys(DB).forEach(
+        ch => {
+
+          DB[ch].mcq.forEach(q => {
+
+            if(
+              q.q
+                .toLowerCase()
+                .includes(query)
+              ||
+              q.why
+                .toLowerCase()
+                .includes(query)
+            ) {
+
+              matches.push({
+                ...q,
+                type:'mcq'
+              });
+
+            }
+
+          });
+
+
+          DB[ch].tf.forEach(q => {
+
+            if(
+              q.q
+                .toLowerCase()
+                .includes(query)
+              ||
+              q.why
+                .toLowerCase()
+                .includes(query)
+            ) {
+
+              matches.push({
+                ...q,
+                type:'tf'
+              });
+
+            }
+
+          });
+
+        }
+      );
+
+
+      mainContent
+        .classList
+        .add('hidden');
+
+
+      resContainer
+        .classList
+        .remove('hidden');
+
 
       if(matches.length === 0) {
-        resContainer.innerHTML = `<p style="color: var(--text-muted);">Không tìm thấy câu hỏi hoặc khái niệm phù hợp.</p>`;
-      } else {
-        resContainer.innerHTML = matches.map((q, idx) => {
-          const qId = `search-${idx}`;
-          activeQuestions[qId] = q;
-          return renderMCQCard(q, qId);
-        }).join('');
+
+        resContainer.innerHTML = `
+
+          <p style="color:var(--text-muted);">
+            Không tìm thấy câu hỏi hoặc khái niệm phù hợp.
+          </p>
+
+        `;
+
+        return;
+
       }
+
+
+      resContainer.innerHTML = `
+
+        <h3 style="margin-bottom:1rem;">
+          🔎 Kết quả tìm kiếm
+        </h3>
+
+        ${matches.map(
+          (q,idx) => {
+
+            const qId =
+              `search-${idx}`;
+
+            activeQuestions[qId] =
+              q;
+
+            return q.type === 'tf'
+              ? renderTFCard(q,qId)
+              : renderMCQCard(q,qId);
+
+          }
+        ).join('')}
+
+      `;
+
     }
 
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
     function escapeHTML(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+
+      if(str === undefined ||
+         str === null) {
+        return '';
+      }
+
+
+      return String(str)
+
+        .replace(/&/g,'&amp;')
+
+        .replace(/</g,'&lt;')
+
+        .replace(/>/g,'&gt;')
+
+        .replace(/"/g,'&quot;')
+
+        .replace(/'/g,'&#039;');
+
     }
+
   </script>
+
 </body>
 </html>
