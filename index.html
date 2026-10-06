@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educational Psychology — Midterm Revision</title>
+<style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--text:#171923;--muted:#74798a;--line:#e7e8ef;
+  --primary:#6c5ce7;--primary2:#8b7cf6;--green:#21a366;--red:#e55353;
+  --yellow:#f2b84b;--blue:#3d8bfd;--shadow:0 12px 35px rgba(28,31,48,.08);
+  --radius:22px
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer;border:0}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#11131b;color:#fff;padding:22px 15px;position:fixed;inset:0 auto 0 0;z-index:20}
+.brand{font-weight:900;font-size:18px;padding:8px 10px 20px;letter-spacing:.2px}
+.brand span{display:block;color:#9e91ff;font-size:12px;margin-top:4px}
+.nav{display:grid;gap:7px}
+.nav button{background:transparent;color:#b9bdca;text-align:left;padding:12px 13px;border-radius:13px;font-weight:700}
+.nav button:hover,.nav button.active{background:#242633;color:#fff}
+.main{margin-left:245px;width:calc(100% - 245px);padding:26px;max-width:1500px}
+.topbar{display:flex;gap:12px;align-items:center;margin-bottom:22px}
+.search{position:relative;flex:1}
+.search input{width:100%;border:1px solid var(--line);background:#fff;padding:14px 17px;border-radius:15px;outline:none}
+.search input:focus{border-color:var(--primary)}
+.search-results{position:absolute;top:52px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);z-index:30;display:none;max-height:360px;overflow:auto}
+.search-item{padding:12px 15px;border-bottom:1px solid var(--line);cursor:pointer}
+.search-item:hover{background:#f6f4ff}
+.pill{padding:11px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:800}
+.page{display:none}.page.active{display:block}
+.hero{background:linear-gradient(135deg,#6c5ce7,#8b7cf6);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-60px;top:-80px;background:rgba(255,255,255,.12)}
+.hero h1{margin:0 0 7px;font-size:32px}.hero p{margin:0;color:#eceaff}
+.grid{display:grid;gap:18px}.stats{grid-template-columns:repeat(4,1fr);margin-top:18px}.two{grid-template-columns:1.35fr .65fr}.three{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card h3,.card h2{margin:0 0 8px}.muted{color:var(--muted)}
+.big{font-size:30px;font-weight:900}
+.progress{height:9px;background:#ececf2;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:20px}
+.btn{background:var(--primary);color:#fff;padding:11px 16px;border-radius:13px;font-weight:850}
+.btn:hover{filter:brightness(.96)}.btn.secondary{background:#efeff6;color:#292b38}.btn.green{background:var(--green)}.btn.red{background:var(--red)}
+.btn.small{padding:8px 11px;font-size:13px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.chapter-card{display:flex;gap:15px;align-items:center}
+.icon{width:50px;height:50px;border-radius:16px;background:#f0eeff;display:grid;place-items:center;font-size:25px;flex:none}
+.chapter-card .grow{flex:1}
+.achievement{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:15px;margin-top:10px}
+.lock{opacity:.45}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
+.day{height:36px;border-radius:10px;background:#eeeef4;display:grid;place-items:center;font-size:11px;font-weight:800;color:#777}
+.day.done{background:#ffead2;color:#a75d00}.day.today{outline:2px solid var(--primary)}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 13px}
+.chapter-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.chapter-head h1{margin:0}.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#efefff;color:#5d4ed0;font-size:12px;font-weight:900}
+.mode-grid{grid-template-columns:repeat(4,1fr)}
+.mode{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.mode .emoji{font-size:28px}.mode p{font-size:13px;color:var(--muted)}
+.concept-list{display:grid;gap:12px}
+.concept{border:1px solid var(--line);border-radius:16px;padding:16px}
+.concept summary{cursor:pointer;font-weight:900}.concept p{line-height:1.65;color:#4e5261}
+.quiz-shell{max-width:850px;margin:auto}
+.quiz-meta{display:flex;justify-content:space-between;color:var(--muted);font-weight:800;font-size:13px;margin-bottom:10px}
+.question{font-size:22px;font-weight:900;line-height:1.4;margin:15px 0 20px}
+.options{display:grid;gap:10px}
+.option{background:#f8f8fb;border:2px solid transparent;text-align:left;padding:14px 15px;border-radius:14px;font-weight:700}
+.option:hover{border-color:#c8c1ff;background:#faf9ff}.option.selected{border-color:var(--primary);background:#f0eeff}
+.option.correct{border-color:var(--green);background:#eaf8f0}.option.wrong{border-color:var(--red);background:#fff0f0}
+.feedback{margin-top:15px;padding:14px;border-radius:14px;background:#f4f4f8;line-height:1.55}
+.fill-input{width:100%;padding:14px;border:2px solid var(--line);border-radius:13px;outline:none}
+.result-score{text-align:center;padding:18px;border-radius:18px;background:#f7f6ff}
+.score{font-size:50px;font-weight:950;color:var(--primary)}
+.review{border:1px solid var(--line);border-radius:16px;padding:15px;margin-top:10px}
+.review.good{border-left:5px solid var(--green)}.review.bad{border-left:5px solid var(--red)}
+.review .q{font-weight:900;line-height:1.45}.answer{margin-top:7px;font-size:14px}.explain{margin-top:8px;color:#555b6b;line-height:1.5}
+.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:15px}.tabs button{padding:9px 13px;border-radius:12px;background:#eeeef5;font-weight:800;white-space:nowrap}.tabs button.active{background:var(--primary);color:#fff}
+.notice{padding:14px;border-radius:14px;background:#fff7df;border:1px solid #f4df9c;color:#735714}
+.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid var(--line);font-size:14px}
+.topic-bar{display:grid;grid-template-columns:120px 1fr 50px;gap:10px;align-items:center;margin:12px 0}
+.empty{text-align:center;padding:35px;color:var(--muted)}
+.mobile-nav{display:none}
+@media(max-width:1000px){.stats,.mode-grid,.three{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:720px){
+ .sidebar{display:none}.main{margin:0;width:100%;padding:15px 15px 80px}.stats,.mode-grid,.three{grid-template-columns:1fr}
+ .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#11131b;z-index:50;padding:7px;justify-content:space-around}
+ .mobile-nav button{background:none;color:#fff;font-size:11px}.mobile-nav b{display:block;font-size:18px}
+ .hero h1{font-size:25px}.topbar{flex-wrap:wrap}.search{order:2;flex-basis:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">🧠 ED PSYCHOLOGY<span>Midterm Revision Lab</span></div>
+  <div class="nav">
+    <button data-page="home" class="active">🏠 Dashboard</button>
+    <button data-page="chapters">📚 Chapters</button>
+    <button data-page="mistakes">❌ Mistakes</button>
+    <button data-page="progress">📈 Progress</button>
+    <button data-page="achievements">🏆 Achievements</button>
+    <button data-page="mock">🎓 Midterm Mock</button>
+  </div>
+</aside>
+
+<main class="main">
+<div class="topbar">
+  <div class="search">
+    <input id="searchInput" placeholder="🔎 Search concepts, questions, topics..." autocomplete="off">
+    <div id="searchResults" class="search-results"></div>
+  </div>
+  <div class="pill">⚡ <span id="topXp">0</span> XP</div>
+  <div class="pill">🔥 <span id="topStreak">0</span></div>
+</div>
+
+<!-- HOME -->
+<section id="page-home" class="page active">
+  <div class="hero">
+    <h1>Ready to train your brain? 🧠</h1>
+    <p>Learn → Practice → Challenge → Exam. No boring PDF scrolling.</p>
+    <div class="actions"><button class="btn" onclick="continueLearning()">▶ Continue Learning</button><button class="btn secondary" onclick="go('chapters')">Explore Chapters</button></div>
+  </div>
+  <div class="grid stats">
+    <div class="card"><div class="muted">Level</div><div class="big" id="levelText">1</div><div class="progress"><i id="levelBar" style="width:0%"></i></div></div>
+    <div class="card"><div class="muted">XP</div><div class="big" id="xpText">0</div><small class="muted">Keep going.</small></div>
+    <div class="card"><div class="muted">Streak</div><div class="big">🔥 <span id="streakText">0</span></div><small class="muted">study days</small></div>
+    <div class="card"><div class="muted">Mistakes</div><div class="big" id="mistakeText">0</div><small class="muted">questions to retry</small></div>
+  </div>
+  <div class="grid two" style="margin-top:18px">
+    <div class="card"><div class="section-title"><h2>📚 Your Chapters</h2><span class="muted" id="overallPct">0%</span></div><div id="homeChapters"></div></div>
+    <div class="card"><h2>🔥 Streak</h2><p class="muted">Complete any learning activity each day.</p><div id="calendar" class="calendar"></div></div>
+  </div>
+  <div class="grid two" style="margin-top:18px">
+    <div class="card"><h2>🎯 Weak Areas</h2><div id="weakAreas"></div></div>
+    <div class="card"><h2>🏆 Recent Achievements</h2><div id="recentAchievements"></div></div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section id="page-chapters" class="page">
+  <div class="chapter-head"><div><span class="tag">4 CHAPTERS</span><h1>Choose your battlefield.</h1><p class="muted">Finish the chapter final to unlock its mastery.</p></div></div>
+  <div id="chapterCards" class="grid"></div>
+</section>
+
+<!-- CHAPTER DETAIL -->
+<section id="page-chapter" class="page">
+  <div id="chapterDetail"></div>
+</section>
+
+<!-- LEARN -->
+<section id="page-learn" class="page">
+  <div id="learnContent"></div>
+</section>
+
+<!-- QUIZ -->
+<section id="page-quiz" class="page">
+  <div id="quizContent"></div>
+</section>
+
+<!-- RESULT -->
+<section id="page-result" class="page">
+  <div id="resultContent"></div>
+</section>
+
+<!-- MISTAKES -->
+<section id="page-mistakes" class="page">
+  <div class="chapter-head"><div><span class="tag">RETRY LAB</span><h1>Your mistakes</h1><p class="muted">Wrong answers stay here until you master them.</p></div></div>
+  <div id="mistakesContent"></div>
+</section>
+
+<!-- PROGRESS -->
+<section id="page-progress" class="page">
+  <div class="chapter-head"><div><span class="tag">KNOWLEDGE MAP</span><h1>Progress</h1><p class="muted">See where your knowledge is strong or needs work.</p></div></div>
+  <div id="progressContent"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="page-achievements" class="page">
+  <div class="chapter-head"><div><span class="tag">REWARDS</span><h1>Achievements</h1><p class="muted">Tiny wins. Big brain energy.</p></div></div>
+  <div id="achievementContent"></div>
+</section>
+
+<!-- MOCK -->
+<section id="page-mock" class="page">
+  <div id="mockContent"></div>
+</section>
+</main>
+</div>
+<div class="mobile-nav">
+  <button onclick="go('home')"><b>🏠</b>Home</button>
+  <button onclick="go('chapters')"><b>📚</b>Chapters</button>
+  <button onclick="go('mistakes')"><b>❌</b>Mistakes</button>
+  <button onclick="go('progress')"><b>📈</b>Progress</button>
+  <button onclick="go('achievements')"><b>🏆</b>Rewards</button>
+</div>
+
+<script>
+/* =========================================================
+   EDUCATIONAL PSYCHOLOGY — FULL REVISION APP
+   Everything is stored locally in the browser.
+   ========================================================= */
+
+// ================= SOUND EFFECTS =================
+// Put these 3 files in the same folder as this HTML file:
+// right.mp3  = correct answer sound
+// wrong.mp3  = wrong answer sound
+// xp.mp3     = XP gained sound
+const sounds = {
+  right: new Audio("right.mp3"),
+  wrong: new Audio("wrong.mp3"),
+  xp: new Audio("xp.mp3")
+};
+
+function playSound(type){
+  const sound = sounds[type];
+  if(!sound) return;
+  sound.currentTime = 0;
+  sound.volume = 0.7;
+  sound.play().catch(()=>{});
+}
+
+
+const chapters = {
+  1:{title:"Memory & Understanding",emoji:"🧠",short:"Memory",sections:["A","B","C","D"]},
+  2:{title:"Cognition",emoji:"💭",short:"Cognition",sections:["A","B","C"]},
+  3:{title:"Self-theories",emoji:"🎯",short:"Self-theories",sections:["A","B","C"]},
+  4:{title:"Creativity",emoji:"💡",short:"Creativity",sections:["A","B","C"]}
+};
+
+const concepts = {
+1:[
+["Memory","Memory is any lasting change in how we think, feel or act as a result of experience."],
+["Declarative memory","Knowledge that can be consciously recalled and explained in words."],
+["Non-declarative memory","Learning shown through performance rather than conscious verbal recall, such as riding a bicycle."],
+["Encoding → Storage → Retrieval","A useful three-step way to understand memory: information is encoded, stored, then retrieved."],
+["Schema","A group of connected ideas or knowledge about a topic. New information is easier to learn when it links to an existing schema."],
+["Deep processing","Processing meaning rather than surface features. Making a personal, meaningful sentence is an example."],
+["Spacing effect","Learning is stronger when study is spread across time instead of crammed into one session."],
+["Retrieval practice","Actively trying to recall information improves learning more than simply rereading it."],
+["Interleaving","Mixing different kinds of problems or topics instead of doing many identical problems in a row."],
+["Desirable difficulty","A learning condition that feels harder in the short term but can improve long-term learning."],
+["Yerkes–Dodson law","Performance is often best at a moderate level of arousal rather than extremely low or high arousal."],
+["Context-dependent memory","Recall can be affected by the context in which information was learned. Varying contexts and practicing in exam-like settings can help."]
+],
+2:[
+["Cognition","The mental processes involved in attention, thinking, reasoning, problem solving and related activity."],
+["Attention","A limited cognitive resource. We cannot give full attention to everything at once."],
+["Working memory","An active system used to temporarily hold and manipulate information while thinking."],
+["Executive function","Higher-level control processes such as attention, planning, inhibition and monitoring."],
+["Prefrontal cortex","A brain region strongly associated with executive functions and complex decision making; development continues into the early twenties."],
+["Brain training & transfer","Practice on a trained task may improve that task, but evidence does not support assuming broad transfer to unrelated academic skills."],
+["Peer influence","Adolescent decisions can be strongly influenced by peers, especially in social or risky situations."],
+["Distraction","Information from outside the current task can capture attention and interfere with performance."],
+["Mind wandering","Attention can drift away from the current task; research has found substantial rates of mind wandering during tasks."],
+["Cognitive load","Too much information or unnecessary decoration can overload working memory and reduce learning."]
+],
+3:[
+["Self-theories","People’s beliefs about themselves and how they interpret experiences."],
+["Meaning systems","Dweck’s idea that people use beliefs and interpretations to make sense of themselves and the world."],
+["Self-esteem","A person’s global feeling of how much value they place on themselves."],
+["Academic self-concept","A belief about one’s ability in a particular school subject or academic domain."],
+["Mastery goals","Goals focused on learning, improving competence and understanding."],
+["Performance goals","Goals focused on demonstrating ability or looking competent compared with others."],
+["Fixed mindset","A belief that ability is relatively fixed. Failure may be interpreted as evidence of low ability."],
+["Growth mindset","A belief that abilities can develop through learning, strategies, practice and support."],
+["Self-esteem vs achievement","Self-esteem interventions do not automatically improve academic achievement; academic success can itself influence self-esteem."],
+["Reciprocal effects","Academic self-concept and achievement can influence each other over time."]
+],
+4:[
+["Creativity","Producing something that is both new and useful."],
+["Big C creativity","Major, field-changing creativity recognized by experts or society."],
+["Small c creativity","Everyday creativity used in school, work and ordinary problem solving."],
+["Expertise","Creative achievement usually rests on substantial factual and conceptual knowledge and experience."],
+["Association","A mental connection between two ideas, concepts or things."],
+["Analogy","Using similarities between situations to transfer a useful solution or idea. Multiple examples can make analogical reasoning easier."],
+["Divergent thinking","Generating many possible answers or ideas."],
+["Convergent thinking","Using logic or knowledge to arrive at one best or correct answer."],
+["Fluency","The number of ideas generated."],
+["Incubation","A break from a problem can sometimes help new associations form and support insight."],
+["Creative group process","Creativity can occur through interaction and collaboration, not only through isolated individual work."]
+]
+};
+
+/* Full source question bank.
+   type: mcq | tf | fill | scenario
+   correct: option index for mcq/tf; answer string for fill/scenario
+*/
+const questions = [
+/* ================= CHAPTER 1 ================= */
+{id:"c1a1",ch:1,sec:"A",type:"mcq",q:"Memory means:",opts:["Any lasting change in how we think, feel or act as a result of experience","Only learning facts by heart","The ability to copy information quickly","A short feeling after a lesson"],correct:0,why:"Memory refers broadly to lasting changes resulting from experience, not simply memorizing facts."},
+{id:"c1a2",ch:1,sec:"A",type:"mcq",q:"Declarative memory is:",opts:["Knowledge we can consciously recall and explain in words","A skill that can only be shown physically","A temporary emotional state","A type of attention"],correct:0,why:"Declarative memory contains consciously accessible knowledge that can be stated or explained."},
+{id:"c1a3",ch:1,sec:"A",type:"mcq",q:"Riding a bicycle is mainly an example of:",opts:["Declarative memory","Non-declarative memory","Semantic memory only","Working memory"],correct:1,why:"Bicycle riding is a learned skill demonstrated through performance, so it is non-declarative."},
+{id:"c1a4",ch:1,sec:"A",type:"mcq",q:"Which is NOT one of the three basic memory processes?",opts:["Encoding","Storage","Retrieval","Revision"],correct:3,why:"The common three processes are encoding, storage and retrieval."},
+{id:"c1a5",ch:1,sec:"A",type:"mcq",q:"The brain is NOT like a:",opts:["Meaning-making system","Learning system","Video recorder","Biological information system"],correct:2,why:"Human memory is reconstructive and can be changed; it is not a perfect video recording."},
+{id:"c1a6",ch:1,sec:"A",type:"mcq",q:"Loftus (2005) showed that:",opts:["Memories can be distorted and some memories may even be for events that never happened","Memory is always exact","Children never accept misleading information","Repetition always creates permanent learning"],correct:0,why:"Research on memory distortion shows that later information can alter recollection."},
+{id:"c1a7",ch:1,sec:"A",type:"mcq",q:"Schacter (2001) highlighted that child witnesses can be influenced by:",opts:["Leading questions","Only background noise","High IQ","Moderate arousal"],correct:0,why:"Leading or suggestive questions can influence children’s reports of events."},
+{id:"c1a8",ch:1,sec:"A",type:"mcq",q:"Kornell et al. (2011) found that repetition may:",opts:["Increase confidence more than long-term learning","Always produce perfect long-term learning","Prevent forgetting completely","Make every study session equally effective"],correct:0,why:"Repeated exposure can create a feeling of fluency and confidence without guaranteeing better long-term retention."},
+{id:"c1a9",ch:1,sec:"A",type:"mcq",q:"Counterintuitive means:",opts:["True but different from what we expect","Obviously false","Impossible to remember","Exactly the same as our expectation"],correct:0,why:"Counterintuitive ideas conflict with an initial expectation or intuition."},
+{id:"c1a10",ch:1,sec:"A",type:"mcq",q:"Soderstrom and Bjork (2015) suggest that:",opts:["Short-term gains are an unreliable guide to long-term learning","Fast performance always means durable learning","Cramming is always best","Confidence perfectly predicts retention"],correct:0,why:"Performance during learning can look good in the short term while long-term retention remains weak."},
+{id:"c1a11",ch:1,sec:"A",type:"mcq",q:"A schema is:",opts:["A group of connected ideas or knowledge about a topic","A single isolated fact","A memory test","A physical brain structure"],correct:0,why:"Schemas organize related knowledge and help us interpret new information."},
+{id:"c1a12",ch:1,sec:"A",type:"mcq",q:"Bartlett found that people retelling stories often:",opts:["Changed details to fit their own cultural expectations","Copied every word exactly","Forgot every story immediately","Improved their photographic memory"],correct:0,why:"Reconstruction can make remembered stories more consistent with existing schemas and culture."},
+{id:"c1a13",ch:1,sec:"A",type:"mcq",q:"Which is an example of deep processing?",opts:["Writing a true sentence about your own life using a new word","Counting the letters in a word only","Looking at the font","Repeating a word without thinking about its meaning"],correct:0,why:"Connecting a word to meaningful personal information processes its meaning deeply."},
+{id:"c1a14",ch:1,sec:"A",type:"mcq",q:"In Hyde and Jenkins (1973), better memory was associated with the group asked to:",opts:["Judge how much they liked each word","Copy every word twice","Count letters only","Avoid thinking about meaning"],correct:0,why:"The pleasantness/meaning-based task encouraged deeper processing than a surface counting task."},
+{id:"c1a15",ch:1,sec:"A",type:"mcq",q:"According to the Yerkes–Dodson law, performance is often best at:",opts:["Very low arousal","Moderate arousal","Maximum arousal","No arousal at all"],correct:1,why:"For many tasks, moderate arousal provides a useful balance of alertness and control."},
+{id:"c1b1",ch:1,sec:"B",type:"tf",q:"Memory is only about remembering facts.",opts:["True","False"],correct:1,why:"Memory includes many kinds of lasting learning, including skills and habits."},
+{id:"c1b2",ch:1,sec:"B",type:"tf",q:"Declarative knowledge can be explained in words.",opts:["True","False"],correct:0,why:"Declarative knowledge is consciously accessible and can usually be described verbally."},
+{id:"c1b3",ch:1,sec:"B",type:"tf",q:"Playing a musical instrument mainly involves non-declarative memory.",opts:["True","False"],correct:0,why:"Instrumental skills are largely procedural/non-declarative, although declarative knowledge may also support them."},
+{id:"c1b4",ch:1,sec:"B",type:"tf",q:"Human memories are exact recordings of events.",opts:["True","False"],correct:1,why:"Memory is reconstructive and can be distorted."},
+{id:"c1b5",ch:1,sec:"B",type:"tf",q:"Children are always more accurate witnesses than adults.",opts:["True","False"],correct:1,why:"Children can be particularly vulnerable to suggestion, although accuracy depends on many factors."},
+{id:"c1b6",ch:1,sec:"B",type:"tf",q:"An easy lesson always produces strong long-term learning.",opts:["True","False"],correct:1,why:"Ease and short-term fluency do not necessarily predict durable learning."},
+{id:"c1b7",ch:1,sec:"B",type:"tf",q:"New information is often easier to learn when it connects to an existing schema.",opts:["True","False"],correct:0,why:"Existing knowledge provides an organized framework for new information."},
+{id:"c1b8",ch:1,sec:"B",type:"tf",q:"Bartlett’s participants could add or change details when remembering stories.",opts:["True","False"],correct:0,why:"Their recollections were reconstructed using existing cultural knowledge."},
+{id:"c1b9",ch:1,sec:"B",type:"tf",q:"Deep processing involves thinking about meaning.",opts:["True","False"],correct:0,why:"Meaning-based processing generally produces stronger memory than shallow surface processing."},
+{id:"c1b10",ch:1,sec:"B",type:"tf",q:"Trying harder always improves memory, even if you ignore meaning.",opts:["True","False"],correct:1,why:"Effort alone is not enough; meaningful processing and effective strategies matter."},
+{id:"c1c1",ch:1,sec:"C",type:"scenario",q:"Mr Hung spends 40 minutes reading 35 slides about passive voice. After 15 minutes, students look tired and stop responding. What principle is most relevant, and what should he do?",opts:["Attention/working-memory limits; chunk the lesson, reduce unnecessary information and use short retrieval activities","Add 20 more slides so students see more examples","Read the same slides faster without pauses","Make students copy every sentence"],correct:0,why:"Working memory and attention are limited. Chunking, concise explanations and active retrieval reduce overload."},
+{id:"c1c2",ch:1,sec:"C",type:"scenario",q:"Lan rereads her notes five times the night before an exam. She feels very confident but scores poorly. Which explanation and strategy fit best?",opts:["Fluency can create confidence; use spacing and retrieval practice instead of only rereading","She needs to reread even more in one night","Confidence proves that her memory is strong","She should only highlight more sentences"],correct:0,why:"Repeated rereading can feel fluent without creating durable retrieval. Spacing and retrieval are stronger learning strategies."},
+{id:"c1c3",ch:1,sec:"C",type:"scenario",q:"A student learns the present perfect in week 2 but never returns to it. In May, the student performs poorly. What should the teacher change?",opts:["Use spaced revisits plus retrieval practice across weeks","Teach it once more immediately and never revisit it","Give only a longer explanation on the first day","Ask students to memorize the definition only"],correct:0,why:"Long-term retention benefits from spaced retrieval over time."},
+{id:"c1c4",ch:1,sec:"C",type:"scenario",q:"A student always studies at one desk with the same music. In the exam hall, he cannot remember information he knew at home. What is a useful response?",opts:["Vary study contexts and sometimes practice in an exam-like setting","Always use the same music and desk","Study only at midnight","Avoid practice tests"],correct:0,why:"Context can support retrieval. Varying contexts reduces dependence on one specific context and exam-like practice helps."},
+{id:"c1c5",ch:1,sec:"C",type:"scenario",q:"Students complete 20 identical gap-fill questions and get 19/20, but later confuse past simple and present perfect. What is a better practice design?",opts:["Interleave different question types and introduce desirable difficulty","Give 50 more identical gap fills","Let them reread the same rule only","Remove all variation"],correct:0,why:"Interleaving forces learners to identify which strategy or form is needed instead of relying on repetition of one pattern."},
+{id:"c1d1",ch:1,sec:"D",type:"fill",q:"The process of making information stable over time is called ________.",answer:"consolidation",why:"Consolidation refers to processes that stabilize and strengthen learning/memory."},
+{id:"c1d2",ch:1,sec:"D",type:"fill",q:"Actively trying to recall information is called ________ practice.",answer:"retrieval",why:"Retrieval practice strengthens the ability to bring information back to mind."},
+{id:"c1d3",ch:1,sec:"D",type:"fill",q:"A group of connected ideas about a topic is a ________.",answer:"schema",why:"A schema organizes connected knowledge."},
+{id:"c1d4",ch:1,sec:"D",type:"fill",q:"Studying across separated time periods is the ________ effect.",answer:"spacing",why:"The spacing effect describes better learning from distributed study."},
+{id:"c1d5",ch:1,sec:"D",type:"fill",q:"Mixing different kinds of problems or topics is called ________.",answer:"interleaving",why:"Interleaving requires learners to switch between different problem types."},
+{id:"c1d6",ch:1,sec:"D",type:"fill",q:"A learning condition that feels harder but can improve long-term learning is a ________ difficulty.",answer:"desirable",why:"Desirable difficulties make learning less fluent now but can strengthen later retention."},
+{id:"c1d7",ch:1,sec:"D",type:"fill",q:"Knowledge that can be consciously explained in words is ________ memory.",answer:"declarative",why:"Declarative memory is consciously accessible knowledge."},
+{id:"c1d8",ch:1,sec:"D",type:"fill",q:"Learning shown through skills or performance is ________ memory.",answer:"non-declarative",why:"Non-declarative learning can be expressed through performance without conscious verbal recall."},
+{id:"c1d9",ch:1,sec:"D",type:"fill",q:"The process of taking in and representing new information is called ________.",answer:"encoding",why:"Encoding is the initial processing/representation of information."},
+{id:"c1d10",ch:1,sec:"D",type:"fill",q:"Processing information by focusing on its meaning is called ________ processing.",answer:"deep",why:"Deep processing focuses on meaning and meaningful connections."},
+
+/* ================= CHAPTER 2 ================= */
+{id:"c2a1",ch:2,sec:"A",type:"mcq",q:"Cognition mainly refers to:",opts:["Thinking, reasoning and what is going on in the mind","Only physical movement","Only emotions","Only long-term memory"],correct:0,why:"Cognition includes mental processes such as attention, thinking, reasoning and problem solving."},
+{id:"c2a2",ch:2,sec:"A",type:"mcq",q:"Cognition involves:",opts:["Attention and thinking","Only sleep","Only muscle control","Only memorization"],correct:0,why:"Attention and thinking are central cognitive processes."},
+{id:"c2a3",ch:2,sec:"A",type:"mcq",q:"Attention is best understood as:",opts:["An unlimited resource","A limited cognitive resource","A type of memory storage","A personality trait"],correct:1,why:"People have limited attentional resources and cannot process everything with equal depth."},
+{id:"c2a4",ch:2,sec:"A",type:"mcq",q:"Working memory is best described as:",opts:["A passive permanent store","An active system for temporarily holding and manipulating information","A type of long-term memory only","A measure of intelligence"],correct:1,why:"Working memory actively maintains and manipulates information during cognitive tasks."},
+{id:"c2a5",ch:2,sec:"A",type:"mcq",q:"Gathercole (2004) found working-memory capacity:",opts:["Decreases steadily from age 5 to 14","Increases steadily across ages 5–14","Is exactly the same at all ages","Appears only after age 18"],correct:1,why:"Developmental research shows increases in working-memory capacity during childhood."},
+{id:"c2a6",ch:2,sec:"A",type:"mcq",q:"Simons et al. (2016) found that brain-training gains:",opts:["Reliably transfer to every academic skill","Do not necessarily transfer beyond the trained task","Always improve school grades","Eliminate distraction"],correct:1,why:"Training can improve practiced tasks, but broad far transfer is not reliably demonstrated."},
+{id:"c2a7",ch:2,sec:"A",type:"mcq",q:"Which is NOT an executive function?",opts:["Planning","Inhibition","Monitoring","Storing information for a few seconds"],correct:3,why:"Temporary storage is a working-memory function; executive functions include control processes such as planning and inhibition."},
+{id:"c2a8",ch:2,sec:"A",type:"mcq",q:"The brain region strongly associated with executive function is the:",opts:["Prefrontal cortex","Cerebellum only","Occipital lobe only","Spinal cord"],correct:0,why:"The prefrontal cortex plays a major role in planning, inhibition, decision making and control."},
+{id:"c2a9",ch:2,sec:"A",type:"mcq",q:"Blakemore and Choudhury reported that the prefrontal cortex continues developing until:",opts:["About age 5","About age 10","At least the early twenties","Exactly age 14"],correct:2,why:"Development of prefrontal systems continues into adolescence and early adulthood."},
+{id:"c2a10",ch:2,sec:"A",type:"mcq",q:"Steinberg’s work suggests adolescent decisions can be strongly influenced by:",opts:["Peers","Weather only","Vocabulary size","Handwriting"],correct:0,why:"Peer presence can increase the attractiveness of immediate or risky choices during adolescence."},
+{id:"c2a11",ch:2,sec:"A",type:"mcq",q:"Traffic noise can negatively affect:",opts:["Reading comprehension","Height","Long-term personality","Handwriting speed only"],correct:0,why:"Environmental distraction can interfere with attention and comprehension."},
+{id:"c2a12",ch:2,sec:"A",type:"mcq",q:"Ching (2017) found maths anxiety was especially harmful for learners with:",opts:["Better executive abilities","No working memory","No mathematical knowledge","No attention at all"],correct:0,why:"Maths anxiety can consume cognitive resources and particularly interfere when learners otherwise have stronger executive capacity to deploy."},
+{id:"c2a13",ch:2,sec:"A",type:"mcq",q:"Distraction often comes from:",opts:["Outside the current task","Only long-term memory","Only sleep","Successful retrieval"],correct:0,why:"External sounds, notifications and other environmental events can capture attention."},
+{id:"c2a14",ch:2,sec:"A",type:"mcq",q:"Risko and colleagues reported that people mind-wandered during a substantial portion of tasks, around:",opts:["4%","40%","90%","0%"],correct:1,why:"The cited finding is commonly summarized as mind wandering occurring around 40% of the time."},
+{id:"c2a15",ch:2,sec:"A",type:"mcq",q:"Ravizza et al. found non-academic internet use was:",opts:["Positively related to test performance for everyone","Negatively related to test performance across learners","Unrelated to performance in every case","Required for good grades"],correct:1,why:"Non-academic internet use during learning can compete for attention and was negatively related to performance."},
+{id:"c2b1",ch:2,sec:"B",type:"tf",q:"Cognition is only about remembering facts.",opts:["True","False"],correct:1,why:"Cognition includes many mental processes beyond factual memory."},
+{id:"c2b2",ch:2,sec:"B",type:"tf",q:"People are consciously aware of all their cognitive processes.",opts:["True","False"],correct:1,why:"Many cognitive processes occur with limited or no conscious awareness."},
+{id:"c2b3",ch:2,sec:"B",type:"tf",q:"Attention is an unlimited resource.",opts:["True","False"],correct:1,why:"Attention is limited."},
+{id:"c2b4",ch:2,sec:"B",type:"tf",q:"Information generally needs to be noticed/attended to before it can be processed effectively.",opts:["True","False"],correct:0,why:"Attention determines what information receives deeper processing."},
+{id:"c2b5",ch:2,sec:"B",type:"tf",q:"Working memory is an active system.",opts:["True","False"],correct:0,why:"It temporarily maintains and manipulates information."},
+{id:"c2b6",ch:2,sec:"B",type:"tf",q:"A six-year-old has exactly the same working-memory capacity as a fourteen-year-old.",opts:["True","False"],correct:1,why:"Working memory develops with age."},
+{id:"c2b7",ch:2,sec:"B",type:"tf",q:"Brain training reliably improves general school performance beyond the trained task.",opts:["True","False"],correct:1,why:"Broad transfer is not reliably supported."},
+{id:"c2b8",ch:2,sec:"B",type:"tf",q:"Executive function depends on attention but is not identical to attention.",opts:["True","False"],correct:0,why:"Attention is one resource used by executive control, but executive function includes broader control processes."},
+{id:"c2b9",ch:2,sec:"B",type:"tf",q:"The prefrontal cortex is fully developed by age eleven.",opts:["True","False"],correct:1,why:"Its development continues through adolescence and into early adulthood."},
+{id:"c2b10",ch:2,sec:"B",type:"tf",q:"Risky decisions becoming more peer-influenced during adolescence is a normal developmental pattern, not simply a sign of bad character.",opts:["True","False"],correct:0,why:"Developmental and social factors contribute to adolescent decision making."},
+{id:"c2c1",ch:2,sec:"C",type:"scenario",q:"A teacher reads slides aloud while students copy every sentence. Students quickly become overloaded. What is the best response?",opts:["Use concise visuals with spoken explanation and stop requiring students to copy everything","Add more decorative text to each slide","Speak faster and add more slides","Ask students to memorize the entire slide"],correct:0,why:"Copying large amounts while listening competes for working-memory resources. Concise visuals and guided processing reduce load."},
+{id:"c2c2",ch:2,sec:"C",type:"scenario",q:"A student keeps saying “I have been in Hanoi since two years” even after the teacher corrects it five times. What is a better next step?",opts:["Make the learner notice the form and retrieve it through meaningful contrast and practice","Repeat the same correction louder","Stop giving any examples","Ask the learner to memorize the teacher’s sentence only"],correct:0,why:"Feedback is more useful when learners attend to the relevant form and actively use it. Contrast “since + starting point” with “for + duration.”"},
+{id:"c2c3",ch:2,sec:"C",type:"scenario",q:"Seven-year-olds must plan, write and check a three-paragraph story in one lesson. Why may this fail?",opts:["Working-memory and executive-function limits make the task too demanding; scaffold it into steps","Young learners never have ideas","Writing is impossible before age 10","The teacher should simply give a longer deadline without support"],correct:0,why:"Developmental limits can make a multi-stage task overload working memory. Break planning, drafting and checking into manageable stages."},
+{id:"c2c4",ch:2,sec:"C",type:"scenario",q:"Students say they understand everything but later score 4/10. What is a better way to check learning?",opts:["Use retrieval practice and low-stakes quizzes rather than only asking if they understand","Ask them if they are sure one more time","Give them more notes to reread","Remove all quizzes"],correct:0,why:"Feeling familiar with material is not the same as being able to retrieve it. Retrieval provides stronger evidence of learning."},
+{id:"c2c5",ch:2,sec:"C",type:"scenario",q:"A worksheet has cartoons, quotes, decorative borders and unrelated colors around every question. Students lose focus. What is the main issue?",opts:["Extraneous cognitive load and distraction","Too much retrieval practice","Too much expertise","A lack of creativity"],correct:0,why:"Decorative information unrelated to the learning goal can consume attention and working-memory resources."},
+
+/* ================= CHAPTER 3 ================= */
+{id:"c3a1",ch:3,sec:"A",type:"mcq",q:"Self-theories are:",opts:["People’s beliefs about themselves","Only teachers’ opinions","A type of memory","A classroom seating plan"],correct:0,why:"Self-theories concern beliefs people hold about themselves, ability and development."},
+{id:"c3a2",ch:3,sec:"A",type:"mcq",q:"Dweck (2000) described self-theories as:",opts:["Meaning systems","Muscle systems","Memory recordings","Attention filters only"],correct:0,why:"Self-theories help people interpret experiences and give them meaning."},
+{id:"c3a3",ch:3,sec:"A",type:"mcq",q:"Self-esteem refers to:",opts:["A global feeling of how much value you place on yourself","Your score in one subject only","Your IQ score","How quickly you read"],correct:0,why:"Self-esteem is a broad evaluation of one’s worth."},
+{id:"c3a4",ch:3,sec:"A",type:"mcq",q:"William James described self-esteem as approximately:",opts:["Success divided by pretensions","Intelligence divided by age","Effort divided by time","Grades multiplied by confidence"],correct:0,why:"James famously linked self-esteem to the ratio of successes to pretensions/aspirations."},
+{id:"c3a5",ch:3,sec:"A",type:"mcq",q:"Which is NOT one of Coopersmith’s dimensions of self-esteem?",opts:["Power","Significance","Virtue","Intelligence"],correct:3,why:"The cited dimensions include power, significance, virtue and competence, not intelligence as a standalone dimension."},
+{id:"c3a6",ch:3,sec:"A",type:"mcq",q:"In the self-esteem literature, power is closest to:",opts:["Control over your own life","Being good at mathematics","Having many friends","Knowing many facts"],correct:0,why:"Power concerns a sense of control or influence over one’s life."},
+{id:"c3a7",ch:3,sec:"A",type:"mcq",q:"Which is NOT one of Harter’s commonly discussed academic/social domains?",opts:["Scholastic competence","Social acceptance","Athletic competence","Musical talent"],correct:3,why:"Harter’s domains include areas such as scholastic competence, social acceptance and athletic competence."},
+{id:"c3a8",ch:3,sec:"A",type:"mcq",q:"Research discussed in this chapter suggests aggressive people can have:",opts:["High self-esteem","No self-concept","Always low self-esteem","No emotions"],correct:0,why:"Aggression is not simply caused by low self-esteem; some aggressive individuals report high or inflated self-esteem."},
+{id:"c3a9",ch:3,sec:"A",type:"mcq",q:"Higher self-esteem in children has been linked with:",opts:["More experimentation or risky behavior in some contexts","Perfect exam results","No mistakes ever","Lower curiosity"],correct:0,why:"High self-esteem can sometimes be associated with greater willingness to experiment or take risks."},
+{id:"c3a10",ch:3,sec:"A",type:"mcq",q:"The relationship between global self-esteem and academic achievement is generally:",opts:["Modest, with evidence that achievement can also influence self-esteem","Perfectly causal in one direction","Completely nonexistent","Always extremely strong"],correct:0,why:"Academic outcomes and self-esteem are related, but the relationship is not a simple strong one-way cause."},
+{id:"c3a11",ch:3,sec:"A",type:"mcq",q:"Programs designed only to raise self-esteem:",opts:["Do not necessarily improve academic results and can sometimes backfire","Always raise grades dramatically","Always eliminate anxiety","Guarantee better learning"],correct:0,why:"Boosting general self-esteem alone is not a reliable route to academic improvement."},
+{id:"c3a12",ch:3,sec:"A",type:"mcq",q:"Academic self-concept is:",opts:["A belief about your ability in a school subject","Your global feeling of worth only","Your friendship network","Your memory capacity"],correct:0,why:"It is domain-specific: how capable a learner believes they are in an academic area."},
+{id:"c3a13",ch:3,sec:"A",type:"mcq",q:"Tiedemann’s research suggests academic self-concept first becomes more apparent around:",opts:["Age 2–3","Age 7–9","Age 15–17","Age 25"],correct:1,why:"Subject-related self-evaluations become increasingly differentiated during middle childhood."},
+{id:"c3a14",ch:3,sec:"A",type:"mcq",q:"Around age 10–11, children increasingly:",opts:["Compare their abilities with classmates","Stop evaluating themselves","Lose all academic motivation","Cannot understand feedback"],correct:0,why:"Social comparison becomes increasingly important in self-evaluations."},
+{id:"c3a15",ch:3,sec:"A",type:"mcq",q:"Marsh’s reciprocal-effects model proposes that:",opts:["Academic self-concept and achievement influence each other over time","Only grades affect self-concept","Only self-concept affects grades","Neither affects the other"],correct:0,why:"The relationship is reciprocal: achievement can build self-concept and self-concept can influence later achievement."},
+{id:"c3b1",ch:3,sec:"B",type:"tf",q:"Self-esteem is about only one school subject.",opts:["True","False"],correct:1,why:"That is closer to academic self-concept; self-esteem is more global."},
+{id:"c3b2",ch:3,sec:"B",type:"tf",q:"Lowering unrealistic expectations can sometimes raise self-esteem.",opts:["True","False"],correct:0,why:"When aspirations are brought into line with attainable outcomes, the success/pretension relationship can change."},
+{id:"c3b3",ch:3,sec:"B",type:"tf",q:"Clearer, supportive rules from parents can be associated with higher self-esteem.",opts:["True","False"],correct:0,why:"Consistent boundaries and supportive parenting can contribute to positive self-evaluation."},
+{id:"c3b4",ch:3,sec:"B",type:"tf",q:"Aggressive people always have low self-esteem.",opts:["True","False"],correct:1,why:"Aggression is not uniquely explained by low self-esteem."},
+{id:"c3b5",ch:3,sec:"B",type:"tf",q:"High self-esteem in children can be linked to more experimentation or risk taking.",opts:["True","False"],correct:0,why:"Confidence can sometimes make children more willing to explore and take risks."},
+{id:"c3b6",ch:3,sec:"B",type:"tf",q:"Raising self-esteem automatically raises exam results.",opts:["True","False"],correct:1,why:"Self-esteem interventions alone do not guarantee improved academic performance."},
+{id:"c3b7",ch:3,sec:"B",type:"tf",q:"Good academic results can raise self-esteem.",opts:["True","False"],correct:0,why:"Success can contribute to more positive self-evaluations."},
+{id:"c3b8",ch:3,sec:"B",type:"tf",q:"Academic self-concept can be a better predictor of academic outcomes than global self-esteem.",opts:["True","False"],correct:0,why:"Domain-specific beliefs are often more closely tied to domain-specific performance."},
+{id:"c3b9",ch:3,sec:"B",type:"tf",q:"Very young children can always rate their own abilities accurately.",opts:["True","False"],correct:1,why:"Young children may have optimistic or less differentiated self-evaluations."},
+{id:"c3b10",ch:3,sec:"B",type:"tf",q:"Older children’s self-concepts tend to become less uniformly positive.",opts:["True","False"],correct:0,why:"With greater social comparison and differentiation, self-evaluations often become more realistic and less globally positive."},
+{id:"c3c1",ch:3,sec:"C",type:"scenario",q:"A student says, “I’m just not a language person.” What is the best response?",opts:["Treat it as a negative academic self-concept; provide specific evidence of progress, small goals and growth-oriented feedback","Agree and move the student to another subject","Give only global praise such as “You are smart”","Avoid giving feedback"],correct:0,why:"Specific evidence and achievable progress can challenge a negative domain-specific self-belief and support a more growth-oriented interpretation."},
+{id:"c3c2",ch:3,sec:"C",type:"scenario",q:"Thu keeps revising grammar she already knows but avoids confusing tense questions because she is afraid of being wrong. This is most consistent with:",opts:["Performance-avoidance goals","Strong mastery goals","Deep processing","Incubation"],correct:0,why:"Performance-avoidance focuses on avoiding looking incompetent or failing rather than learning."},
+{id:"c3c3",ch:3,sec:"C",type:"scenario",q:"A teacher gives a monthly “Top of the Class” prize. Students focus on beating classmates rather than improving. What is the concern?",opts:["A performance goal orientation based on social comparison","Too much mastery orientation","Too much retrieval practice","Too much incubation"],correct:0,why:"Ranking rewards emphasize demonstrating ability relative to others. Progress/mastery goals can shift attention toward learning."},
+{id:"c3c4",ch:3,sec:"C",type:"scenario",q:"A girl finishes first and the teacher says, “You’re so clever.” Later she struggles and becomes afraid to try. What is a better approach?",opts:["Praise useful effort, strategies and progress rather than treating ability as fixed","Repeat “You are naturally clever” more often","Give easier tasks forever","Avoid feedback"],correct:0,why:"Person/ability praise can encourage fixed interpretations. Process-focused feedback emphasizes controllable strategies and learning."},
+{id:"c3c5",ch:3,sec:"C",type:"scenario",q:"A high-scoring student fails one test and then stops trying because “I guess I’m not smart.” What belief pattern is most relevant?",opts:["A fixed mindset that interprets failure as evidence of fixed low ability","A strong growth mindset","High divergent thinking","Deep processing"],correct:0,why:"A fixed interpretation can turn one failure into a judgment about permanent ability and encourage avoidance."},
+
+/* ================= CHAPTER 4 ================= */
+{id:"c4a1",ch:4,sec:"A",type:"mcq",q:"Creativity is best defined as producing something that is:",opts:["New and useful","New but useless","Old and repetitive","Fast and easy"],correct:0,why:"Creativity combines novelty with usefulness or appropriateness."},
+{id:"c4a2",ch:4,sec:"A",type:"mcq",q:"Big C creativity refers to:",opts:["Major field-changing creativity recognized by experts or society","Everyday classroom creativity only","Copying a model","A single correct answer"],correct:0,why:"Big C refers to eminent, transformative creative achievement."},
+{id:"c4a3",ch:4,sec:"A",type:"mcq",q:"Small c creativity refers to:",opts:["Everyday creative activity in ordinary life or school","Only Nobel-level achievements","Only professional artists","Only scientific discoveries"],correct:0,why:"Small c creativity is ordinary, personally meaningful creative problem solving."},
+{id:"c4a4",ch:4,sec:"A",type:"mcq",q:"Jauk et al. (2013) found that the relationship between high IQ and creative success:",opts:["Is weak beyond an above-average IQ level","Gets perfectly stronger at every IQ level","Does not exist at all below any level","Means IQ and creativity are identical"],correct:0,why:"The association between intelligence and creative achievement is not simply linear at high ability levels."},
+{id:"c4a5",ch:4,sec:"A",type:"mcq",q:"Which statement does NOT fit Csikszentmihalyi’s discussion of creative people?",opts:["They all have identical personalities and life paths","They can show complex or seemingly contradictory traits","Creative development involves a wider system than the individual alone","Social and field contexts can matter"],correct:0,why:"Csikszentmihalyi emphasizes complexity rather than a single uniform creative personality."},
+{id:"c4a6",ch:4,sec:"A",type:"mcq",q:"Creating something new usually involves:",opts:["Rearranging existing parts into a new and useful combination","Creating from absolutely nothing","Memorizing a model word-for-word","Removing all prior knowledge"],correct:0,why:"Creative products often recombine existing knowledge, concepts or elements in novel ways."},
+{id:"c4a7",ch:4,sec:"A",type:"mcq",q:"Cropley and Cropley suggest creativity is:",opts:["At least partly a group or social process","Always completely private","Impossible in teams","Only genetic"],correct:0,why:"Creative work can emerge through collaboration, feedback and social systems."},
+{id:"c4a8",ch:4,sec:"A",type:"mcq",q:"Gick and Holyoak found analogical problem solving can be easier when learners have:",opts:["Two or more previous examples","No previous examples","Only one unrelated word","No understanding of the problem"],correct:0,why:"Multiple examples can help learners notice the underlying structural analogy."},
+{id:"c4a9",ch:4,sec:"A",type:"mcq",q:"Which principle is most important for classroom creativity?",opts:["Creativity cannot happen effectively without factual and conceptual understanding","Knowledge always blocks creativity","Students should never learn rules","Creative tasks require no expertise"],correct:0,why:"Knowledge supplies material and structures that creative thinking can recombine."},
+{id:"c4a10",ch:4,sec:"A",type:"mcq",q:"An association is:",opts:["A mental link between two ideas or things","A single correct answer","A memory loss","A type of exam"],correct:0,why:"Associations connect concepts and can provide raw material for creative combinations."},
+{id:"c4a11",ch:4,sec:"A",type:"mcq",q:"Wilson et al. (2016) found objects with the most potential creative uses were:",opts:["Recalled best","Always forgotten","Never associated with creativity","Only remembered by experts"],correct:0,why:"Objects that invite many possible uses can be more memorable in the cited research."},
+{id:"c4a12",ch:4,sec:"A",type:"mcq",q:"After REM sleep, researchers have discussed a more:",opts:["Hyper-associative state","Rigid state","Unconscious-free state","Mathematical state"],correct:0,why:"REM-related cognition has been linked with broader, more flexible associations."},
+{id:"c4a13",ch:4,sec:"A",type:"mcq",q:"Divergent thinking involves:",opts:["Generating many possible answers","Finding only one correct answer","Repeating one answer","Avoiding alternatives"],correct:0,why:"Divergent thinking expands the solution space."},
+{id:"c4a14",ch:4,sec:"A",type:"mcq",q:"Convergent thinking is illustrated by:",opts:["Solving a logic puzzle with one correct solution","Listing 50 possible uses for a paperclip","Brainstorming many endings","Generating many titles"],correct:0,why:"Convergent thinking narrows possibilities toward the best/correct answer."},
+{id:"c4a15",ch:4,sec:"A",type:"mcq",q:"Fluency in creative thinking refers to:",opts:["The number of ideas generated","How beautiful an idea looks","The intelligence of the teacher","How long a test takes"],correct:0,why:"Fluency is the quantity of ideas produced."},
+{id:"c4b1",ch:4,sec:"B",type:"tf",q:"Only people with high IQ can be creative.",opts:["True","False"],correct:1,why:"Creativity and intelligence overlap in some ways but are not identical."},
+{id:"c4b2",ch:4,sec:"B",type:"tf",q:"Creative ideas appear completely out of nothing.",opts:["True","False"],correct:1,why:"Creative work usually recombines existing knowledge and associations."},
+{id:"c4b3",ch:4,sec:"B",type:"tf",q:"A new idea should also be useful or appropriate to count as creative.",opts:["True","False"],correct:0,why:"Novelty alone is not enough; usefulness/appropriateness is also important."},
+{id:"c4b4",ch:4,sec:"B",type:"tf",q:"Teachers should aim for Big C creativity in every lesson.",opts:["True","False"],correct:1,why:"Everyday classroom creativity is realistic; Big C is exceptional and field-changing."},
+{id:"c4b5",ch:4,sec:"B",type:"tf",q:"All creative work must be done privately by one individual.",opts:["True","False"],correct:1,why:"Creativity can be collaborative and socially supported."},
+{id:"c4b6",ch:4,sec:"B",type:"tf",q:"Major creative achievements usually rest on years of expertise and knowledge.",opts:["True","False"],correct:0,why:"Expertise provides the conceptual material and skills for sophisticated creative work."},
+{id:"c4b7",ch:4,sec:"B",type:"tf",q:"Rote learning can never help creative performance.",opts:["True","False"],correct:1,why:"Although rote learning alone is limited, factual knowledge can provide material that creativity builds on."},
+{id:"c4b8",ch:4,sec:"B",type:"tf",q:"Creative tasks can help consolidate knowledge because they require active use and retrieval.",opts:["True","False"],correct:0,why:"Applying knowledge creatively can make learners actively retrieve and connect information."},
+{id:"c4b9",ch:4,sec:"B",type:"tf",q:"Analogical reasoning can become easier when two situations share useful structural similarities.",opts:["True","False"],correct:0,why:"Recognizing shared structure supports transfer by analogy."},
+{id:"c4b10",ch:4,sec:"B",type:"tf",q:"A short break can sometimes help people solve a problem they were stuck on.",opts:["True","False"],correct:0,why:"Incubation can allow new associations or perspectives to emerge."},
+{id:"c4c1",ch:4,sec:"C",type:"scenario",q:"A teacher says grammar rules kill creativity. What is the better interpretation?",opts:["Factual and conceptual knowledge can support creativity by giving learners material and structures to use","Grammar and creativity can never coexist","Students should never learn vocabulary","Creative writing needs no knowledge"],correct:0,why:"Creativity needs knowledge to recombine. Rules can become resources rather than barriers when used flexibly."},
+{id:"c4c2",ch:4,sec:"C",type:"scenario",q:"Students must write a creative story next month. What preparation is most useful?",opts:["Build vocabulary, grammar, genre knowledge and examples over several lessons, then give creative practice","Give the task once with no preparation","Tell them to be creative without teaching anything","Only memorize one model story"],correct:0,why:"Creative performance benefits from sufficient domain knowledge, examples and time to practice."},
+{id:"c4c3",ch:4,sec:"C",type:"scenario",q:"Students receive a creative project on Monday and submit it Friday. What principle can make the schedule useful?",opts:["Spread the work and use breaks/incubation rather than doing everything at once","Force all work into one sitting","Do not allow students to revisit ideas","Grade only the first idea"],correct:0,why:"Time between sessions can support incubation and allow ideas to develop."},
+{id:"c4c4",ch:4,sec:"C",type:"scenario",q:"A teacher gives a detailed template for every paragraph. Stories are correct but dull. What is likely happening?",opts:["The tight template constrains divergent thinking and creative freedom","Students have too much divergent thinking","The class needs fewer ideas","The template automatically creates Big C creativity"],correct:0,why:"Excessive constraints can reduce the space for alternative ideas and combinations."},
+{id:"c4c5",ch:4,sec:"C",type:"scenario",q:"Students brainstorm only three ideas and stop. What would best support creative fluency?",opts:["Require more ideas, delay evaluation and provide prompts/examples or extra time","Tell them the first idea is always best","Grade immediately after idea one","Stop brainstorming"],correct:0,why:"Fluency can be supported by persistence, deferred evaluation, prompts and time for additional associations."}
+];
+
+/* -------------------- STATE -------------------- */
+const defaultState={
+ xp:0, streak:0, lastDate:null, activityDates:[],
+ completedChapters:[], passedChapters:[], mistakes:[], results:{},
+ achievements:[], sectionProgress:{}, mockPassed:false
+};
+let state=JSON.parse(localStorage.getItem("epsyState")||"null")||structuredClone(defaultState);
+let currentChapter=1, currentMode="", currentQuestions=[], quizIndex=0, quizAnswers=[], quizStartedAt=0, lastResult=null, retryMode=false;
+
+function save(){localStorage.setItem("epsyState",JSON.stringify(state));}
+function today(){return new Date().toISOString().slice(0,10)}
+function activity(xp=0){
+ const d=today();
+ if(!state.activityDates.includes(d)){
+  state.activityDates.push(d);
+  state.activityDates=state.activityDates.slice(-60);
+  if(state.lastDate){
+   const a=new Date(state.lastDate),b=new Date(d);
+   const diff=Math.round((b-a)/86400000);
+   state.streak=diff===1?state.streak+1:1;
+  }else state.streak=1;
+  state.lastDate=d;
+ }
+
+ if(xp>0){
+  playSound("xp");
+ }
+
+ state.xp+=xp;
+ checkAchievements();
+ save();
+ renderAll();
+}
+function level(){return Math.floor(state.xp/250)+1}
+function levelBase(){return (level()-1)*250}
+function levelPct(){return Math.min(100,Math.round(((state.xp-levelBase())/250)*100))}
+function chapterQs(ch){return questions.filter(x=>x.ch===ch)}
+function chapterPct(ch){
+ const qs=chapterQs(ch), answered=qs.filter(q=>state.results[q.id]?.answered).length;
+ return Math.round(answered/qs.length*100);
+}
+function finalPassed(ch){return state.passedChapters.includes(ch)}
+function checkAchievements(){
+ const add=(id)=>{
+   if(!state.achievements.includes(id)) state.achievements.push(id);
+ };
+ if(state.activityDates.length>=1)add("first");
+ if(state.streak>=3)add("streak3");
+ if(state.streak>=7)add("streak7");
+ for(let c=1;c<=4;c++)if(finalPassed(c))add("ch"+c);
+ if(Object.values(state.results).some(r=>r.final && r.percent===100))add("perfect");
+ if(Object.values(state.results).some(r=>r.retry))add("comeback");
+ if(state.passedChapters.length===4)add("master");
+ if(state.mockPassed)add("boss");
+}
+const achievementDefs=[
+["first","🌱","First Step","Complete your first learning activity."],
+["streak3","🔥","On Fire","Reach a 3-day study streak."],
+["streak7","🚀","Unstoppable","Reach a 7-day study streak."],
+["ch1","🧠","Memory Master","Pass the Chapter 1 Final Exam."],
+["ch2","💭","Thinker","Pass the Chapter 2 Final Exam."],
+["ch3","🎯","Know Yourself","Pass the Chapter 3 Final Exam."],
+["ch4","💡","Creative Mind","Pass the Chapter 4 Final Exam."],
+["perfect","💯","Perfectionist","Score 100% on a chapter final."],
+["comeback","🦾","Comeback","Improve after retrying mistakes."],
+["master","👑","Psychology Master","Pass all four chapter finals."],
+["boss","🎓","Final Boss","Pass the Midterm Mock Exam."]
+];
+
+function go(page){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ const el=document.getElementById("page-"+page); if(el)el.classList.add("active");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
+ window.scrollTo({top:0,behavior:"smooth"});
+ renderAll();
+}
+
+function renderAll(){
+ document.getElementById("topXp").textContent=state.xp;
+ document.getElementById("topStreak").textContent=state.streak;
+ document.getElementById("xpText").textContent=state.xp;
+ document.getElementById("levelText").textContent=level();
+ document.getElementById("levelBar").style.width=levelPct()+"%";
+ document.getElementById("streakText").textContent=state.streak;
+ document.getElementById("mistakeText").textContent=state.mistakes.length;
+ renderHome();renderChapters();renderMistakes();renderProgress();renderAchievements();renderMock();
+ if(document.getElementById("page-chapter").classList.contains("active"))renderChapterDetail();
+ if(document.getElementById("page-learn").classList.contains("active"))renderLearn();
+}
+
+function renderHome(){
+ let total=questions.length, answered=questions.filter(q=>state.results[q.id]?.answered).length;
+ document.getElementById("overallPct").textContent=Math.round(answered/total*100)+"%";
+ document.getElementById("homeChapters").innerHTML=Object.entries(chapters).map(([id,c])=>`
+ <div style="margin:13px 0;cursor:pointer" onclick="openChapter(${id})">
+  <div style="display:flex;justify-content:space-between;font-weight:850"><span>${c.emoji} Chapter ${id} — ${c.title}</span><span>${chapterPct(+id)}%</span></div>
+  <div class="progress" style="margin-top:7px"><i style="width:${chapterPct(+id)}%"></i></div>
+ </div>`).join("");
+ const days=[];
+ for(let i=6;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let s=d.toISOString().slice(0,10);days.push(`<div class="day ${state.activityDates.includes(s)?"done":""} ${s===today()?"today":""}">${d.toLocaleDateString(undefined,{weekday:"short"}).slice(0,2)}<br>${d.getDate()}</div>`)}
+ document.getElementById("calendar").innerHTML=days.join("");
+ const weak=questions.filter(q=>state.mistakes.includes(q.id)).slice(0,7);
+ document.getElementById("weakAreas").innerHTML=weak.length?weak.map(q=>`<div class="achievement"><span>❌</span><div><b>${q.q.slice(0,65)}${q.q.length>65?"…":""}</b><br><small class="muted">Chapter ${q.ch} • Section ${q.sec}</small></div></div>`).join(""):`<div class="empty">No mistakes yet. Your brain is behaving suspiciously well. 😎</div>`;
+ const ach=achievementDefs.filter(a=>state.achievements.includes(a[0])).slice(-4).reverse();
+ document.getElementById("recentAchievements").innerHTML=ach.length?ach.map(a=>`<div class="achievement"><span style="font-size:23px">${a[1]}</span><div><b>${a[2]}</b><br><small class="muted">${a[3]}</small></div></div>`).join(""):`<div class="empty">Your first badge is waiting.</div>`;
+}
+function renderChapters(){
+ document.getElementById("chapterCards").innerHTML=Object.entries(chapters).map(([id,c])=>{
+  id=+id;let p=chapterPct(id),passed=finalPassed(id);
+  return `<div class="card chapter-card">
+   <div class="icon">${c.emoji}</div><div class="grow"><div class="muted">CHAPTER ${id}</div><h2>${c.title}</h2>
+   <div class="progress"><i style="width:${p}%"></i></div><small class="muted">${p}% studied • ${passed?"✅ Final passed":"Final not passed"}</small></div>
+   <button class="btn" onclick="openChapter(${id})">${p?"Continue":"Start"}</button>
+  </div>`
+ }).join("");
+}
+function openChapter(ch){currentChapter=+ch;go("chapter")}
+function renderChapterDetail(){
+ const c=chapters[currentChapter],p=chapterPct(currentChapter);
+ document.getElementById("chapterDetail").innerHTML=`
+ <div class="chapter-head"><div><span class="tag">CHAPTER ${currentChapter}</span><h1>${c.emoji} ${c.title}</h1><p class="muted">${p}% completed • ${finalPassed(currentChapter)?"Final exam passed":"Master the whole chapter before the final."}</p></div><button class="btn secondary" onclick="go('chapters')">← All Chapters</button></div>
+ <div class="grid mode-grid">
+  <div class="card mode"><div class="emoji">📖</div><div><h3>Learn</h3><p>Short concept cards. No giant walls of text.</p></div><button class="btn" onclick="startLearn(${currentChapter})">Study</button></div>
+  <div class="card mode"><div class="emoji">⚡</div><div><h3>Quick Check</h3><p>Fast questions after learning.</p></div><button class="btn" onclick="startQuiz(${currentChapter},'quick')">Start</button></div>
+  <div class="card mode"><div class="emoji">🎮</div><div><h3>Practice</h3><p>MCQ + True/False + Fill in the blank.</p></div><button class="btn" onclick="startQuiz(${currentChapter},'practice')">Practice</button></div>
+  <div class="card mode"><div class="emoji">🧩</div><div><h3>Scenarios</h3><p>Apply psychology to classroom situations.</p></div><button class="btn" onclick="startQuiz(${currentChapter},'scenario')">Challenge</button></div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <div class="section-title"><div><h2>🏆 Chapter Final Exam</h2><p class="muted">Comprehensive test • all questions • no answers during the exam.</p></div><span class="tag">${chapterQs(currentChapter).length} QUESTIONS</span></div>
+  <div class="notice">⚠️ Final mode is exam-style. Submit first, then you’ll see <b>every question</b> with your answer, the correct answer, and explanations for mistakes.</div>
+  <div class="actions"><button class="btn" onclick="startQuiz(${currentChapter},'final')">${finalPassed(currentChapter)?"Retake Final":"Start Final Exam"}</button><button class="btn secondary" onclick="startQuiz(${currentChapter},'retry')">Retry Mistakes (${state.mistakes.filter(id=>questions.find(q=>q.id===id)?.ch===currentChapter).length})</button></div>
+ </div>`;
+}
+function startLearn(ch){
+ currentChapter=ch;go("learn");
+}
+function renderLearn(){
+ const c=chapters[currentChapter], list=concepts[currentChapter]||[];
+ document.getElementById("learnContent").innerHTML=`
+ <div class="chapter-head"><div><span class="tag">LEARN MODE</span><h1>${c.emoji} ${c.title}</h1><p class="muted">Read the essentials, then test yourself.</p></div><button class="btn secondary" onclick="openChapter(${currentChapter})">← Chapter</button></div>
+ <div class="concept-list">${list.map((x,i)=>`<details class="concept" ${i===0?"open":""} ontoggle="if(this.open) activityOnce('learn-${currentChapter}-${i}',5)">
+ <summary>${i+1}. ${x[0]}</summary><p>${x[1]}</p></details>`).join("")}</div>
+ <div class="card" style="margin-top:18px"><h2>Ready?</h2><p class="muted">Learning is only step one. Retrieval is where the brain has to work.</p><button class="btn" onclick="startQuiz(${currentChapter},'quick')">⚡ Quick Check</button></div>`;
+}
+const onceKeys=new Set(JSON.parse(sessionStorage.getItem("onceKeys")||"[]"));
+function activityOnce(key,xp){if(onceKeys.has(key))return;onceKeys.add(key);sessionStorage.setItem("onceKeys",JSON.stringify([...onceKeys]));activity(xp)}
+
+function filterFor(ch,mode){
+ const qs=chapterQs(ch);
+ if(mode==="final")return qs.slice();
+ if(mode==="scenario")return qs.filter(q=>q.sec==="C");
+ if(mode==="practice")return qs.filter(q=>["A","B","D"].includes(q.sec));
+ if(mode==="quick")return qs.filter(q=>q.sec==="A").slice(0,7);
+ if(mode==="retry")return qs.filter(q=>state.mistakes.includes(q.id));
+ return qs;
+}
+function startQuiz(ch,mode){
+ currentChapter=ch;currentMode=mode;retryMode=mode==="retry";
+ currentQuestions=filterFor(ch,mode);
+ if(!currentQuestions.length){alert("No questions here yet. Nice work!");return}
+ quizIndex=0;quizAnswers=Array(currentQuestions.length).fill(null);quizStartedAt=Date.now();
+ go("quiz");
+}
+function renderQuiz(){
+ const total=currentQuestions.length,q=currentQuestions[quizIndex],ans=quizAnswers[quizIndex];
+ const exam=currentMode==="final"||currentMode==="retry";
+ document.getElementById("quizContent").innerHTML=`
+ <div class="quiz-shell">
+  <div class="chapter-head"><div><span class="tag">${exam?"EXAM MODE":currentMode.toUpperCase()}</span><h1>${chapters[currentChapter].emoji} Chapter ${currentChapter}</h1></div><button class="btn secondary" onclick="confirmExitQuiz()">Exit</button></div>
+  <div class="card">
+   <div class="quiz-meta"><span>Question ${quizIndex+1} / ${total}</span><span>Section ${q.sec} • ${q.type==="scenario"?"Scenario":q.type==="fill"?"Fill in the blank":q.type==="tf"?"True / False":"Multiple Choice"}</span></div>
+   <div class="progress"><i style="width:${(quizIndex+1)/total*100}%"></i></div>
+   <div class="question">${q.q}</div>
+   ${q.type==="fill"?`<input class="fill-input" id="fillAnswer" placeholder="Type your answer..." value="${ans??""}" oninput="quizAnswers[quizIndex]=this.value">`:
+   `<div class="options">${q.opts.map((o,i)=>`<button class="option ${ans===i?"selected":""}" onclick="selectAnswer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>`}
+   <div class="actions"><button class="btn secondary" onclick="prevQ()" ${quizIndex===0?"disabled":""}>← Previous</button>
+   <button class="btn" onclick="${quizIndex===total-1?"submitQuiz()":"nextQ()"}">${quizIndex===total-1?"Submit Exam":"Next →"}</button></div>
+  </div>
+  ${exam?`<p class="muted" style="text-align:center;margin-top:12px">Exam rule: no feedback until submission.</p>`:""}
+ </div>`;
+}
+function selectAnswer(i){quizAnswers[quizIndex]=i;renderQuiz()}
+function nextQ(){
+ const q=currentQuestions[quizIndex];
+ if(q.type==="fill")quizAnswers[quizIndex]=(document.getElementById("fillAnswer")?.value||"").trim();
+ if(q.type!=="fill" && quizAnswers[quizIndex]===null){alert("Choose an answer first.");return}
+ if(quizIndex<currentQuestions.length-1){quizIndex++;renderQuiz()}else submitQuiz();
+}
+function prevQ(){
+ const q=currentQuestions[quizIndex];
+ if(q?.type==="fill")quizAnswers[quizIndex]=(document.getElementById("fillAnswer")?.value||"").trim();
+ if(quizIndex>0){quizIndex--;renderQuiz()}
+}
+function confirmExitQuiz(){if(confirm("Exit this quiz? Your current attempt will not be submitted.")){go("chapter")}}
+function normalize(s){return String(s||"").trim().toLowerCase().replace(/[.,!?;:()'"]/g,"").replace(/\s+/g," ")}
+function isCorrect(q,ans){
+ if(q.type==="fill"){
+  const a=normalize(ans), c=normalize(q.answer);
+  if(a===c)return true;
+  const alternatives={consolidation:["consolidate"],retrieval:["retrieval practice"],schema:["schemas"],spacing:["spacing effect"],interleaving:["interleaved practice"],desirable:["desirable difficulty"],"non-declarative":["non declarative"],encoding:["encode"]};
+  return (alternatives[c]||[]).some(x=>normalize(x)===a);
+ }
+ return ans===q.correct;
+}
+function answerText(q,ans){
+ if(q.type==="fill")return ans?ans:"(No answer)";
+ if(ans===null||ans===undefined)return "(No answer)";
+ return q.opts[ans];
+}
+function correctText(q){return q.type==="fill"?q.answer:q.opts[q.correct]}
+function submitQuiz(){
+ const q0=currentQuestions[quizIndex];
+ if(q0?.type==="fill")quizAnswers[quizIndex]=(document.getElementById("fillAnswer")?.value||"").trim();
+ for(let i=0;i<currentQuestions.length;i++){
+  if(quizAnswers[i]===null||quizAnswers[i]===undefined||quizAnswers[i]===""){alert("Please answer every question before submitting.");return}
+ }
+ const items=currentQuestions.map((q,i)=>({q,ans:quizAnswers[i],correct:isCorrect(q,quizAnswers[i])}));
+ const score=items.filter(x=>x.correct).length;
+ const percent=Math.round(score/items.length*100);
+ const final=currentMode==="final";
+ const retry=currentMode==="retry";
+ if(final){
+  const before=state.results[`final-${currentChapter}`]?.percent||0;
+  state.results[`final-${currentChapter}`]={final:true,percent,score,total:items.length,date:today(),items:items.map(x=>({id:x.q.id,ans:x.ans,correct:x.correct}))};
+  if(percent>=70&&!state.passedChapters.includes(currentChapter))state.passedChapters.push(currentChapter);
+  if(retry&&percent>before)state.results[`final-${currentChapter}`].retry=true;
+  state.completedChapters=[...new Set([...state.completedChapters,currentChapter])];
+  activity(50+(percent===100?100:0));
+ }else{
+  items.forEach(x=>storeAnswer(x.q,x.ans,x.correct));
+  activity(currentMode==="scenario"?25:currentMode==="practice"?20:5);
+ }
+ lastResult={items,score,total:items.length,percent,final,retry};
+ go("result");
+}
+function storeAnswer(q,ans,correct){
+ state.results[q.id]={answered:true,ans,correct,date:today()};
+
+ // Play the result sound when an answer is checked.
+ if(correct){
+  playSound("right");
+ }else{
+  playSound("wrong");
+ }
+
+ if(!correct&&!state.mistakes.includes(q.id))state.mistakes.push(q.id);
+ if(correct)state.mistakes=state.mistakes.filter(id=>id!==q.id);
+ save();
+}
+function renderResult(){
+ if(!lastResult)return;
+ const r=lastResult;
+ const title=r.final?`🏆 Chapter ${currentChapter} Final Result`:`${r.retry?"🦾 Retry Result":"⚡ Practice Result"}`;
+ document.getElementById("resultContent").innerHTML=`
+ <div class="quiz-shell">
+  <div class="chapter-head"><div><span class="tag">RESULT</span><h1>${title}</h1></div></div>
+  <div class="card result-score"><div class="score">${r.percent}%</div><div><b>${r.score} / ${r.total} correct</b></div>
+  <p class="muted">${r.final?(r.percent>=70?"🎉 You passed the chapter final!":"📚 Not quite yet. Review the mistakes and retry."):"Nice. Now learn from the misses."}</p></div>
+  <div class="actions">
+   ${r.final?`<button class="btn" onclick="startQuiz(${currentChapter},'final')">Retake Full Exam</button>`:""}
+   <button class="btn secondary" onclick="startQuiz(${currentChapter},'retry')">Retry Wrong (${state.mistakes.filter(id=>questions.find(q=>q.id===id)?.ch===currentChapter).length})</button>
+   <button class="btn secondary" onclick="go('learn')">📖 Review Chapter</button>
+   <button class="btn secondary" onclick="go('chapters')">← Chapters</button>
+  </div>
+  <h2 style="margin-top:25px">📝 Full Review</h2>
+  <p class="muted">Every question is shown. Correct answers are green; mistakes include the correct answer and a short explanation.</p>
+  <div>${r.items.map((x,i)=>`
+   <div class="review ${x.correct?"good":"bad"}">
+    <div class="q">${i+1}. ${x.q.q}</div>
+    <div class="answer">Your answer: <b>${escapeHtml(answerText(x.q,x.ans))}</b> ${x.correct?"✅":"❌"}</div>
+    ${!x.correct?`<div class="answer">Correct answer: <b>${escapeHtml(correctText(x.q))}</b></div><div class="explain">💡 ${x.q.why}</div>`:`<div class="answer" style="color:var(--green)">Correct! ${escapeHtml(correctText(x.q))}</div>`}
+   </div>`).join("")}</div>
+ </div>`;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function renderMistakes(){
+ const list=questions.filter(q=>state.mistakes.includes(q.id));
+ document.getElementById("mistakesContent").innerHTML=list.length?`
+ <div class="notice">You have <b>${list.length}</b> questions to master. Fixing them removes them from the list.</div>
+ <div style="margin-top:15px">${list.map(q=>`<div class="card" style="margin-bottom:10px"><span class="tag">CH ${q.ch} • ${q.sec}</span><h3>${q.q}</h3><p class="muted">${q.type==="fill"?"Fill in the blank":"Practice question"}</p></div>`).join("")}</div>
+ <div class="actions"><button class="btn" onclick="retryAllMistakes()">🦾 Retry All Mistakes</button><button class="btn secondary" onclick="clearMistakes()">Clear Mistake List</button></div>`:
+ `<div class="card empty"><div style="font-size:40px">✨</div><h2>No mistakes!</h2><p>Either you are a genius or you have not started yet.</p><button class="btn" onclick="go('chapters')">Start Learning</button></div>`;
+}
+function retryAllMistakes(){
+ const ids=new Set(state.mistakes);currentQuestions=questions.filter(q=>ids.has(q.id));if(!currentQuestions.length)return;
+ currentChapter=currentQuestions[0].ch;currentMode="retry";retryMode=true;quizIndex=0;quizAnswers=Array(currentQuestions.length).fill(null);go("quiz");
+}
+function clearMistakes(){if(confirm("Remove the mistake list?")){state.mistakes=[];save();renderAll()}}
+
+function renderProgress(){
+ const rows=Object.entries(chapters).map(([id,c])=>{
+  id=+id;let p=chapterPct(id),passed=finalPassed(id);
+  const correct=chapterQs(id).filter(q=>state.results[q.id]?.correct).length;
+  const attempted=chapterQs(id).filter(q=>state.results[q.id]?.answered).length;
+  return `<div class="card" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between"><h2>${c.emoji} Chapter ${id} — ${c.title}</h2><b>${p}%</b></div><div class="progress"><i style="width:${p}%"></i></div><p class="muted">${correct}/${attempted||0} answered questions currently correct • ${passed?"Final passed ✅":"Final pending"}</p></div>`
+ }).join("");
+ const byCh=[1,2,3,4].map(ch=>{
+  const qs=chapterQs(ch), correct=qs.filter(q=>state.results[q.id]?.correct).length;
+  return `<div class="topic-bar"><b>${chapters[ch].short}</b><div class="progress"><i style="width:${Math.round(correct/qs.length*100)}%"></i></div><span>${Math.round(correct/qs.length*100)}%</span></div>`;
+ }).join("");
+ document.getElementById("progressContent").innerHTML=`<div class="grid two"><div>${rows}</div><div class="card"><h2>🗺️ Knowledge Map</h2><p class="muted">Based on your answered revision questions.</p>${byCh}<hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><h3>What next?</h3><p class="muted">Focus on chapters with the lowest percentage, then retry their mistakes.</p><button class="btn" onclick="practiceWeakest()">Practice Weakest</button></div></div>`;
+}
+function practiceWeakest(){
+ let best=1,bp=101;for(let c=1;c<=4;c++){let p=chapterPct(c);if(p<bp){bp=p;best=c}}startQuiz(best,"practice");
+}
+function renderAchievements(){
+ document.getElementById("achievementContent").innerHTML=`<div class="grid three">${achievementDefs.map(a=>{
+  const got=state.achievements.includes(a[0]);
+  return `<div class="card ${got?"":"lock"}"><div style="font-size:38px">${a[1]}</div><h2>${a[2]}</h2><p class="muted">${a[3]}</p><span class="tag">${got?"UNLOCKED":"LOCKED"}</span></div>`
+ }).join("")}</div>`;
+}
+function renderMock(){
+ const unlocked=state.passedChapters.length===4;
+ document.getElementById("mockContent").innerHTML=`
+ <div class="chapter-head"><div><span class="tag">FINAL BOSS</span><h1>🎓 Midterm Mock Exam</h1><p class="muted">One mixed test across all four chapters.</p></div></div>
+ <div class="card">
+  ${unlocked?`<h2>Everything is unlocked. 😈</h2><p class="muted">The mock mixes questions from all chapters and hides chapter labels during the test.</p>
+  <div class="notice">Recommended: do it like the real midterm. No notes. No checking. Submit once.</div>
+  <div class="actions"><button class="btn" onclick="startMock()">Start 60-Question Mock</button></div>`:
+  `<h2>🔒 Locked</h2><p class="muted">Pass all four chapter finals with at least 70% to unlock the Midterm Mock.</p>
+  <div class="progress"><i style="width:${state.passedChapters.length/4*100}%"></i></div>
+  <p><b>${state.passedChapters.length}/4 chapters passed</b></p>
+  <button class="btn secondary" onclick="go('chapters')">Train the chapters</button>`}
+ </div>`;
+}
+function startMock(){
+ let pool=questions.slice();
+ // Prefer a balanced 15 questions per chapter = 60 total.
+ currentQuestions=[1,2,3,4].flatMap(ch=>pool.filter(q=>q.ch===ch).sort(()=>Math.random()-.5).slice(0,15));
+ currentChapter=0;currentMode="mock";retryMode=false;quizIndex=0;quizAnswers=Array(currentQuestions.length).fill(null);quizStartedAt=Date.now();go("quiz");
+}
+function submitMock(){
+ // not used; mock goes through submitQuiz
+}
+function mockAwareSubmit(){
+ // reserved
+}
+
+const originalRenderQuiz=renderQuiz;
+renderQuiz=function(){
+ if(currentMode==="mock"){
+  const total=currentQuestions.length,q=currentQuestions[quizIndex],ans=quizAnswers[quizIndex];
+  document.getElementById("quizContent").innerHTML=`
+  <div class="quiz-shell"><div class="chapter-head"><div><span class="tag">MIDTERM MOCK</span><h1>🎓 Final Boss</h1></div><button class="btn secondary" onclick="confirmExitQuiz()">Exit</button></div>
+  <div class="card"><div class="quiz-meta"><span>Question ${quizIndex+1} / ${total}</span><span>${q.type==="scenario"?"Scenario":q.type==="fill"?"Fill in the blank":q.type==="tf"?"True / False":"Multiple Choice"}</span></div>
+  <div class="progress"><i style="width:${(quizIndex+1)/total*100}%"></i></div>
+  <div class="question">${q.q}</div>
+  ${q.type==="fill"?`<input class="fill-input" id="fillAnswer" placeholder="Type your answer..." value="${ans??""}" oninput="quizAnswers[quizIndex]=this.value">`:`<div class="options">${q.opts.map((o,i)=>`<button class="option ${ans===i?"selected":""}" onclick="selectAnswer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>`}
+  <div class="actions"><button class="btn secondary" onclick="prevQ()" ${quizIndex===0?"disabled":""}>← Previous</button><button class="btn" onclick="${quizIndex===total-1?"submitMockReal()":"nextQ()"}">${quizIndex===total-1?"Submit Mock":"Next →"}</button></div></div>
+  <p class="muted" style="text-align:center">No chapter labels. No feedback until submission.</p></div>`;
+ }else originalRenderQuiz();
+};
+function submitMockReal(){
+ const q0=currentQuestions[quizIndex];
+ if(q0?.type==="fill")quizAnswers[quizIndex]=(document.getElementById("fillAnswer")?.value||"").trim();
+ if(quizAnswers.some(a=>a===null||a===undefined||a==="")){alert("Answer every question before submitting.");return}
+ const items=currentQuestions.map((q,i)=>({q,ans:quizAnswers[i],correct:isCorrect(q,quizAnswers[i])}));
+ const score=items.filter(x=>x.correct).length,percent=Math.round(score/items.length*100);
+ items.forEach(x=>storeAnswer(x.q,x.ans,x.correct));
+ state.results.mock={percent,score,total:items.length,date:today(),items:items.map(x=>({id:x.q.id,ans:x.ans,correct:x.correct}))};
+ state.mockPassed=percent>=70;
+ activity(75+(percent===100?100:0));
+ lastResult={items,score,total:items.length,percent,final:false,retry:false,mock:true};
+ go("result");
+}
+const oldRenderResult=renderResult;
+renderResult=function(){
+ if(!lastResult?.mock){oldRenderResult();return}
+ const r=lastResult;
+ const breakdown=[1,2,3,4].map(ch=>{
+  const a=r.items.filter(x=>x.q.ch===ch),s=a.filter(x=>x.correct).length,p=Math.round(s/a.length*100);
+  return `<div class="topic-bar"><b>${chapters[ch].short}</b><div class="progress"><i style="width:${p}%"></i></div><span>${p}%</span></div>`
+ }).join("");
+ document.getElementById("resultContent").innerHTML=`<div class="quiz-shell"><div class="chapter-head"><div><span class="tag">MIDTERM REPORT</span><h1>🎓 Mock Exam Result</h1></div></div>
+ <div class="card result-score"><div class="score">${r.percent}%</div><b>${r.score}/${r.total} correct</b><p class="muted">${r.percent>=70?"🎉 Mock passed!":"📚 Keep training and retry."}</p></div>
+ <div class="card" style="margin-top:15px"><h2>🗺️ Chapter Breakdown</h2>${breakdown}</div>
+ <div class="actions"><button class="btn" onclick="startMock()">Retake Mock</button><button class="btn secondary" onclick="go('progress')">Knowledge Map</button><button class="btn secondary" onclick="go('mistakes')">Review Mistakes</button></div>
+ <h2 style="margin-top:25px">📝 Full Review</h2><p class="muted">All questions remain visible after submission.</p>
+ ${r.items.map((x,i)=>`<div class="review ${x.correct?"good":"bad"}"><div class="q">${i+1}. ${x.q.q}</div><div class="answer">Your answer: <b>${escapeHtml(answerText(x.q,x.ans))}</b> ${x.correct?"✅":"❌"}</div>${!x.correct?`<div class="answer">Correct: <b>${escapeHtml(correctText(x.q))}</b></div><div class="explain">💡 ${x.q.why}</div>`:`<div class="answer" style="color:var(--green)">Correct! ${escapeHtml(correctText(x.q))}</div>`}</div>`).join("")}
+ </div>`;
+};
+
+function continueLearning(){
+ let ch=state.passedChapters.length<4?([1,2,3,4].find(c=>!finalPassed(c))||1):1;
+ openChapter(ch);
+}
+function searchItems(term){
+ term=term.toLowerCase().trim();if(!term)return[];
+ const arr=[];
+ for(let c=1;c<=4;c++)(concepts[c]||[]).forEach(x=>{if((x[0]+" "+x[1]).toLowerCase().includes(term))arr.push({kind:"Concept",ch:c,title:x[0],desc:x[1],action:()=>{currentChapter=c;go("learn")}}));
+ questions.forEach(q=>{if(q.q.toLowerCase().includes(term))arr.push({kind:"Question",ch:q.ch,title:q.q,desc:`Section ${q.sec}`,action:()=>{currentChapter=q.ch;currentQuestions=[q];currentMode="practice";quizIndex=0;quizAnswers=[null];go("quiz")}})});
+ return arr.slice(0,12);
+}
+document.getElementById("searchInput").addEventListener("input",e=>{
+ const box=document.getElementById("searchResults"),arr=searchItems(e.target.value);
+ box.innerHTML=arr.map((x,i)=>`<div class="search-item" data-search="${i}"><b>${x.kind}</b> • Ch ${x.ch}<br>${escapeHtml(x.title)}<br><small class="muted">${escapeHtml(x.desc.slice(0,100))}</small></div>`).join("");
+ box.style.display=arr.length?"block":"none";
+ box.querySelectorAll(".search-item").forEach((el,i)=>el.onclick=()=>{box.style.display="none";arr[i].action()});
+});
+document.addEventListener("click",e=>{if(!e.target.closest(".search"))document.getElementById("searchResults").style.display="none"});
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+function boot(){renderAll();renderChapterDetail();renderLearn();renderQuiz();renderResult()}
+boot();
+</script>
+</body>
+</html>
